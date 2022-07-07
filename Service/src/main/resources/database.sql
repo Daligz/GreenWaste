@@ -1,8 +1,8 @@
 CREATE
-DATABASE recolector;
+DATABASE greenwaste;
 
 USE
-recolector;
+greenwaste;
 
 CREATE TABLE rol
 (
