@@ -6,9 +6,10 @@ public class ServicesStorage extends Storage<Service> {
 
     public ServicesStorage(final Service... services) {
         this.add(services);
+        this.run();
     }
 
-    public void run() {
+    private void run() {
         this.get().forEach(Service::run);
     }
 }
