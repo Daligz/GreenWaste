@@ -1,8 +1,8 @@
-package me.upp.arquis.greenwaste.loaders;
+package me.upp.arquis.greenwaste.storages;
 
 import java.util.*;
 
-public abstract class Loader<T> {
+public abstract class Storage<T> {
 
     private final Set<T> set = new HashSet<>();
 
