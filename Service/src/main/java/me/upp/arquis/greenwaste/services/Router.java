@@ -19,7 +19,7 @@ public abstract class Router implements Service {
     @Override
     public void run() {
         final String className = this.getClass().getSimpleName();
-        System.out.printf("Cargando el enrutador %s...%n", className);
+        System.out.printf("[%s] Cargando el enrutador...%n", className);
         this.routes.forEach(routeWrapper -> {
             System.out.printf("  < [%s] > Iniciando el servicio %s...%n", className, routeWrapper.getClass().getSimpleName());
             Spark.get(routeWrapper.getPath(), routeWrapper);
