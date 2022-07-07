@@ -68,7 +68,7 @@ CREATE TABLE premios
     idPremio    int(4) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nombre      varchar(50),
     descripcion varchar(100),
-    imagen      varchar(100),
+    imagen      varchar(250),
     valor       int(10),
     stock       int(4)
 );
