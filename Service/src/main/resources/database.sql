@@ -18,19 +18,18 @@ CREATE TABLE usuario
     apellidoMaterno varchar(50),
     telefono        varchar(10),
     correo          varchar(50),
-    psw             varchar(50)
-        idRol int (4),
-    FOREIGN KEY (idRol) REFERENCES rol (idRol),
+    psw             varchar(50),
+    idRol           int (4),
+    FOREIGN KEY (idRol) REFERENCES rol (idRol)
 );
 
 
 CREATE TABLE material
 (
-    idMaterial int(4),
+    idMaterial int(4) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nombre     varchar(50),
-    costo      float(6, 2
-)
-    );
+    costo      float(6, 2)
+);
 
 CREATE TABLE direccion
 (
@@ -51,7 +50,7 @@ CREATE TABLE contenedor
     idContenedor int(4) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     idMaterial   int(4),
     idDireccion  int(4),
-    estado       enum(‘lleno’,’vació’),
+    estado       enum('lleno','vacio'),
     FOREIGN KEY (idMaterial) REFERENCES material (idMaterial),
     FOREIGN KEY (idDireccion) REFERENCES direccion (idDireccion)
 );
