@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movil_app/constants.dart';
+import 'package:movil_app/screens/Profile/profile_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,11 +20,22 @@ class MyApp extends StatelessWidget {
           headline1: TextStyle(
             fontSize: 36.0,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF358F80),
-          )
-        )
+            color: kPrimaryColor,
+          ),
+          headline2: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            color: kPrimaryColor,
+          ),
+          headline3: TextStyle(
+            fontSize: 15.0,
+            fontWeight: FontWeight.w500,
+            color: kPrimaryColor,
+          ),
+        ),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: ProfileScreen(),
+      //const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
