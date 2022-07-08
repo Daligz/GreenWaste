@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movil_app/components/already_have_an_account_check.dart';
 import 'package:movil_app/components/rounded_button.dart';
 import 'package:movil_app/components/rounded_input_field.dart';
 import 'package:movil_app/components/rounded_password_field.dart';
@@ -13,6 +14,7 @@ class Body_Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController emailTextController = TextEditingController();
+    TextEditingController passwordTextController = TextEditingController();
     Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
@@ -20,52 +22,31 @@ class Body_Login extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: size.height * 0.02),
-            Image.asset("assets/imgs/img_main.png",
+            Image.asset("assets/imgs/img_sesion.png",
               height: size.height * 0.45,
             ),
-            TextFieldContainer(
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: "Correo Electronico",
-                  icon: Icon(
-                    Icons.email,
-                    color: kPrimaryDarkColor,
-                  ),
-                  border: InputBorder.none,
-                ),
-              ),
+            RoundedInputField(
+                hintText: "Correo electrónico",
+                icon: Icons.email,
+                onChanged: (value) {},
+                controller: emailTextController
             ),
-            TextFieldContainer(
-              child: TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  hintText: "Contraseña",
-                  icon: Icon(
-                    Icons.lock,
-                    color: kPrimaryDarkColor,
-                  ),
-                  border: InputBorder.none,
-                ),
-              ),
+            RoundedInputField(
+                hintText: "Contraseña",
+                icon: Icons.lock,
+                onChanged: (value) {},
+                controller: passwordTextController
             ),
             RoundedButton(
               text: "Inciar Sesión",
               press: () {},
             ),
-            RichText(
-              text: TextSpan(
-                text: '¿Aún no tiene cuenta? ',
-                style: DefaultTextStyle.of(context).style,
-                children: const <TextSpan>[
-                  TextSpan(
-                      text: 'Crear Cuenta',
-                      style:
-                      TextStyle(
-                          fontWeight: FontWeight.bold ,
-                          color: kPrimaryColor)),
-                ],
-              ),
-            )
+            SizedBox(height: size.height * 0.02),
+            AlreadyHaveAnAccountCheck(
+              press: () {
+              },
+            ),
+
           ],
         ),
       ),
