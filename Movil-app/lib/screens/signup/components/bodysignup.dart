@@ -6,6 +6,7 @@ import 'package:movil_app/screens/Profile/components/background.dart';
 import 'package:movil_app/components/already_have_a_container_check.dart';
 import 'package:movil_app/components/text_field_container.dart';
 import 'package:movil_app/constants.dart';
+import 'package:movil_app/screens/login/login.dart';
 import 'package:movil_app/screens/signup/signup.dart';
 import '../../../components/already_have_an_account_check.dart';
 
@@ -59,9 +60,7 @@ class BodySignUp extends StatelessWidget {
                 onChanged: (value) {},
                 controller: emailTextController
             ),
-            RoundedInputField(
-                hintText: "Contraseña",
-                icon: Icons.lock,
+            RoundedPasswordField(
                 onChanged: (value) {},
                 controller: passwordTextController
             ),
@@ -73,8 +72,13 @@ class BodySignUp extends StatelessWidget {
             AlreadyHaveAnAccountCheck(
               login: false,
               press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Login()),
+                );
               },
-            )
+            ),
+            SizedBox(height: size.height * 0.04),
           ],
         ),
       ),

@@ -4,6 +4,8 @@ import 'package:movil_app/components/rounded_input_field.dart';
 import 'package:movil_app/components/rounded_password_field.dart';
 import 'package:movil_app/screens/Profile/components/background.dart';
 import 'package:movil_app/components/already_have_a_container_check.dart';
+import 'package:movil_app/screens/UpdateUser/update_user.dart';
+import 'package:movil_app/screens/login/login.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -29,7 +31,12 @@ class Body extends StatelessWidget {
             ),
             RoundedButton(
               text: "Datos personales",
-              press: () {},
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => UpdateUser()),
+                );
+              },
             ),
             RoundedButton(
               text: "Direcciones",
@@ -41,7 +48,12 @@ class Body extends StatelessWidget {
             ),
             RoundedButton(
               text: "Cerrar sesión",
-              press: () {},
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Login()),
+                );
+              },
             ),
           ],
         ),
