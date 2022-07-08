@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: UpdateUser(),
+      home: Login(),
       //const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
