@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movil_app/constants.dart';
 import 'package:movil_app/screens/Profile/profile_screen.dart';
+import 'package:movil_app/screens/UpdateUser/update_user.dart';
 import 'package:movil_app/screens/login/login.dart';
 import 'package:movil_app/screens/splashscreen.dart';
 import 'package:movil_app/components/rounded_password_field.dart';
@@ -35,9 +36,14 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.w500,
             color: kPrimaryColor,
           ),
+          headline4: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            color: kTextColor,
+          ),
         ),
       ),
-      home: Login(),
+      home: UpdateUser(),
       //const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
