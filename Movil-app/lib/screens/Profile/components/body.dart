@@ -28,10 +28,6 @@ class Body extends StatelessWidget {
               style: Theme.of(context).textTheme.headline3,
             ),
             RoundedButton(
-              text: "Cambiar cuenta",
-              press: () {},
-            ),
-            RoundedButton(
               text: "Datos personales",
               press: () {},
             ),
