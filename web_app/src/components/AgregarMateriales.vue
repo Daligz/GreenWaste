@@ -12,11 +12,9 @@
               <v-text-field filled outlined label="Nombre del Material" prepend-inner-icon="mdi-recycle-variant">
               </v-text-field>
             </v-col>
-
             <v-col cols="12" md="6">
               <v-text-field filled outlined label="Precio por Kilogramo" prepend-inner-icon="mdi-cash"></v-text-field>
             </v-col>
-
             <v-col cols="12" md="6">
               <v-btn id="button-Agregar">
                 <v-icon left color="#ffffff">mdi-plus-box</v-icon>Agregar Material
