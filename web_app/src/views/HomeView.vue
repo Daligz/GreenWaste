@@ -1,30 +1,25 @@
 <template>
-<div class="content-agregarMaterial">
-  <hello-world/>
-  <agregar-materiales/>
-</div>
+  <div class="content-agregarMaterial">
 
+    <splash-view/>
+  </div>
 </template>
-
 <style>
-  .content-agregarMaterial{
-    margin-top:2%;
-    background: #F8F8F8;
-  }
+.content-agregarMaterial {
+  margin-top: 2%;
+  background: #ffffff;
+}
 </style>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
-  import AgregarMateriales from '../components/AgregarMateriales'
 
-  export default {
-    name: 'Home',
+import SplashView from "@/views/SplashView";
 
-    components: {
-      HelloWorld,
-      AgregarMateriales,
-    },
-   
-    
-  }
+export default {
+  name: 'Home',
+
+  components: {
+    SplashView,
+  },
+}
 </script>
