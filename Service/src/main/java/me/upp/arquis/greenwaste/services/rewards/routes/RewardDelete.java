@@ -19,6 +19,6 @@ public class RewardDelete extends RouteWrapper {
                 .from("premios")
                 .where("idPremio", "=", id)
                 .getQuery();
-        return Connector.HIKARI_POOL.execute(connection -> connection.prepareStatement(delete).execute());
+        return Connector.HIKARI_POOL.execute(connection -> !(connection.prepareStatement(delete).execute()));
     }
 }

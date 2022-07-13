@@ -23,6 +23,6 @@ public class RewardUpdate extends RouteWrapper {
                 .update(value, valueToUpdate)
                 .where("idPremio", "=", id)
                 .getQuery();
-        return Connector.HIKARI_POOL.execute(connection -> connection.prepareStatement(update).execute());
+        return Connector.HIKARI_POOL.execute(connection -> !(connection.prepareStatement(update).execute()));
     }
 }

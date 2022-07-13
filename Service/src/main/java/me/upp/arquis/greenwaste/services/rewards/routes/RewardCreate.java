@@ -24,6 +24,6 @@ public class RewardCreate extends RouteWrapper {
                 .values(
                         null, name, description, image, value, stock
                 ).getQuery();
-        return Connector.HIKARI_POOL.execute(connection -> connection.prepareStatement(insert).execute());
+        return Connector.HIKARI_POOL.execute(connection -> !(connection.prepareStatement(insert).execute()));
     }
 }
