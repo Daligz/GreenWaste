@@ -1,8 +1,8 @@
 CREATE
-DATABASE greenwaste;
+DATABASE dali_greenwaste;
 
 USE
-greenwaste;
+dali_greenwaste;
 
 CREATE TABLE rol
 (
