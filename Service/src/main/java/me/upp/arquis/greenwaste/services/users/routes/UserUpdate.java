@@ -9,7 +9,7 @@ import spark.Response;
 public class UserUpdate extends RouteWrapper {
 
     public UserUpdate() {
-        super("/rewards/update/:id/:value/:valueToUpdate");
+        super("/users/update/:id/:value/:valueToUpdate");
     }
 
     @Override

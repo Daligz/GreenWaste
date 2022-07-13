@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 public class UserRead extends RouteWrapper {
 
     public UserRead() {
-        super("/rewards/read/:id");
+        super("/users/read/:id");
     }
 
     @Override
