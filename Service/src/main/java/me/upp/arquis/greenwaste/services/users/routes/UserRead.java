@@ -1,13 +1,11 @@
 package me.upp.arquis.greenwaste.services.users.routes;
 
-import me.upp.arquis.greenwaste.GreenWaste;
 import me.upp.arquis.greenwaste.database.Connector;
 import me.upp.arquis.greenwaste.services.RouteWrapper;
+import me.upp.arquis.greenwaste.utils.JsonMapper;
 import net.royalmind.library.lightquery.queries.LSelect;
 import spark.Request;
 import spark.Response;
-
-import java.sql.ResultSet;
 
 public class UserRead extends RouteWrapper {
 
@@ -23,7 +21,6 @@ public class UserRead extends RouteWrapper {
                 .value("*")
                 .where("idUsuario", "=", id)
                 .getQuery();
-        final ResultSet resultSet = Connector.HIKARI_POOL.execute(connection -> connection.prepareStatement(select).executeQuery());
-        return GreenWaste.GSON.toJson(resultSet);
+        return Connector.HIKARI_POOL.execute(connection -> JsonMapper.toJSON(connection.prepareStatement(select).executeQuery()));
     }
 }
