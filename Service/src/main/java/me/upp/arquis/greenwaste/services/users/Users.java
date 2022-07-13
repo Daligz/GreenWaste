@@ -1,10 +1,7 @@
 package me.upp.arquis.greenwaste.services.users;
 
 import me.upp.arquis.greenwaste.services.Router;
-import me.upp.arquis.greenwaste.services.users.routes.UserCreate;
-import me.upp.arquis.greenwaste.services.users.routes.UserDelete;
-import me.upp.arquis.greenwaste.services.users.routes.UserRead;
-import me.upp.arquis.greenwaste.services.users.routes.UserUpdate;
+import me.upp.arquis.greenwaste.services.users.routes.*;
 
 public class Users extends Router {
 
@@ -13,6 +10,7 @@ public class Users extends Router {
                 new UserCreate(),
                 new UserDelete(),
                 new UserRead(),
+                new UserSpecificRead(),
                 new UserUpdate()
         );
     }
