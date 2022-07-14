@@ -9,6 +9,8 @@ import 'package:movil_app/constants.dart';
 import 'package:movil_app/screens/login/login.dart';
 import 'package:movil_app/screens/signup/signup.dart';
 import '../../../components/already_have_an_account_check.dart';
+import 'package:movil_app/service/service.dart';
+
 
 class BodySignUp extends StatelessWidget {
   @override
@@ -66,7 +68,17 @@ class BodySignUp extends StatelessWidget {
             ),
             RoundedButton(
               text: "Regístrate",
-              press: () {},
+              press: () {
+                if(nameTextController.text.isNotEmpty && lastname1TextController.text.isNotEmpty &&
+                    lastname2TextController.text.isNotEmpty && phoneTextController.text.isNotEmpty &&
+                    emailTextController.text.isNotEmpty && passwordTextController.text.isNotEmpty){
+                  Service.createUser(nameTextController.text, lastname1TextController.text, lastname2TextController.text,
+                      phoneTextController.text, emailTextController.text, passwordTextController.text);
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Éxito!"),));
+                } else{
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("No se ha podido crear el usuario, falta campos por llenar"),));
+                }
+              },
             ),
             SizedBox(height: size.height * 0.01),
             AlreadyHaveAnAccountCheck(
