@@ -4,18 +4,19 @@ import 'package:movil_app/components/rounded_button.dart';
 import 'package:movil_app/components/rounded_input_field.dart';
 import 'package:movil_app/components/rounded_password_field.dart';
 import 'package:movil_app/screens/Profile/components/background.dart';
-import 'package:movil_app/components/already_have_a_container_check.dart';
-import 'package:movil_app/components/text_field_container.dart';
-import 'package:movil_app/constants.dart';
-import 'package:movil_app/screens/login/login.dart';
 import 'package:movil_app/screens/signup/signup.dart';
+import 'package:movil_app/service/common/user.dart';
+import 'package:movil_app/service/service.dart';
+import 'package:movil_app/screens/Profile/profile_screen.dart';
 
 class Body_Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     TextEditingController emailTextController = TextEditingController();
     TextEditingController passwordTextController = TextEditingController();
+
     Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
@@ -38,7 +39,21 @@ class Body_Login extends StatelessWidget {
             ),
             RoundedButton(
               text: "Inciar Sesión",
-              press: () {},
+              press: () async {
+                if(emailTextController.text.isNotEmpty && passwordTextController.text.isNotEmpty){
+                  User? val1 = await Service.loginUser(emailTextController.text, passwordTextController.text);
+                  print(val1);
+                  if( val1 != null && val1.correo.isNotEmpty){
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Bienvenido"),));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfileScreen()));
+                  }else{
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Verifique sus credenciales")));
+                  }
+                }else{
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Todos los campos deben estar llenos")));
+                }
+
+              },
             ),
             SizedBox(height: size.height * 0.02),
             AlreadyHaveAnAccountCheck(
