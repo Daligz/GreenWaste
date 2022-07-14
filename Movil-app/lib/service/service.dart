@@ -9,4 +9,11 @@ class Service {
     //final Response response = await get(Uri.parse("http://localhost:6969/users/create/$nombre/$apellidoPaterno/$apellidoMaterno/$telefono/$correo/$psw/1"));
     return (response.statusCode == 200);
   }
+
+  static Future<bool> loginUser(final String correo, final String psw)  async{
+    final Response response = await get(Uri.parse(Routes.routeUserLogin(correo, psw)));
+    return(response.statusCode==200);
+
+  }
+
 }
