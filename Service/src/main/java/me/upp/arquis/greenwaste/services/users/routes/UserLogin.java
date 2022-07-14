@@ -11,20 +11,20 @@ public class UserLogin extends RouteWrapper {
 
     public UserLogin(){
 
-        super("/users/login/:correo/:correoParametro/:password/:passwordParametro");
+        super("/users/login/:value1/:valueToSearch1/:value2/:valueToSearch2");
     }
 
     @Override
     public Object handle(final Request request, final Response response) {
-        final String correo = request.params(":/correo");
-        final String correoParametro = request.params(":/correoParametro");
-        final String password = request.params(":/password");
-        final String passwordParametro = request.params("/:passwordParametro");
+        final String value1 = request.params(":value1");
+        final String valueToSearch1 = request.params(":valueToSearch1");
+        final String value2 = request.params(":value2");
+        final String valueToSearch2 = request.params(":valueToSearch2");
         final String select = new LSelect()
                 .from("usuario")
                 .value("*")
-                .where(correo, "=", correoParametro)
-                .and(password, "=", passwordParametro)
+                .where(value1, "=", valueToSearch1)
+                .and(value2, "=", valueToSearch2)
                 .getQuery();
         return Connector.HIKARI_POOL.execute(connection -> JsonMapper.toJSON(connection.prepareStatement(select).executeQuery()));
     }
