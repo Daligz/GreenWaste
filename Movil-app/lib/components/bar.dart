@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movil_app/screens/Profile/profile_screen.dart';
+import 'package:movil_app/service/common/user.dart';
 
 class Bar extends StatelessWidget{
+  final User? user;
   final String text;
   final void Function()? press;
   const Bar({
     Key? key,
     required this.text,
-    required  this.press
+    required  this.press,
+    required this.user
 }) : super(key: key);
 
   @override
@@ -24,7 +27,7 @@ class Bar extends StatelessWidget{
             onPressed: (){
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProfileScreen()),
+                MaterialPageRoute(builder: (context) => ProfileScreen(user: user!)),
               );
             },
           ),

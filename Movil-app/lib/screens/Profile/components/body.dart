@@ -6,8 +6,14 @@ import 'package:movil_app/screens/Profile/components/background.dart';
 import 'package:movil_app/components/already_have_a_container_check.dart';
 import 'package:movil_app/screens/UpdateUser/update_user.dart';
 import 'package:movil_app/screens/login/login.dart';
+import 'package:movil_app/service/common/user.dart';
 
 class Body extends StatelessWidget {
+  final User? user;
+  const Body({
+    Key? key,
+    required this.user
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     TextEditingController emailTextController = TextEditingController();
@@ -34,7 +40,7 @@ class Body extends StatelessWidget {
               press: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => UpdateUser()),
+                  MaterialPageRoute(builder: (context) => UpdateUser(user: user!)),
                 );
               },
             ),
