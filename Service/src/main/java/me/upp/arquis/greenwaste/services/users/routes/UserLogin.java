@@ -10,7 +10,6 @@ import spark.Response;
 public class UserLogin extends RouteWrapper {
 
     public UserLogin(){
-
         super("/users/login/:correo/:psw");
     }
 
