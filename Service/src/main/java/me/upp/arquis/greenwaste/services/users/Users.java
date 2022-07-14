@@ -10,7 +10,8 @@ public class Users extends Router {
                 new UserCreate(),
                 new UserDelete(),
                 new UserRead(),
-                new UserSpecificRead()
+                new UserSpecificRead(),
+                new UserLogin()
 
         );
     }
