@@ -6,11 +6,13 @@ import 'package:movil_app/screens/Profile/components/background.dart';
 import 'package:movil_app/components/already_have_a_container_check.dart';
 import 'package:movil_app/screens/UpdateUser/update_user.dart';
 import 'package:movil_app/screens/login/login.dart';
+import 'package:movil_app/service/common/user.dart';
+import 'package:movil_app/service/service.dart';
 
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailTextController = TextEditingController();
+    User user;
     Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
@@ -32,9 +34,10 @@ class Body extends StatelessWidget {
             RoundedButton(
               text: "Datos personales",
               press: () {
+                user = Service.readUser(1) as User;
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => UpdateUser()),
+                  MaterialPageRoute(builder: (context) => UpdateUser(user: user,)),
                 );
               },
             ),

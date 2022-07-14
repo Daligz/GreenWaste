@@ -5,9 +5,14 @@ import 'package:movil_app/components/rounded_password_field.dart';
 import 'package:movil_app/screens/Profile/components/background.dart';
 import 'package:movil_app/components/bar.dart';
 import 'package:movil_app/screens/Profile/profile_screen.dart';
+import 'package:movil_app/service/common/user.dart';
 
 class Body extends StatelessWidget {
-
+  final User? user;
+  const Body({
+    Key? key,
+    required this.user
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     TextEditingController nameTextController = TextEditingController();
