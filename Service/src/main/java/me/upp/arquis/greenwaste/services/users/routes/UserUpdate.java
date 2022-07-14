@@ -1,16 +1,15 @@
-package me.upp.arquis.greenwaste.services.rewards.routes;
+package me.upp.arquis.greenwaste.services.users.routes;
 
 import me.upp.arquis.greenwaste.database.Connector;
 import me.upp.arquis.greenwaste.services.RouteWrapper;
-import net.royalmind.library.lightquery.queries.LDelete;
 import net.royalmind.library.lightquery.queries.LUpdate;
 import spark.Request;
 import spark.Response;
 
-public class RewardUpdate extends RouteWrapper {
+public class UserUpdate extends RouteWrapper {
 
-    public RewardUpdate() {
-        super("/rewards/update/:id/:value/:valueToUpdate");
+    public UserUpdate() {
+        super("/users/update/:id/:value/:valueToUpdate");
     }
 
     @Override
@@ -19,9 +18,9 @@ public class RewardUpdate extends RouteWrapper {
         final String value = request.params(":value");
         final String valueToUpdate = request.params(":valueToUpdate");
         final String update = new LUpdate()
-                .table("premios")
+                .table("usuario")
                 .update(value, valueToUpdate)
-                .where("idPremio", "=", id)
+                .where("idUsuario", "=", id)
                 .getQuery();
         return Connector.HIKARI_POOL.execute(connection -> !(connection.prepareStatement(update).execute()));
     }

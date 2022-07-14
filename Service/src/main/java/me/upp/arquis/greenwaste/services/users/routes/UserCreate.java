@@ -27,6 +27,6 @@ public class UserCreate extends RouteWrapper {
                         null, nombre, apPa, apMa, tel, correo, psw, idRol
                 )
                 .getQuery();
-        return Connector.HIKARI_POOL.execute(connection -> connection.prepareStatement(insert).execute());
+        return Connector.HIKARI_POOL.execute(connection -> !(connection.prepareStatement(insert).execute()));
     }
 }
