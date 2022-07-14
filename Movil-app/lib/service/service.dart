@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:http/http.dart';
+import 'package:movil_app/service/common/user.dart';
 import 'package:movil_app/service/service_routes.dart';
 
 class Service {
@@ -10,10 +13,17 @@ class Service {
     return (response.statusCode == 200);
   }
 
-  static Future<bool> loginUser(final String correo, final String psw)  async{
-    final Response response = await get(Uri.parse(Routes.routeUserLogin(correo, psw)));
-    return(response.statusCode==200);
 
+   static Future<User?> loginUser(final String correo, final String psw)  async{
+    final Response response = await get(Uri.parse(Routes.routeUserLogin(correo, psw)));
+    print(response.body);
+    if(response.body == "[]"){
+      return null;
+    }
+    return(User.fromJson(json.decode(response.body)[0]));
   }
+
+
+
 
 }

@@ -4,16 +4,17 @@ class User {
 
   User(this.idUsuario, this.nombre, this.apellidoPaterno, this.apellidoMaterno, this.telefono, this.correo, this.psw, this.idRol);
 
+
   factory User.fromJson(final Map<String, dynamic> jsonMap) {
     return User(
-      jsonMap['idUsuario'],
+      jsonMap['idusuario'],
       jsonMap['nombre'],
-      jsonMap['apellidoPaterno'],
-      jsonMap['apellidoMaterno'],
+      jsonMap['apellidopaterno'],
+      jsonMap['apellidomaterno'],
       jsonMap['telefono'],
       jsonMap['correo'],
       jsonMap['psw'],
-      jsonMap['idRol']
+      jsonMap['idrol']
     );
   }
 }
