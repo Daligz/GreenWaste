@@ -8,6 +8,7 @@ public class Users extends Router {
     public Users() {
         super(
                 new UserCreate(),
+                new UserUpdate(),
                 new UserDelete(),
                 new UserRead(),
                 new UserSpecificRead(),
