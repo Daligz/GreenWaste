@@ -22,6 +22,21 @@ class Service {
     }
     return(User.fromJson(json.decode(response.body)[0]));
   }
+  
+  static Future<User?> readUser(final int idUsuario) async{
+    final Response response = await get(Uri.parse(Routes.routeUserRead(idUsuario)));
+    if(response.body == "[]"){
+      return null;
+    }
+    return(User.fromJson(json.decode(response.body)[0]));
+  }
+  
+  static Future<bool> updateUser(final int idUsuario, final String nombre, final String apellidoPaterno, final String apellidoMaterno,
+      final String telefono, final String correo, final String psw) async{
+    final Response response = await get(Uri.parse(Routes.routeUserUpdate(idUsuario, nombre, apellidoPaterno, apellidoMaterno, telefono, correo, psw)));
+    print(response.statusCode == 200);
+    return (response.statusCode == 200);
+  }
 
 
 

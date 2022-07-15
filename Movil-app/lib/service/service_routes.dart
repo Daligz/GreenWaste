@@ -10,6 +10,10 @@ class Routes{
 
   static String routeUserLogin(final String correo, final String psw) => _url + "/users/login/$correo/$psw";
 
+  static String routeUserUpdate(final int idUsuario, final String nombre,
+      final String apellidoPaterno, final String apellidoMaterno,
+      final String telefono, final String correo,
+      final String psw) => _url + "/users/update/$idUsuario/$nombre/$apellidoPaterno/$apellidoMaterno/$telefono/$correo/$psw/1";
 
-
+  static String routeUserRead(final int idUsuario) => _url + "/users/read/$idUsuario";
 }

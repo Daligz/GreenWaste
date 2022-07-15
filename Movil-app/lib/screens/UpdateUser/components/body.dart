@@ -5,7 +5,9 @@ import 'package:movil_app/components/rounded_password_field.dart';
 import 'package:movil_app/screens/Profile/components/background.dart';
 import 'package:movil_app/components/bar.dart';
 import 'package:movil_app/screens/Profile/profile_screen.dart';
+import 'package:movil_app/screens/UpdateUser/update_user.dart';
 import 'package:movil_app/service/common/user.dart';
+import 'package:movil_app/service/service.dart';
 
 class Body extends StatelessWidget {
   final User? user;
@@ -73,8 +75,26 @@ class Body extends StatelessWidget {
                 controller: passwordTextController..text = user!.psw ?? ""
             ),
             RoundedButton(
-              text: "Guarddar",
-              press: () {},
+              text: "Guardar",
+              press: () async {
+                if(nameTextController.text.isNotEmpty && lastNameTextController.text.isNotEmpty &&
+                    lastName2TextController.text.isNotEmpty && phoneTextController.text.isNotEmpty &&
+                    emailTextController.text.isNotEmpty && passwordTextController.text.isNotEmpty){
+                  bool valor = await Service.updateUser(user!.idUsuario, nameTextController.text, lastNameTextController.text, lastName2TextController.text,
+                      phoneTextController.text, emailTextController.text, passwordTextController.text);
+                 // User newUser = User(user!.idUsuario, nameTextController.text, lastNameTextController.text, lastName2TextController.text, phoneTextController.text, emailTextController.text, passwordTextController.text, 1);
+                  if(valor != false){
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Éxito!"),));
+                    User? newUser = await Service.readUser(user!.idUsuario);
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> UpdateUser(user: newUser!)));
+                  }else{
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Error al guardar al usuario!"),));
+                  }
+
+                } else{
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("No se ha podido crear el usuario, falta campos por llenar"),));
+                }
+              },
             ),
             SizedBox(height: size.height * 0.02),
 
