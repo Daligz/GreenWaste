@@ -9,7 +9,7 @@ import spark.Response;
 
 public class AddressRead extends RouteWrapper {
     public  AddressRead(){
-        super("address/read/:idUsuario");
+        super("/address/read/:idUsuario");
     }
 
     @Override
