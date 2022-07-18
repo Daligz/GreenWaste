@@ -1,5 +1,6 @@
 package me.upp.arquis.greenwaste;
 
+import me.upp.arquis.greenwaste.configuration.ServiceConfiguration;
 import me.upp.arquis.greenwaste.services.Service;
 import me.upp.arquis.greenwaste.services.ServicesStorage;
 import me.upp.arquis.greenwaste.services.address.Address;
@@ -13,6 +14,7 @@ public class GreenWaste {
     public static void main(final String[] args) {
         // Set port to service
         Spark.port(6969);
+        new ServiceConfiguration().apply();
         final Storage<Service> services = new ServicesStorage(
                 // Add here all services
                 new Rewards(),
