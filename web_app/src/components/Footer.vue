@@ -1,5 +1,5 @@
 <template>
-<v-footer color="#fff" id="footer">
+<v-footer id="footer" >
       <v-card class="flex" flat tile>
         <v-card-title>
           <strong class="subheading footer-text">Green Waste C.V <v-icon>mdi-home-city </v-icon></strong>
