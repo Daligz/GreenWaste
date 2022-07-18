@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movil_app/constants.dart';
 import 'package:movil_app/screens/login/login.dart';
+import 'package:movil_app/screens/rewards/rewards_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: Login(),
+      debugShowCheckedModeBanner: false,
+      home: const RewardScreen(),
         //SplashScreen()
       //ProfileScreen
       //const MyHomePage(title: 'Flutter Demo Home Page'),
