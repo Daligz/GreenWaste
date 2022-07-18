@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movil_app/screens/rewards/components/reward_card.dart';
 
 class RewardContainer extends StatelessWidget {
 
@@ -10,23 +11,9 @@ class RewardContainer extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget> [
-        Column(
-          children: <Widget> [
-            Text('a'),
-            Text('a'),
-            Text('a'),
-            Text('a')
-          ],
-        ),
+        RewardCard(),
         SizedBox(width: size.width * 0.2),
-        Column(
-          children: <Widget> [
-            Text('XDD'),
-            Text('XDD'),
-            Text('XDD'),
-            Text('XDD')
-          ],
-        )
+        RewardCard()
       ],
     );
   }
