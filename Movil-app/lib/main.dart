@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const RewardScreen(),
+      home: Login(),
         //SplashScreen()
       //ProfileScreen
       //const MyHomePage(title: 'Flutter Demo Home Page'),
