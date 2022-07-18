@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movil_app/constants.dart';
-import 'package:movil_app/screens/Profile/profile_screen.dart';
-import 'package:movil_app/screens/UpdateUser/update_user.dart';
 import 'package:movil_app/screens/login/login.dart';
-import 'package:movil_app/screens/splashscreen.dart';
-import 'package:movil_app/components/rounded_password_field.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,8 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Green Waste',
       theme: ThemeData(
-        primaryColor: Color(0xFF358F80),
-        textTheme: TextTheme(
+        primaryColor: const Color(0xFF358F80),
+        textTheme: const TextTheme(
           headline1: TextStyle(
             fontSize: 36.0,
             fontWeight: FontWeight.bold,
