@@ -4,6 +4,7 @@
       <div class="content1-login">
         <v-img class="img-logo-splash" :src="require('../assets/img_logo_web.png')"></v-img>
       </div>
+
       <div class="content2-longin">
         <h1 class="titulo-splash">BIENVENIDO A GREENWASTE</h1>
         <v-img class="img-login" :src="require('../assets/img_login_web.png')"></v-img>
@@ -14,7 +15,6 @@
     </div>
   </main>
 </template>
-
 <style>
 .flex-container{
   display: flex;
@@ -65,7 +65,6 @@
     width:100%;
   }
 }
-
 /* Diseño para tabletas */
 @media screen and (min-width: 800px) {
   template {
@@ -73,7 +72,6 @@
     width:50%;
   }
 }
-
 /* Diseño para PC */
 @media screen and (min-width: 1025px) {
   template {
@@ -81,5 +79,4 @@
     width: 33%;
   }
 }
-
 </style>
