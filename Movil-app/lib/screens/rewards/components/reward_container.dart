@@ -10,7 +10,6 @@ class RewardContainer extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return Column(
       children: <Widget> [
-        SizedBox(height: size.height * 0.05),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget> [
@@ -25,10 +24,11 @@ class RewardContainer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget> [
             RewardCard(),
-            SizedBox(width: size.width * 0.05),
+            SizedBox(width: size.width * 0.1),
             RewardCard()
           ],
         ),
+        SizedBox(height: size.height * 0.05),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget> [
@@ -43,7 +43,7 @@ class RewardContainer extends StatelessWidget {
 
   TextStyle _titleStyle(final Size size) {
     return TextStyle(
-      fontSize: size.height * 0.07,
+      fontSize: size.height * 0.04,
       color: const Color(0xFF358F80),
       fontWeight: FontWeight.bold
     );
