@@ -42,7 +42,7 @@
 import HeaderView from "../components/HeaderView.vue";
 import SidebarView from "../components/Sidebar.vue";
 import FooterVue from "@/components/Footer.vue";
-import AgregarMaterialesVue from "@/views/AgregarMateriales.vue";
+
 export default {
     data: () => ({
         cards: ["Today", "Yesterday"],
@@ -58,7 +58,7 @@ export default {
       HeaderView, 
       SidebarView, 
       FooterVue, 
-      AgregarMaterialesVue 
+      
     }
 }
 </script>

@@ -41,6 +41,27 @@ const routes = [
     component: function(){
       return import('../views/Dashboard.vue')
     }
+  },
+  {
+    path: '/rewardsDashboard',
+    name: 'rewardsDashboard',
+    component: function(){
+      return import('../views/Rewards/RewardsDashboardView.vue')
+    }
+  },
+  {
+    path: '/addReaward',
+    name: 'addReaward',
+    component: function(){
+      return import('../views/Rewards/AddRewardView.vue')
+    }
+  },
+  {
+    path: '/updateReaward',
+    name: 'updateReaward',
+    component: function(){
+      return import('../views/Rewards/UpdateRewardView.vue')
+    }
   }
 ]
 
