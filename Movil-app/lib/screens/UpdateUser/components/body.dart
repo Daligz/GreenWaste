@@ -32,7 +32,7 @@ class Body extends StatelessWidget {
           children: <Widget>[
             SizedBox(height: size.height * 0.02),
             Bar(text:"Editar perfil", user: user, press: () {
-              Navigator.of(context).pushNamed('/main-screen', arguments: {'user': user!,},);
+              //Navigator.of(context).pushNamed('/main-screen', arguments: {'user': user!,},);
               //Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateUser(user: user!)),);
             }),
             Image.asset("assets/imgs/img_editar_usuario_movil.png",

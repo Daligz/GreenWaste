@@ -32,8 +32,12 @@ class _MainScreenState extends State<MainScreen>{
         screens.add(RewardScreen());
         screens.add(RewardScreen());
         screens.add(RewardScreen());
+        if(arguments['index']!=null){
+          index = arguments['index'];
+        }
         setState((){});
       }
+
     });
   }
 

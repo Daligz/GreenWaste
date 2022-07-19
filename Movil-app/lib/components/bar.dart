@@ -25,10 +25,8 @@ class Bar extends StatelessWidget{
             iconSize: 15.0,
             icon: SvgPicture.asset("assets/icons/arrow.svg"),
             onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProfileScreen(user: user!)),
-              );
+              //Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen(user: user!)),);
+              Navigator.of(context).pushNamed('/main-screen', arguments: {'user': user!, 'index': 1},);
             },
           ),
           Row(
