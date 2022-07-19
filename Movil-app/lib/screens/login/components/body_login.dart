@@ -45,7 +45,8 @@ class Body_Login extends StatelessWidget {
                   print(val1);
                   if( val1 != null && val1.correo.isNotEmpty){
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Bienvenido"),));
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfileScreen(user: val1!)));
+                    Navigator.of(context).pushNamed('/main-screen', arguments: {'user': val1,},);
+                    //Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfileScreen(user: val1!)));
                   }else{
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Verifique sus credenciales")));
                   }
