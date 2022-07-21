@@ -10,16 +10,14 @@ import spark.Response;
 public class RewardRead extends RouteWrapper {
 
     public RewardRead() {
-            super("/rewards/read/:id");
+            super("/rewards/read");
     }
 
     @Override
     public Object handle(final Request request, final Response response) {
-        final String id = request.params(":id");
         final String select = new LSelect()
                 .from("premios")
                 .value("*")
-                .where("idPremio", "=", id)
                 .getQuery();
         return Connector.HIKARI_POOL.execute(connection -> JsonMapper.toJSON(connection.prepareStatement(select).executeQuery()));
     }
