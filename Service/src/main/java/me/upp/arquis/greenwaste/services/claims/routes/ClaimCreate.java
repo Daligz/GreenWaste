@@ -12,7 +12,6 @@ import spark.Request;
 import spark.Response;
 
 import java.sql.Date;
-import java.time.format.DateTimeFormatter;
 
 public class ClaimCreate extends RouteWrapper {
 
@@ -22,30 +21,39 @@ public class ClaimCreate extends RouteWrapper {
 
     @Override
     public Object handle(final Request request, final Response response) {
-        try {
-            final String correo = request.params(":correo");
-            final String idPremio = request.params(":idPremio");
+        final String correo = request.params(":correo");
+        final String idPremio = request.params(":idPremio");
 
-            final String selectUser = new LSelect()
-                    .from("usuario")
-                    .value("idUsuario")
-                    .where("correo", "=", correo)
-                    .getQuery();
-            final String data = Connector.HIKARI_POOL.execute(connection -> JsonMapper.toJSON(connection.prepareStatement(selectUser).executeQuery())).toString();
-            final UserContainer userContainer = GreenWaste.GSON.fromJson(data, UserContainer[].class)[0];
+        final String selectUser = new LSelect()
+                .from("usuario")
+                .value("idUsuario")
+                .where("correo", "=", correo)
+                .getQuery();
+        final String userData = Connector.HIKARI_POOL.execute(connection -> JsonMapper.toJSON(connection.prepareStatement(selectUser).executeQuery())).toString();
+        final UserContainer userContainer = GreenWaste.GSON.fromJson(userData, UserContainer[].class)[0];
 
-            // Format : day-month-year
-            // new Date(System.currentTimeMillis()).toLocalDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        final String selectPoints = new LSelect()
+                .from("puntos")
+                .value("idPuntos")
+                .where("idUsuario", "=", userContainer.getId())
+                .getQuery();
+        final String pointsData = Connector.HIKARI_POOL.execute(connection -> JsonMapper.toJSON(connection.prepareStatement(selectPoints).executeQuery())).toString();
+        final PointContainer pointContainer = GreenWaste.GSON.fromJson(pointsData, PointContainer[].class)[0];
 
-            final String insert = new LInsert()
-                    .table("canjee")
-                    .values(null, userContainer.getId(), idPremio, new Date(System.currentTimeMillis()))
-                    .getQuery();
-            return Connector.HIKARI_POOL.execute(connection -> !(connection.prepareStatement(insert).execute()));
-        } catch (final Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
+        // Format : day-month-year
+        // new Date(System.currentTimeMillis()).toLocalDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+        final String insert = new LInsert()
+                .table("canjee")
+                .values(null, pointContainer.getId(), idPremio, new Date(System.currentTimeMillis()))
+                .getQuery();
+        return Connector.HIKARI_POOL.execute(connection -> !(connection.prepareStatement(insert).execute()));
+    }
+
+    @Data
+    static class PointContainer {
+        @SerializedName("idpuntos")
+        private String id;
     }
 
     @Data
