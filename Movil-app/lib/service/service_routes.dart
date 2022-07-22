@@ -1,6 +1,6 @@
 class Routes{
   
-  static const String _url = "http://192.168.0.5:6969";
+  static const String _url = "http://192.168.0.11:6969";
 
   // User routes
   static String routeUserCreate(final String nombre,
@@ -16,4 +16,11 @@ class Routes{
       final String psw) => _url + "/users/update/$idUsuario/$nombre/$apellidoPaterno/$apellidoMaterno/$telefono/$correo/$psw/1";
 
   static String routeUserRead(final int idUsuario) => _url + "/users/read/$idUsuario";
+
+
+  static String routeAddressCreate(final String colonia, final String calle, final String numero, final String municipio,
+      final String estado, final String latitud, final String logitud,
+      final int idUsuario)=> _url+"/address/create/$colonia/$calle/$numero/$municipio/$estado/$latitud/$logitud/$idUsuario";
+
+
 }
