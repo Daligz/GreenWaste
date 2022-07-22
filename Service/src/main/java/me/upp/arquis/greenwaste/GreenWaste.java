@@ -5,6 +5,7 @@ import me.upp.arquis.greenwaste.configuration.ServiceConfiguration;
 import me.upp.arquis.greenwaste.services.Service;
 import me.upp.arquis.greenwaste.services.ServicesStorage;
 import me.upp.arquis.greenwaste.services.address.Address;
+import me.upp.arquis.greenwaste.services.claims.Claims;
 import me.upp.arquis.greenwaste.services.materials.Materials;
 import me.upp.arquis.greenwaste.services.points.Points;
 import me.upp.arquis.greenwaste.services.rewards.Rewards;
@@ -26,7 +27,8 @@ public class GreenWaste {
                 new Users(),
                 new Address(),
                 new Materials(),
-                new Points()
+                new Points(),
+                new Claims()
         );
     }
 }

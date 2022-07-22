@@ -1,5 +1,6 @@
 package me.upp.arquis.greenwaste.services.points.routes;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import me.upp.arquis.greenwaste.GreenWaste;
 import me.upp.arquis.greenwaste.database.Connector;
@@ -26,7 +27,6 @@ public class PointCreate extends RouteWrapper {
                 .where("correo", "=", correo)
                 .getQuery();
         final String data = Connector.HIKARI_POOL.execute(connection -> JsonMapper.toJSON(connection.prepareStatement(select).executeQuery())).toString();
-        System.out.println(data);
         final DataContainer dataContainer = GreenWaste.GSON.fromJson(data, DataContainer[].class)[0];
 
         final String insert = new LInsert()
@@ -38,6 +38,7 @@ public class PointCreate extends RouteWrapper {
 
     @Data
     static class DataContainer {
+        @SerializedName("idusuario")
         private String id;
     }
 }
