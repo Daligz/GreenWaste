@@ -5,6 +5,7 @@ import 'package:movil_app/components/rounded_password_field.dart';
 import 'package:movil_app/screens/Profile/components/background.dart';
 import 'package:movil_app/components/already_have_a_container_check.dart';
 import 'package:movil_app/screens/UpdateUser/update_user.dart';
+import 'package:movil_app/screens/address/AddressCreate/create_address.dart';
 import 'package:movil_app/screens/login/login.dart';
 import 'package:movil_app/service/common/user.dart';
 
@@ -45,8 +46,12 @@ class Body extends StatelessWidget {
               },
             ),
             RoundedButton(
-              text: "Direcciones",
-              press: () {},
+                text: "Direcciones",
+                press: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context)=>AddressCreate(user:user!)),);
+                },
             ),
             RoundedButton(
               text: "Historial de recompensas",
