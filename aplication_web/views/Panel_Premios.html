@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/contentDashboard.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/premios.css">
+</head>
+
+<body>
+
+    <v-app id="view-panel-premios">
+        <v-main>
+            <nav>
+                <div class="logo-name">
+                    <div class="logo-image">
+                        <img src="../assets/img/img_logo_web.png" alt="">
+                    </div>
+                    <span class="logo_name">GREEN WASTE</span>
+                </div>
+                <div class="menu-items">
+                    <ul class="nav-links">
+                        <li><a href="dashboard.html">
+                                <i class="uil uil-estate"></i>
+                                <span class="link-name"><b>Dahsboard</b></span>
+                            </a></li>
+                        <li><a href="#">
+                                <i class="uil uil-users-alt"></i>
+                                <span class="link-name"><b>Usuarios</b></span>
+                            </a></li>
+                        <li><a href="#">
+                                <i class="uil uil-trash-alt"></i>
+                                <span class="link-name"><b>Contenedores</b></span>
+                            </a></li>
+                        <li><a href="#">
+                                <i class="uil uil-file-copy-alt"></i>
+                                <span class="link-name"><b>Materiales</b></span>
+                            </a></li>
+                        <li><a href="Panel_Premios.html">
+                                <i class="uil uil-gift"></i>
+                                <span class="link-name"><b>Premios</b></span>
+                            </a></li>
+                        <li><a href="#">
+                                <i class="uil uil-signout"></i>
+                                <span class="link-name"><b>Cerrar Sesión</b></span>
+                            </a></li>
+
+                    </ul>
+                    <ul class="logout-mode">
+                        <li class="mode">
+                            <div class="mode-toggle">
+                                <span class="switch"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <section class="dashboard">
+                <div class="top">
+                    <i class="uil uil-bars sidebar-toggle"></i>
+                    <div class="title">
+                        <i class="uil uil-tachometer-fast-alt"></i>
+                        <span class="text">Dashboard</span>
+                    </div>
+                    <img src="../assets/img/img_login_web.png" alt="">
+                </div>
+                <div class="dash-content">
+                    <div id="content2-main">
+                        <sidebar-view :drawer="drawer" />
+                        <div class="grid-container">
+                            <div class="grid-item">
+                                <v-img src="../assets/img/img_panelPremios_web.png" class="my-2" contain height="400" />
+                            </div>
+                            <div class="grid-item">
+                                <h1 id="title-panel">PANEL DE CONTROL DE LOS PREMIOS</h1>
+                                <v-btn class=" pa-5 cyan darken-3" block dark color="#00B0FF" @click="formNuevo()">
+                                    <v-icon dark>mdi-plus</v-icon>Agregar nuevo usuario
+                                </v-btn>
+                            </div>
+                        </div>
+                    </div>
+                    <v-card class="mx-auto mt-5" max-width="1500" elevation="4">
+                        <!-- Tabla y formulario -->
+                        <v-simple-table class="mx-auto mt-5" max-width="1500" elevation="4">
+                            <template v-slot:default>
+                                <thead>
+                                    <tr class="cyan darken-4">
+                                        <th class="white--text text-center">NO.</th>
+                                        <th class="white--text text-center">NOMBRE</th>
+                                        <th class="white--text text-center">DESCRIPCIÓN</th>
+                                        <th class="white--text text-center">IMAGEN</th>
+                                        <th class="white--text text-center">VALOR</th>
+                                        <th class="white--text text-center">STOCK</th>
+                                        <th class="white--text text-center">ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr v-for="recompensa in recompensas" :key="recompensas.idpremio">
+                                        <td class=" font-weight-bold text-center">{{ recompensa.idpremio }}</td>
+                                        <td class=" font-weight-bold text-center">{{ recompensa.nombre}}</td>
+                                        <td class=" font-weight-bold text-center">{{ recompensa.descripcion }}</td>
+                                        <td class=" font-weight-bold text-center">{{ recompensa.imagen }}</td>
+                                        <td class=" font-weight-bold text-center">{{ recompensa.valor }}</td>
+                                        <td class=" font-weight-bold text-center">{{ recompensa.stock }}</td>
+                                        <td class=" text-center">
+                                            <v-btn dark class="amber darken-3" small
+                                                @click="formEditar(recompensa.idpremio,recompensa.nombre,recompensa.descripcion,recompensa.imagen,recompensa.valor,recompensa.stock)">
+                                                <v-icon>mdi-pencil</v-icon>Editar
+                                            </v-btn>
+                                            <v-btn dark class="red accent-3" small @click="borrar(recompensa.idpremio)">
+                                                <v-icon>mdi-delete</v-icon>Eliminar
+                                            </v-btn>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </template>
+                        </v-simple-table>
+                    </v-card>
+                    <v-dialog v-model="dialog" max-width="800">
+                        <v-card>
+                                <v-form><br>
+                                    <v-container class="content-form-premios">
+                                        <v-card-title class="title-form-premios">AGREGA EL PREMIO A CANJEAR</v-card-title>
+                                        <img id="img-premios" src="../assets/img/img_agregarPremio_web.png" alt="">
+                                        <input v-model="recompensa.idpremio" hidden></input>
+                                        <v-row>
+                                            <v-col cols="12" md="6">
+                                                <v-text-field filled outlined v-model="recompensa.nombre" 
+                                                    label="Nombre del premio" prepend-inner-icon="mdi-gift" solo
+                                                    required>
+                                                    {{recompensa.nombre}}</v-text-field>
+                                            </v-col>
+                                            <v-col cols="12" md="6">
+                                                <v-file-input v-model="recompensa.imagen" label="Seleccione la imagen"
+                                                    solo required filled outlined prepend-inner-icon="mdi-camera">
+                                                </v-file-input>
+                                                
+                                            </v-col>
+                                        </v-row>
+                                        <v-row>
+                                            <v-col cols="12" md="6">
+                                                <v-text-field filled outlined v-model="recompensa.valor"
+                                                    label="ingrese el valor" solo required
+                                                    prepend-inner-icon="mdi-cash-multiple">
+                                                </v-text-field>
+                                            </v-col>
+                                            <v-col cols="12" md="6">
+                                                <v-text-field v-model="recompensa.stock" filled
+                                                    outlinedv-model="recompensa.valor" label="ingrese el valor" solo
+                                                    required prepend-inner-icon="mdi-cash-multiple">
+                                                </v-text-field>
+                                            </v-col>
+                                        </v-row>
+                                        <v-row>
+                                            <v-col cols="12" md="12">
+                                                <v-textarea v-model="recompensa.descripcion" name="input-7-1" filled outlined
+                                            label="Ingrese una secripción del producto"
+                                            prepend-inner-icon="mdi-book-open-variant" auto-grow solo required>
+                                        </v-textarea>
+                                            </v-col>
+                                        </v-row>
+                                        <v-row>
+                                            <v-col cols="12" md="6">
+                                                <v-btn @click="guardar()" id="button-Agregar" type="submit">Guardar</v-btn>
+                                            </v-col>
+                                            <v-col cols="12" md="6">
+                                                <v-btn @click="dialog=false" id="button-Cancelar">Cancelar</v-btn>
+                                            </v-col>
+                                        </v-row>
+                                    </v-container>   <br>               
+                            </v-form>
+                        </v-card>
+                    </v-dialog>
+                </div>
+            </section>
+        </v-main>
+    </v-app>
+    <script src="../js/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.5.7/vuetify.min.js"
+        integrity="sha512-BPXn+V2iK/Zu6fOm3WiAdC1pv9uneSxCCFsJHg8Cs3PEq6BGRpWgXL+EkVylCnl8FpJNNNqvY+yTMQRi4JIfZA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        //? hacemos referencia a nuestro recursos de la api
+        let url = 'http://127.0.0.1:6969/rewards/';
+
+        new Vue({
+            el: '#view-panel-premios',
+            vuetify: new Vuetify(),
+            data() {
+                return {
+                    recompensas: [],
+                    dialog: false,
+                    operacion: '',
+                    recompensa: {
+                        idpremio: null,
+                        nombre: '',
+                        descripcion: '',
+                        imagen: '',
+                        valor: '',
+                        stock: '',
+                    }
+                }
+            },
+            created() {
+                this.mostrar()
+            },
+            methods: {
+                //MÉTODOS PARA EL CRUD
+                mostrar: function () {
+                    axios.get(url + '/read')
+                        .then(response => {
+                            this.recompensas = response.data;
+                        })
+                },
+                crear: function () {
+                    let parametros = { nombre: this.recompensa.nombre, descripcion: this.recompensa.descripcion, imagen: this.recompensa.imagen, valor: this.recompensa.valor, stock: this.recompensa.stock };
+                    if (!parametros.nombre || !parametros.descripcion || !parametros.imagen || !parametros.valor || !parametros.stock) {
+                        alert("Debes agregar todos los datos!");
+                        return;
+                    }
+                    axios.get(url + `create/${parametros.nombre}/${parametros.descripcion}/${parametros.imagen}/${parametros.valor}/${parametros.stock}`)
+                        .then(response => {
+                            this.mostrar();
+                        }).catch(error => {
+                            alert("Insertaste datos incorrectos!");
+                        });
+                    this.recompensa.nombre = "";
+                    this.recompensa.descripcion = "";
+                    this.recompensa.imagen = "";
+                    this.recompensa.valor = "";
+                    this.recompensa.stock = "";
+                },
+                editar: function () {
+                    let parametros = { nombre: this.recompensa.nombre, descripcion: this.recompensa.descripcion, imagen: this.recompensa.imagen, valor: this.recompensa.valor, stock: this.recompensa.stock, idpremio: this.recompensa.idpremio };
+                    if (!parametros.nombre || !parametros.descripcion || !parametros.imagen || !parametros.valor || !parametros.stock) {
+                        alert("Debes agregar todos los datos!");
+                        return;
+                    }
+                    axios.get(url + `update/${parametros.idpremio}/${parametros.nombre}/${parametros.descripcion}/${parametros.imagen}/${parametros.valor}/${parametros.stock}`)
+                        .then(response => {
+                            this.mostrar();
+                        })
+                        .catch(error => {
+                            alert("Insertaste datos incorrectos!");
+                            console.log(error);
+                        });
+                },
+                borrar: function (idpremio) {
+                    Swal.fire({
+                        title: '¿Confirma eliminar el registro?',
+                        confirmButtonText: `Confirmar`,
+                        showCancelButton: true,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            //procedimiento borrar
+                            axios.get(url + `/delete/${idpremio}`)
+                                .then(response => {
+                                    this.mostrar();
+                                });
+                            Swal.fire('¡Eliminado!', '', 'success')
+                        } else if (result.isDenied) {
+                        }
+                    });
+                },
+
+                //Botones y formularios
+                guardar: function () {
+                    if (this.operacion == 'crear') {
+                        this.crear();
+                    }
+                    if (this.operacion == 'editar') {
+                        this.editar();
+                    }
+                    this.dialog = false;
+                },
+                formNuevo: function () {
+                    this.dialog = true;
+                    this.operacion = 'crear';
+                    this.recompensa.nombre = "";
+                    this.recompensa.descripcion = "";
+                    this.recompensa.imagen = "";
+                    this.recompensa.valor = "";
+                    this.recompensa.stock = "";
+                },
+                formEditar: function (idpremio, nombre, descripcion, imagen, valor, stock) {
+                    //capturamos los datos del registro seleccionado y los mostramos en el formulario
+                    this.recompensa.idpremio = idpremio;
+                    this.recompensa.nombre = nombre;
+                    this.recompensa.descripcion = descripcion;
+                    this.recompensa.imagen = imagen;
+                    this.recompensa.valor = valor;
+                    this.recompensa.stock = stock;
+
+                    this.dialog = true;
+                    this.operacion = 'editar';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+.dashboard .dash-content{
+    padding-top: 50px;
+    margin-top: 70px;
+    width: 100%;
+    background: #FFF;
+}
+#title-dash{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    color: #888;
+    font-size: 50px;
+}
+#img-dash{
+    max-width: 40%;
+    display: block;
+    margin: auto;
+    opacity: .6;
+}

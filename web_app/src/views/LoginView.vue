@@ -39,7 +39,7 @@
   margin-bottom: 5%;
 }
 .titulo-splash{
-  font-family: Inter;
+ font-family: Roboto;
   color: #358F80;
   font-size: 50px;
   text-align: center;

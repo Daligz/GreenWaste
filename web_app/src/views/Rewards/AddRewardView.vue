@@ -9,13 +9,14 @@
                     <v-img :src="require('@/assets/img_agregarPremio_web.png')" class="my-2" contain height="400" />
                     <v-row>
                         <v-col cols="12" md="6">
-                            <v-text-field filled outlined label="Nombre del premio" prepend-inner-icon="mdi-gift">
-                            </v-text-field>
+                            <v-text-field filled outlined label="Nombre del premio" prepend-inner-icon="mdi-gift"></v-text-field>
                         </v-col>
-
                         <v-col cols="12" md="6">
                             <v-text-field filled outlined label="Valor por puntos"
                                 prepend-inner-icon="mdi-cash-multiple">
+                            </v-text-field>
+                            <v-text-field filled outlined label="Nombre del premio"
+                                prepend-inner-icon="mdi-gift-open-outline">
                             </v-text-field>
                         </v-col>
                     </v-row>

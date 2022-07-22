@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+.flex-container{
+    display: flex;
+
+  }
+  .flex-container>div{
+    width: 50%;
+  }
+  .content1-login{
+    padding-left: 15%;
+    padding-top: 1%;
+  }
+  .img-logo-splash{
+    width:100%;
+  }
+  .content2-longin{
+   padding: 1%;
+  }
+  .text-gps{
+    margin-left: 70%;
+  }

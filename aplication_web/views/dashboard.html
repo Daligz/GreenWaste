@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/contentDashboard.css">
+    <link rel="stylesheet" href="../css/footer.css">
+
+</head>
+
+<body>
+    <v-app id="#view-dashboard">
+        <v-main>
+            <nav>
+                <div class="logo-name">
+                    <div class="logo-image">
+                        <img src="../assets/img/img_logo_web.png" alt="">
+                    </div>
+                    <span class="logo_name">GREEN WASTE</span>
+                </div>
+                <div class="menu-items">
+                    <ul class="nav-links">
+                        <li><a href="dashboard.html">
+                                <i class="uil uil-estate"></i>
+                                <span class="link-name"><b>Dahsboard</b></span>
+                            </a></li>
+                        <li><a href="#">
+                                <i class="uil uil-users-alt"></i>
+                                <span class="link-name"><b>Usuarios</b></span>
+                            </a></li>
+                        <li><a href="#">
+                                <i class="uil uil-trash-alt"></i>
+                                <span class="link-name"><b>Contenedores</b></span>
+                            </a></li>
+                        <li><a href="#">
+                                <i class="uil uil-file-copy-alt"></i>
+                                <span class="link-name"><b>Materiales</b></span>
+                            </a></li>
+                        <li><a href="Panel_Premios.html">
+                                <i class="uil uil-gift"></i>
+                                <span class="link-name"><b>Premios</b></span>
+                            </a></li>
+                        <li><a href="#">
+                                <i class="uil uil-signout"></i>
+                                <span class="link-name"><b>Cerrar Sesión</b></span>
+                            </a></li>
+
+                    </ul>
+                    <ul class="logout-mode">
+                        <li class="mode">
+                            <div class="mode-toggle">
+                                <span class="switch"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <section class="dashboard">
+                <div class="top">
+                    <i class="uil uil-bars sidebar-toggle"></i>
+                    <div class="title">
+                        <i class="uil uil-tachometer-fast-alt"></i>
+                        <span class="text">Dashboard</span>
+                    </div>
+                    <img src="../assets/img/img_login_web.png" alt="">
+                </div>
+                <div class="dash-content">
+                    <h1 id="title-dash">BIENVENIDO, QUE TENGA UN EXCELENTE DÍA</h1>
+                    <img id="img-dash" src="../assets/img/img_logo_web.png" alt="">
+                </div>
+                </div>
+            </section>
+
+        </v-main>
+        <footer>
+            <div class="flex-container">
+                <div class="content1-login">
+                    <strong class="subheading footer-text">Green Waste C.V <i class="uil uil-estate"></i></strong>
+                </div>
+                <div class="content2-longin">
+                    <strong class="text-gps">Pachuca de Soto Hidalgo<i class="uil uil-home"></i></strong>
+                </div>
+            </div>
+        </footer>
+    </v-app>
+    <script src="../js/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.5.7/vuetify.min.js"
+        integrity="sha512-BPXn+V2iK/Zu6fOm3WiAdC1pv9uneSxCCFsJHg8Cs3PEq6BGRpWgXL+EkVylCnl8FpJNNNqvY+yTMQRi4JIfZA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        //? hacemos referencia a nuestro recursos de la api
+        let url = 'http://127.0.0.1:6969/rewards/';
+
+        new Vue({
+            el: '#view-dashboard',
+            vuetify: new Vuetify(),
+            data() {
+                return {
+
+                }
+            },
+
+        });
+    </script>
+</body>
+
+</html>

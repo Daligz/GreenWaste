@@ -10,9 +10,9 @@
                     </div>
                     <div class="grid-item">
                         <h1 id="title-panel">PANEL DE CONTROL DE LOS PREMIOS</h1>
-                        <v-btn id="button-Agregar">
-                                <v-icon left color="#ffffff">mdi-plus-box</v-icon>Agregar Material
-                            </v-btn>
+                        <v-btn class=" pa-5 cyan darken-3" block dark color="#00B0FF" @click="formNuevo()">
+              <v-icon dark>mdi-plus</v-icon>Agregar nuevo usuario
+            </v-btn>
                     </div>
                 </div>
                 <v-card-title>

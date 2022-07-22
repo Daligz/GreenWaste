@@ -1,0 +1,81 @@
+.flex-container{
+    display: flex;
+  }
+  .flex-container>div{
+    width: 50%;
+  }
+  .content1-login{
+    padding: 4%;
+    background: rgba(194, 221, 217, 0.74);
+  }
+  .img-logo-splash{
+    width:100%;
+  }
+  .content2-longin{
+    padding: 4%;
+  }
+  .titulo-splash{
+    font-family: Roboto;
+    color: #358F80;
+    font-size: 50px;
+    text-align: center;
+    text-shadow: 2px 2px #999;
+    margin-bottom: 2%;
+  }
+  .img-login{
+    width: 50%;
+    display: block;
+    margin: auto;
+    margin-bottom: 5%;
+  }
+  #img-login{
+    width: 50%;
+    display: block;
+    margin: auto;
+    margin-bottom: 5%;
+  }
+  a{
+    text-decoration: none;
+    display: inline-block;
+  }
+  #button-Agregar {
+    width: 100%;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+    background: #358F80;
+    padding: 1%;
+    font-family: Roboto;
+    font-size: 18px;
+    border-radius: 10px;
+    box-shadow: 2px 4px #888888;
+  }
+  #button-Agregar:hover {
+    color: #358F80;
+    background: #fff;
+    border-style: solid;
+    border-color: #358F80;
+  }
+  /* Diseño para celulares */
+  
+  @media screen and (max-width:480px){
+    template {
+      float:none;
+      width:100%;
+    }
+  }
+  /* Diseño para tabletas */
+  @media screen and (min-width: 800px) {
+    template {
+      float:left;
+      width:50%;
+    }
+  }
+  /* Diseño para PC */
+  @media screen and (min-width: 1025px) {
+    template {
+      float: left;
+      width: 33%;
+    }
+  }
