@@ -8,7 +8,7 @@ import spark.Response;
 
 public class AddressUpdate extends RouteWrapper {
     public  AddressUpdate(){
-        super("/address/update/:idDireccion/:colonia/:calle/:numero/:municipio/:estado/:latitud/:longitud/:idUsuario");
+        super("/address/update/:idDireccion/:colonia/:calle/:numero/:municipio/:estado/:idUsuario");
     }
 
     @Override
@@ -19,8 +19,6 @@ public class AddressUpdate extends RouteWrapper {
         final String  numero = request.params(":numero");
         final String municipio = request.params(":municipio");
         final String estado = request.params(":estado");
-        final String latitud = request.params(":latitud");
-        final String longitud = request.params(":longitud");
         final int idUsuario = Integer.parseInt(request.params(":idUsuario"));
         final String update = new LUpdate()
                 .table("direccion")
@@ -29,8 +27,6 @@ public class AddressUpdate extends RouteWrapper {
                 .update("numero",numero)
                 .update("municipio",municipio)
                 .update("estado",estado)
-                .update("latitud",latitud)
-                .update("longitud",longitud)
                 .where("idDireccion","=", idDireccion)
                 .getQuery();
         return Connector.HIKARI_POOL.execute(connection -> !(connection.prepareStatement(update).execute()));

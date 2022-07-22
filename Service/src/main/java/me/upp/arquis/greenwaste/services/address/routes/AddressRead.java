@@ -17,7 +17,7 @@ public class AddressRead extends RouteWrapper {
         final String idUsuario = request.params(":idUsuario");
         final String select = new LSelect()
                 .from("direccion")
-                .value("colonia,numero,municipio,estado,latitud,longitud,usuario.nombre")
+                .value("colonia,numero,municipio,estado,usuario.nombre")
                 .join("usuario","direccion.idUsuario","=", idUsuario)
                 .where("usuario.idUsuario","=",idUsuario)
                 .getQuery();

@@ -39,8 +39,6 @@ CREATE TABLE direccion
     numero      varchar(50),
     municipio   varchar(50),
     estado      varchar(50),
-    latitud     varchar(250),
-    longitud    varchar(250),
     idUsuario   int(4),
     FOREIGN KEY (idUsuario) REFERENCES usuario (idUsuario)
 );

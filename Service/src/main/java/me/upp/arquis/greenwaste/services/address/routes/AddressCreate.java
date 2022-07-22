@@ -8,7 +8,7 @@ import spark.Response;
 
 public class AddressCreate extends RouteWrapper {
     public  AddressCreate(){
-        super("/address/create/:colonia/:calle/:numero/:municipio/:estado/:latitud/:longitud/:idUsuario");
+        super("/address/create/:colonia/:calle/:numero/:municipio/:estado/:idUsuario");
     }
 
     @Override
@@ -18,12 +18,10 @@ public class AddressCreate extends RouteWrapper {
         final String  numero = request.params(":numero");
         final String municipio = request.params(":municipio");
         final String estado = request.params(":estado");
-        final String latitud = request.params(":latitud");
-        final String longitud = request.params(":longitud");
         final int idUsuario = Integer.parseInt(request.params(":idUsuario"));
         final String insert = new LInsert()
                 .table("direccion")
-                .values(null,colonia,calle,numero,municipio,estado,latitud,longitud,idUsuario)
+                .values(null,colonia,calle,numero,municipio,estado,idUsuario)
                 .getQuery();
         return Connector.HIKARI_POOL.execute(connection -> !(connection.prepareStatement(insert).execute()));
     }
