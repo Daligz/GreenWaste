@@ -1,5 +1,6 @@
 package me.upp.arquis.greenwaste;
 
+import com.google.gson.Gson;
 import me.upp.arquis.greenwaste.configuration.ServiceConfiguration;
 import me.upp.arquis.greenwaste.services.Service;
 import me.upp.arquis.greenwaste.services.ServicesStorage;
@@ -12,6 +13,8 @@ import me.upp.arquis.greenwaste.storages.Storage;
 import spark.Spark;
 
 public class GreenWaste {
+
+    public static final Gson GSON = new Gson();
 
     public static void main(final String[] args) {
         // Set port to service
