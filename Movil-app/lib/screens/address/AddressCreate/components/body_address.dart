@@ -20,8 +20,6 @@ class Body_Address extends StatelessWidget {
     TextEditingController numeroTextController = TextEditingController();
     TextEditingController municipioTextController = TextEditingController();
     TextEditingController estadoTextController = TextEditingController();
-    TextEditingController latitudTextController = TextEditingController();
-    TextEditingController logitudTextController = TextEditingController();
     Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
@@ -66,27 +64,14 @@ class Body_Address extends StatelessWidget {
                 onChanged: (value) {},
                 controller: estadoTextController
             ),
-            RoundedInputField(
-                hintText: "Latitud",
-                icon: Icons.email,
-                onChanged: (value){},
-                controller: latitudTextController
-            ),
-            RoundedInputField(
-                hintText: "Logitud",
-                icon: Icons.email,
-                onChanged: (value){},
-                controller: logitudTextController
-            ),
             RoundedButton(
               text: "Agregar Dirección",
               press: () {
                 if(coloniaTextController.text.isNotEmpty && calleTextController.text.isNotEmpty &&
                     numeroTextController.text.isNotEmpty && municipioTextController.text.isNotEmpty &&
-                    municipioTextController.text.isNotEmpty && estadoTextController.text.isNotEmpty &&
-                    latitudTextController.text.isNotEmpty && logitudTextController.text.isNotEmpty){
+                    estadoTextController.text.isNotEmpty){
                   Service.createAddress(coloniaTextController.text, calleTextController.text, numeroTextController.text, municipioTextController.text,
-                      estadoTextController.text, latitudTextController.text, logitudTextController.text,user!.idUsuario);
+                      estadoTextController.text,user!.idUsuario);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Éxito!"),));
                 } else{
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("No se ha crear la dirección, falta campos por llenar"),));

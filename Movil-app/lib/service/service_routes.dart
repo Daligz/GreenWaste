@@ -19,8 +19,7 @@ class Routes{
 
 
   static String routeAddressCreate(final String colonia, final String calle, final String numero, final String municipio,
-      final String estado, final String latitud, final String logitud,
-      final int idUsuario)=> _url+"/address/create/$colonia/$calle/$numero/$municipio/$estado/$latitud/$logitud/$idUsuario";
+      final String estado,final int idUsuario)=> _url+"/address/create/$colonia/$calle/$numero/$municipio/$estado/$idUsuario";
 
 
 }
