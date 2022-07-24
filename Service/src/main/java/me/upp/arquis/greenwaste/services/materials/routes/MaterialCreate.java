@@ -15,7 +15,7 @@ public class MaterialCreate extends RouteWrapper {
     @Override
     public Object handle(final Request request, final Response response){
         final String name = request.params(":name");
-        final int cost = Integer.parseInt(request.params(":cost"));
+        final float cost = Float.parseFloat(request.params(":cost"));
         final String insert = new LInsert()
                 .table("material")
                 .values(
