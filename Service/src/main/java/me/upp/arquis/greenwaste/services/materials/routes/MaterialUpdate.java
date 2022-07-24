@@ -16,7 +16,7 @@ public class MaterialUpdate extends RouteWrapper {
     public Object handle(final Request request, final Response response){
         final String id = request.params(":id");
         final String name = request.params(":name");
-        final String cost = request.params(":cost");
+        final float cost = Float.parseFloat(request.params(":cost"));
 
         final String update = new LUpdate()
                 .table("material")
