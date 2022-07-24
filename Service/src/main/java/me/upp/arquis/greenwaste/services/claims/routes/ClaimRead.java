@@ -20,7 +20,7 @@ public class ClaimRead extends RouteWrapper {
     }
 
     @Override
-    public Object handle(final Request request, final Response response){
+    public Object handle(final Request request, final Response response) {
         final String idUsuario = request.params(":idUsuario");
 
         final String selectPoints = new LSelect()
@@ -41,12 +41,47 @@ public class ClaimRead extends RouteWrapper {
         final String claimsData = Connector.HIKARI_POOL.execute(connection -> JsonMapper.toJSON(connection.prepareStatement(selectClaim).executeQuery())).toString();
         final ClaimData[] claimData = GreenWaste.GSON.fromJson(claimsData, ClaimData[].class);
 
-        for (final ClaimData claimDatum : claimData) {
-            System.out.println(claimDatum.toString());
+        final RewardData[] rewardData = new RewardData[claimData.length];
+
+        final String selectReward = new LSelect()
+                .from("premios")
+                .value("*")
+                .where("idPremio", "=", "%reward")
+                .getQuery();
+
+        for (int i = 0; i < claimData.length; i++) {
+            final int tempCounter = i;
+            final String rewardsData = Connector.HIKARI_POOL.execute(connection -> JsonMapper.toJSON(connection.prepareStatement(selectReward.replace("%reward", String.valueOf(claimData[tempCounter].getIdPremio()))).executeQuery())).toString();
+            rewardData[i] = GreenWaste.GSON.fromJson(
+                    rewardsData,
+                    RewardData[].class
+            )[0];
         }
 
-        return ":)";
-        //return Connector.HIKARI_POOL.execute(connection -> JsonMapper.toJSON(connection.prepareStatement(read).executeQuery()));
+        int usedPoints = 0;
+        for (final RewardData data : rewardData) usedPoints += data.getValue();
+
+        return GreenWaste.GSON.toJson(new GeneralizedClaimData(usedPoints, rewardData));
+    }
+
+    @Data
+    static class GeneralizedClaimData {
+        private final int usedPoints;
+        private final RewardData[] rewardData;
+    }
+
+    @Data
+    static class RewardData {
+        @SerializedName("nombre")
+        private final String name;
+        @SerializedName("descripcion")
+        private final String description;
+        @SerializedName("imagen")
+        private final String image;
+        @SerializedName("valor")
+        private final int value;
+        @SerializedName("stock")
+        private final int stock;
     }
 
     @Data
