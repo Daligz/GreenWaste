@@ -11,7 +11,7 @@ import spark.Response;
 public class MaterialRead extends RouteWrapper {
 
     public MaterialRead() {
-        super("/materials/read/:id");
+        super("/materials/read");
     }
 
     @Override
@@ -20,7 +20,6 @@ public class MaterialRead extends RouteWrapper {
         final String read = new LSelect()
                 .from("material")
                 .value("*")
-                .where("idMaterial", "=", id)
                 .getQuery();
 
         return Connector.HIKARI_POOL.execute(connection -> JsonMapper.toJSON(connection.prepareStatement(read).executeQuery()));
