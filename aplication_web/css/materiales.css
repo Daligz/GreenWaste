@@ -1,0 +1,108 @@
+#button-Agregar {
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: #358F80;
+    padding: 2.5%;
+
+}
+#title-panel {
+    font-size: 70px;
+    color: #888888;
+    display: block;
+    margin: auto;
+    text-align: center;
+    margin: 4% 0% 4% 0%;
+
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 10px;
+}
+
+.grid-item {
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.img-logo-dashboard {
+    width: 50%;
+    display: block;
+    margin: auto;
+    opacity: .6;
+}
+
+#content2-main {
+    height: 100%;
+    background-color: #fff;
+    padding-top: 1%;
+    margin: 1%;
+}
+
+#content-main {
+    background-color: #F8F8F8;
+}
+
+.main {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+#card-content {
+
+    border-style: solid;
+    border: 2px solid #888888;
+    width: 90%;
+    display: block;
+    margin: auto;
+    padding: 2% 1% 2% 1%;
+}
+#img-materiales{
+    max-width: 40%;
+    display: block;
+    margin: auto;
+}
+.title-form-materiales{
+    font-size: 30px;
+    margin-left: 22%;
+}
+.content-form-materiales{
+    width: 90%;
+    border: 2px solid #888;
+  border-radius: 25px;
+  
+}
+#button-Agregar {
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+    background: #358F80;
+    padding: 3%;
+}
+
+#button-Cancelar {
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+    background: #FFC107;
+    padding: 3%;
+
+}
+
+#button-Cancelar:hover {
+    color: #FFC107;
+    background: #fff;
+    border-style: solid;
+    border-color: #FFC107;
+}
+
+#button-Agregar:hover {
+    color: #358F80;
+    background: #fff;
+    border-style: solid;
+    border-color: #358F80;
+}
