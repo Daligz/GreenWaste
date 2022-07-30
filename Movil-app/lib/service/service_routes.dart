@@ -21,5 +21,7 @@ class Routes{
   static String routeAddressCreate(final String colonia, final String calle, final String numero, final String municipio,
       final String estado,final int idUsuario)=> _url+"/address/create/$colonia/$calle/$numero/$municipio/$estado/$idUsuario";
 
+  static String routeAddressRead(final int idUsuario)=> _url + "/address/read/$idUsuario";
+
 
 }
