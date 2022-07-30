@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movil_app/screens/Profile/components/background.dart';
+import '../../../../components/rounded_button.dart';
 import '../../../../service/common/user.dart';
 import 'container_readAddress.dart';
+import 'package:movil_app/screens/address/AddressCreate/create_address.dart';
+
 
 class BodyReadAddress extends StatelessWidget {
 
@@ -12,9 +15,9 @@ class BodyReadAddress extends StatelessWidget {
     return Background(
       child: SingleChildScrollView(
         child: Column(
-          children: const <Widget> [
+          children: <Widget> [
+            ContainerReadAddress(user: user!),
 
-            ContainerReadAddress()
           ],
         ),
       ),

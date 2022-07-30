@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:movil_app/screens/address/AddressCreate/create_address.dart';
 import 'package:movil_app/screens/address/AddressRead/components/card_readAddress.dart';
 
-class ContainerReadAddress extends StatelessWidget {
+import '../../../../components/rounded_button.dart';
+import '../../../../service/common/user.dart';
 
-  const ContainerReadAddress({Key? key}) : super(key: key);
+class ContainerReadAddress extends StatelessWidget {
+  final User? user;
+  const ContainerReadAddress({Key? key,required this.user}) : super(key: key);
 
   @override
   Widget build(final BuildContext context) {
@@ -14,7 +18,7 @@ class ContainerReadAddress extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget> [
             Text(
-                'Recompensas',
+                'Mis Direcciones',
                 style: _titleStyle(size)
             )
           ],
@@ -26,7 +30,15 @@ class ContainerReadAddress extends StatelessWidget {
             CardReadAddress(),
           ],
         ),
-
+        RoundedButton(
+          text: "Agregar nueva dirección",
+          press: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddressCreate(user: user!)),
+            );
+          },
+        ),
       ],
     );
   }

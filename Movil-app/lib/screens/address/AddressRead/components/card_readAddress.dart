@@ -30,15 +30,20 @@ class CardReadAddress extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: size.height * 0.010),
                   child: const Text('Fraccionamiento el Paraiso'),
                 ),
-                IconButton(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: size.height * 0.077),
-                  icon: Icon(
-                    Icons.edit_note_sharp,
-                      color: const Color(0xFF358F80),
-                      size: size.height * 0.08),
-                  onPressed: () {
-                  },
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    IconButton(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: size.height * 0.077,
+                          vertical: size.width*0.02),
+                      icon: Icon(
+                          Icons.edit_note_sharp,
+                          color: const Color(0xFF358F80),
+                          size: size.height * 0.08),
+                      onPressed: () {},
+                    )
+                  ],
                 ),
               ],
             ),

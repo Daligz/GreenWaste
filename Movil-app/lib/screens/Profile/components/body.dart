@@ -52,7 +52,8 @@ class Body extends StatelessWidget {
                 press: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context)=>AddressScreen(user:user!)),);
+                      MaterialPageRoute(builder: (context)=>AddressScreen(user:user!)),
+                  );
                 },
             ),
             RoundedButton(
