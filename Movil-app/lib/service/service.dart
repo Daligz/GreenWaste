@@ -40,6 +40,14 @@ class Service {
     return (response.statusCode==200);
   }
 
+  static Future<Address?> readAddress(final int idUsuario) async{
+    final Response response = await get(Uri.parse(Routes.routeAddressRead(idUsuario)));
+    if(response.body == "[]"){
+      return null;
+    }
+    return(Address.fromJson(json.decode(response.body)[0]));
+  }
+
 
 
 
