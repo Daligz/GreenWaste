@@ -9,6 +9,8 @@ import 'package:movil_app/screens/address/AddressCreate/create_address.dart';
 import 'package:movil_app/screens/login/login.dart';
 import 'package:movil_app/service/common/user.dart';
 
+import '../../address/AddressRead/read_addres.dart';
+
 class Body extends StatelessWidget {
   final User? user;
   const Body({
@@ -50,7 +52,7 @@ class Body extends StatelessWidget {
                 press: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context)=>AddressCreate(user:user!)),);
+                      MaterialPageRoute(builder: (context)=>AddressScreen(user:user!)),);
                 },
             ),
             RoundedButton(
