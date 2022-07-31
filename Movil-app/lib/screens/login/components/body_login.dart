@@ -5,15 +5,14 @@ import 'package:movil_app/components/rounded_input_field.dart';
 import 'package:movil_app/components/rounded_password_field.dart';
 import 'package:movil_app/screens/Profile/components/background.dart';
 import 'package:movil_app/screens/signup/signup.dart';
+import 'package:movil_app/service/common/address.dart';
 import 'package:movil_app/service/common/user.dart';
 import 'package:movil_app/service/service.dart';
 import 'package:movil_app/screens/Profile/profile_screen.dart';
 
 class Body_Login extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-
     TextEditingController emailTextController = TextEditingController();
     TextEditingController passwordTextController = TextEditingController();
 
@@ -24,36 +23,44 @@ class Body_Login extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: size.height * 0.02),
-            Image.asset("assets/imgs/img_sesion.png",
+            Image.asset(
+              "assets/imgs/img_sesion.png",
               height: size.height * 0.45,
             ),
             RoundedInputField(
                 hintText: "Correo electrónico",
                 icon: Icons.email,
                 onChanged: (value) {},
-                controller: emailTextController
-            ),
+                controller: emailTextController),
             RoundedPasswordField(
-                onChanged: (value) {},
-                controller: passwordTextController
-            ),
+                onChanged: (value) {}, controller: passwordTextController),
             RoundedButton(
               text: "Inciar Sesión",
               press: () async {
-                if(emailTextController.text.isNotEmpty && passwordTextController.text.isNotEmpty){
-                  User? val1 = await Service.loginUser(emailTextController.text, passwordTextController.text);
+                if (emailTextController.text.isNotEmpty &&
+                    passwordTextController.text.isNotEmpty) {
+                  User? val1 = await Service.loginUser(
+                      emailTextController.text, passwordTextController.text);
                   print(val1);
-                  if( val1 != null && val1.correo.isNotEmpty){
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Bienvenido"),));
-                    Navigator.of(context).pushNamed('/main-screen', arguments: {'user': val1,},);
+                  if (val1 != null && val1.correo.isNotEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Bienvenido"),
+                    ));
+                    Navigator.of(context).pushNamed(
+                      '/main-screen',
+                      arguments: {
+                        'user': val1,
+                      },
+                    );
                     //Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfileScreen(user: val1!)));
-                  }else{
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Verifique sus credenciales")));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Verifique sus credenciales")));
                   }
-                }else{
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Todos los campos deben estar llenos")));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Todos los campos deben estar llenos")));
                 }
-
               },
             ),
             SizedBox(height: size.height * 0.02),
@@ -65,7 +72,6 @@ class Body_Login extends StatelessWidget {
                 );
               },
             ),
-
           ],
         ),
       ),

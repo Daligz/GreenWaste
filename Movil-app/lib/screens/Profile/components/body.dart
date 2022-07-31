@@ -7,16 +7,21 @@ import 'package:movil_app/components/already_have_a_container_check.dart';
 import 'package:movil_app/screens/UpdateUser/update_user.dart';
 import 'package:movil_app/screens/address/AddressCreate/create_address.dart';
 import 'package:movil_app/screens/login/login.dart';
+import 'package:movil_app/service/common/address.dart';
 import 'package:movil_app/service/common/user.dart';
 
 import '../../address/AddressRead/read_addres.dart';
 
 class Body extends StatelessWidget {
   final User? user;
-  const Body({
-    Key? key,
-    required this.user
-  }) : super(key: key);
+  final List<User> users;
+  final Address? address;
+  const Body(
+      {Key? key,
+      required this.user,
+      required this.users,
+      required this.address})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     TextEditingController emailTextController = TextEditingController();
@@ -31,7 +36,8 @@ class Body extends StatelessWidget {
               "Perfil",
               style: Theme.of(context).textTheme.headline2,
             ),
-            Image.asset("assets/imgs/img_main.png",
+            Image.asset(
+              "assets/imgs/img_main.png",
               height: size.height * 0.45,
             ),
             Text(
@@ -43,18 +49,24 @@ class Body extends StatelessWidget {
               press: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => UpdateUser(user: user!)),
+                  MaterialPageRoute(
+                      builder: (context) => UpdateUser(user: user!)),
                 );
               },
             ),
             RoundedButton(
-                text: "Direcciones",
-                press: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context)=>AddressScreen(user:user!)),
-                  );
-                },
+              text: "Direcciones",
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ReadAddress(
+                            user: user!,
+                            users: const [],
+                            address: address,
+                          )),
+                );
+              },
             ),
             RoundedButton(
               text: "Historial de recompensas",

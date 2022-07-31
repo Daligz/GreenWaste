@@ -17,9 +17,8 @@ public class AddressRead extends RouteWrapper {
         final String idUsuario = request.params(":idUsuario");
         final String select = new LSelect()
                 .from("direccion")
-                .value("colonia,numero,municipio,estado,usuario.nombre")
-                .join("usuario","direccion.idUsuario","=", idUsuario)
-                .where("usuario.idUsuario","=",idUsuario)
+                .value("*")
+                .where("idUsuario","=",idUsuario)
                 .getQuery();
         return Connector.HIKARI_POOL.execute(connection -> (JsonMapper.toJSON(connection.prepareStatement(select).executeQuery())));
     }
