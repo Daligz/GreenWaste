@@ -78,17 +78,28 @@ class Body extends StatelessWidget {
                 if(nameTextController.text.isNotEmpty && lastNameTextController.text.isNotEmpty &&
                     lastName2TextController.text.isNotEmpty && phoneTextController.text.isNotEmpty &&
                     emailTextController.text.isNotEmpty && passwordTextController.text.isNotEmpty){
-                  bool valor = await Service.updateUser(user!.idUsuario, nameTextController.text, lastNameTextController.text, lastName2TextController.text,
-                      phoneTextController.text, emailTextController.text, passwordTextController.text);
-                 // User newUser = User(user!.idUsuario, nameTextController.text, lastNameTextController.text, lastName2TextController.text, phoneTextController.text, emailTextController.text, passwordTextController.text, 1);
-                  if(valor != false){
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Éxito!"),));
-                    User? newUser = await Service.readUser(user!.idUsuario);
-                    //Navigator.of(context).pushNamed('/main-screen', arguments: {'user': newUser!,},);
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> UpdateUser(user: newUser!)));
+                  bool name = RegExp(r"^[a-zA-Z ]*$").hasMatch(nameTextController.text);
+                  bool lastName = RegExp(r"^[a-zA-Z ]*$").hasMatch(lastNameTextController.text);
+                  bool lastName2 = RegExp(r"^[a-zA-Z ]*$").hasMatch(lastName2TextController.text);
+                  bool phone = RegExp(r"^((\d{10})|(\d{13}))$").hasMatch(phoneTextController.text);
+                  bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(emailTextController.text);
+
+                  if(name && lastName && lastName2 && phone && emailValid){
+                    bool valor = await Service.updateUser(user!.idUsuario, nameTextController.text, lastNameTextController.text, lastName2TextController.text,
+                        phoneTextController.text, emailTextController.text, passwordTextController.text);
+                    // User newUser = User(user!.idUsuario, nameTextController.text, lastNameTextController.text, lastName2TextController.text, phoneTextController.text, emailTextController.text, passwordTextController.text, 1);
+                    if(valor != false){
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Éxito!"),));
+                      User? newUser = await Service.readUser(user!.idUsuario);
+                      //Navigator.of(context).pushNamed('/main-screen', arguments: {'user': newUser!,},);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> UpdateUser(user: newUser!)));
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Error al guardar al usuario!"),));
+                    }
                   }else{
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Error al guardar al usuario!"),));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Ingrese datos validos"),));
                   }
+                  /**/
 
                 } else{
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("No se ha podido crear el usuario, falta campos por llenar"),));
