@@ -8,6 +8,7 @@ import 'package:movil_app/components/text_field_container.dart';
 import 'package:movil_app/constants.dart';
 import 'package:movil_app/screens/login/login.dart';
 import 'package:movil_app/screens/signup/signup.dart';
+import 'package:movil_app/service/service_points.dart';
 import '../../../components/already_have_an_account_check.dart';
 import 'package:movil_app/service/service.dart';
 
@@ -68,13 +69,19 @@ class BodySignUp extends StatelessWidget {
             ),
             RoundedButton(
               text: "Regístrate",
-              press: () {
+              press: () async {
                 if(nameTextController.text.isNotEmpty && lastname1TextController.text.isNotEmpty &&
                     lastname2TextController.text.isNotEmpty && phoneTextController.text.isNotEmpty &&
                     emailTextController.text.isNotEmpty && passwordTextController.text.isNotEmpty){
-                  Service.createUser(nameTextController.text, lastname1TextController.text, lastname2TextController.text,
+                  bool account = await Service.createUser(nameTextController.text, lastname1TextController.text, lastname2TextController.text,
                       phoneTextController.text, emailTextController.text, passwordTextController.text);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Éxito!"),));
+                  bool points = await ServicePoints.createPoints(emailTextController.text);
+                  if(account && points){
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Éxito!"),));
+                  }else{
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Error al crear usuario!"),));
+                  }
+
                 } else{
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("No se ha podido crear el usuario, falta campos por llenar"),));
                 }

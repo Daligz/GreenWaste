@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:movil_app/constants.dart';
 import 'package:movil_app/service/common/reward.dart';
+import 'package:movil_app/service/common/user.dart';
+import 'package:movil_app/service/service_claims.dart';
 
 class RewardCard extends StatelessWidget {
+  final User? user;
   final Reward? model;
-  const RewardCard({Key? key, this.model}) : super(key: key);
+  const RewardCard({Key? key, this.model, required this.user}) : super(key: key);
 
   @override
   Widget build(final BuildContext context) {
@@ -53,6 +56,7 @@ class RewardCard extends StatelessWidget {
                       child: GestureDetector(
                         child: const Icon(Icons.shopping_cart, color: kPrimaryColor,),
                         onTap: (){
+                          _showAlertDialog(context);
                         },
                       ),
                     )
@@ -78,4 +82,34 @@ class RewardCard extends StatelessWidget {
         ]
     );
   }
+
+  void _showAlertDialog(context) {
+    showDialog(
+        context: context,
+        builder: (buildcontext) {
+          return AlertDialog(
+            title: Text("Confirmación"),
+            content: Text("¿Desea canjear este premio?"),
+            actions: <Widget>[
+              RaisedButton(
+                child: Text("Cerrar", style: TextStyle(color: Colors.red),),
+                onPressed: (){ Navigator.of(context).pop(); },
+              ),
+              RaisedButton(
+                child: Text("Aceptar", style: TextStyle(color: kPrimaryColor),),
+                onPressed: () async {
+                  bool claim = await ServiceClaims.createClaim(user!.correo, model!.idPremio);
+                  if(claim){
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Canjee exitoso")));
+                  }else{
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Error al realizar el canjee")));
+                  }
+                  Navigator.of(context).pop(); },
+              ),
+            ],
+          );
+        }
+    );
+  }
+
 }

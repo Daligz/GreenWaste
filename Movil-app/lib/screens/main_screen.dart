@@ -15,9 +15,9 @@ class _MainScreenState extends State<MainScreen>{
   User? user;
   final screens = [
     ProfileScreen(user: null),
-    RewardScreen(),
-    RewardScreen(),
-    RewardScreen(),
+    RewardScreen(user: null),
+    RewardScreen(user: null),
+    RewardScreen(user: null),
   ];
 
   @override
@@ -29,9 +29,9 @@ class _MainScreenState extends State<MainScreen>{
         user = arguments['user'];
         screens.removeRange(0, 3);
         screens.add(ProfileScreen(user: user));
-        screens.add(RewardScreen());
-        screens.add(RewardScreen());
-        screens.add(RewardScreen());
+        screens.add(RewardScreen(user: user));
+        screens.add(RewardScreen(user: user,));
+        screens.add(RewardScreen(user: user,));
         if(arguments['index']!=null){
           index = arguments['index'];
         }

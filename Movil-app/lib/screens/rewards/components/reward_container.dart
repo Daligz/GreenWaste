@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:movil_app/screens/rewards/components/reward_card.dart';
 import 'package:movil_app/service/common/reward.dart';
+import 'package:movil_app/service/common/user.dart';
 import 'package:movil_app/service/service_rewards.dart';
 
 class RewardContainer extends StatelessWidget {
-
-  const RewardContainer({Key? key}) : super(key: key);
+  final User? user;
+  const RewardContainer({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(final BuildContext context) {
@@ -70,6 +71,7 @@ class RewardContainer extends StatelessWidget {
         childAspectRatio: 0.75,
       ), itemBuilder: (context, index) => RewardCard(
         model: rewards[index],
+        user: user,
       )
       );
   }

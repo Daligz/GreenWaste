@@ -12,7 +12,7 @@ class ReportBody extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: const <Widget> [
-            RewardContainer()
+            //RewardContainer()
           ],
         ),
       ),
