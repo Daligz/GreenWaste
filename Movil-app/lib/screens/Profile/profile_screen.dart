@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:movil_app/service/common/address.dart';
 import 'package:movil_app/service/common/user.dart';
 
 import 'components/body.dart';
 
-class ProfileScreen extends StatelessWidget{
+class ProfileScreen extends StatelessWidget {
   final User? user;
-  ProfileScreen({Key? key, required this.user }): super(key: key);
+  final List<User> users;
+  final Address? address;
+  const ProfileScreen(
+      {Key? key,
+      required this.user,
+      required this.users,
+      required this.address})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Body(
-          user: user
-      ),);
+        user: user,
+        users: const [],
+        address: address,
+      ),
+    );
   }
 }

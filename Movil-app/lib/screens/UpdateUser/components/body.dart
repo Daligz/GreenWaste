@@ -11,10 +11,7 @@ import 'package:movil_app/service/service.dart';
 
 class Body extends StatelessWidget {
   final User? user;
-  const Body({
-    Key? key,
-    required this.user
-  }) : super(key: key);
+  const Body({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,47 +28,47 @@ class Body extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: size.height * 0.02),
-            Bar(text:"Editar perfil", user: user, press: () {
-              //Navigator.of(context).pushNamed('/main-screen', arguments: {'user': user!,},);
-              //Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateUser(user: user!)),);
-            }),
-            Image.asset("assets/imgs/img_editar_usuario_movil.png",
+            Bar(
+                text: "Editar perfil",
+                user: user,
+                press: () {
+                  //Navigator.of(context).pushNamed('/main-screen', arguments: {'user': user!,},);
+                  //Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateUser(user: user!)),);
+                }),
+            Image.asset(
+              "assets/imgs/img_editar_usuario_movil.png",
               height: size.height * 0.20,
             ),
             RoundedInputField(
                 hintText: "Nombre",
                 icon: Icons.account_circle_rounded,
                 onChanged: (value) {},
-                controller: nameTextController..text = user!.nombre ?? ""
-            ),
+                controller: nameTextController..text = user!.nombre ?? ""),
             RoundedInputField(
                 hintText: "Apellido paterno",
                 icon: Icons.contact_mail_rounded,
                 onChanged: (value) {},
-                controller: lastNameTextController..text = user!.apellidoPaterno ?? ""
-            ),
+                controller: lastNameTextController
+                  ..text = user!.apellidoPaterno ?? ""),
             RoundedInputField(
                 hintText: "Apellido materno",
                 icon: Icons.contact_mail_rounded,
                 onChanged: (value) {},
-                controller: lastName2TextController..text = user!.apellidoMaterno ?? ""
-            ),
+                controller: lastName2TextController
+                  ..text = user!.apellidoMaterno ?? ""),
             RoundedInputField(
                 hintText: "Teléfono",
                 icon: Icons.local_phone_rounded,
                 onChanged: (value) {},
-                controller: phoneTextController..text = user!.telefono ?? ""
-            ),
+                controller: phoneTextController..text = user!.telefono ?? ""),
             RoundedInputField(
                 hintText: "Correo electrónico",
                 icon: Icons.email,
                 onChanged: (value) {},
-                controller: emailTextController..text = user!.correo ?? ""
-            ),
+                controller: emailTextController..text = user!.correo ?? ""),
             RoundedPasswordField(
                 onChanged: (value) {},
-                controller: passwordTextController..text = user!.psw ?? ""
-            ),
+                controller: passwordTextController..text = user!.psw ?? ""),
             RoundedButton(
               text: "Guardar",
               press: () async {
@@ -107,7 +104,6 @@ class Body extends StatelessWidget {
               },
             ),
             SizedBox(height: size.height * 0.02),
-
           ],
         ),
       ),
