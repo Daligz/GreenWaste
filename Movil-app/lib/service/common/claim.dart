@@ -8,7 +8,7 @@ class Claim {
     print(jsonMap['rewardData']);
     return Claim(
       jsonMap['usedPoints'],
-      jsonMap['rewardData']
+      RewardData.build(jsonMap['rewardData'])
     );
   }
 }
@@ -20,8 +20,9 @@ class RewardData {
 
   RewardData(this.nombre, this.descripcion, this.imagen, this.valor, this.stock);
 
-  static List<RewardData> build(final String a) {
+  static List<RewardData> build(final String data) {
 
+    return List.empty();
   }
 
   factory RewardData.fromJson(final Map<String, dynamic> jsonMap) {
