@@ -3,6 +3,7 @@ import 'package:movil_app/constants.dart';
 import 'package:movil_app/service/common/reward.dart';
 import 'package:movil_app/service/common/user.dart';
 import 'package:movil_app/service/service_claims.dart';
+import 'package:movil_app/service/service_points.dart';
 
 class RewardCard extends StatelessWidget {
   final User? user;
@@ -98,12 +99,19 @@ class RewardCard extends StatelessWidget {
               RaisedButton(
                 child: Text("Aceptar", style: TextStyle(color: kPrimaryColor),),
                 onPressed: () async {
-                  bool claim = await ServiceClaims.createClaim(user!.correo, model!.idPremio);
-                  if(claim){
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Canjee exitoso")));
+                  String points = await ServicePoints.updatePoints(user!.idUsuario, model!.valor);
+                  if(points == "true"){
+                    bool claim = await ServiceClaims.createClaim(user!.correo, model!.idPremio);
+                    if(claim){
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Canjee exitoso")));
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Error al realizar el canjee")));
+                    }
                   }else{
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Error al realizar el canjee")));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Puntos insuficientes")));
                   }
+
+
                   Navigator.of(context).pop(); },
               ),
             ],

@@ -50,19 +50,21 @@ class Routes{
   // Points routes
   static String routePointsCreate(final String correo) => _url + "/points/create/$correo";
 
+  static String routePointsUpdate(final int idUsuario, final int puntos) => _url + "/points/update/$idUsuario/$puntos";
+
   // Claims routes
   static String routeClaimCreate(final String correo, final int idPremio) => _url + "/claims/create/$correo/$idPremio";
 
+  static String routeAddressUpdate(
+      final int idDireccion,
+      final String colonia,
+      final String calle,
+      final String numero,
+      final String municipio,
+      final String estado,
+      final int idUsuario) =>
+      _url +
+          "/address/update/$idDireccion,$colonia,$calle,$numero,$municipio,$estado,$idUsuario";
 
 }
-  static String routeAddressUpdate(
-          final int idDireccion,
-          final String colonia,
-          final String calle,
-          final String numero,
-          final String municipio,
-          final String estado,
-          final int idUsuario) =>
-      _url +
-      "/address/update/$idDireccion,$colonia,$calle,$numero,$municipio,$estado,$idUsuario";
-}
+
