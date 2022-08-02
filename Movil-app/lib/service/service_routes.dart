@@ -55,6 +55,8 @@ class Routes{
   // Claims routes
   static String routeClaimCreate(final String correo, final int idPremio) => _url + "/claims/create/$correo/$idPremio";
 
+  static String routeClaimRead(final String idUsuario) => _url + "/claims/read/$idUsuario";
+
   static String routeAddressUpdate(
       final int idDireccion,
       final String colonia,
@@ -65,6 +67,5 @@ class Routes{
       final int idUsuario) =>
       _url +
           "/address/update/$idDireccion,$colonia,$calle,$numero,$municipio,$estado,$idUsuario";
-
 }
 

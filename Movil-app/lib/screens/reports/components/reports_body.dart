@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movil_app/screens/Profile/components/background.dart';
-import 'package:movil_app/screens/rewards/components/reward_container.dart';
 
 class ReportBody extends StatelessWidget {
 

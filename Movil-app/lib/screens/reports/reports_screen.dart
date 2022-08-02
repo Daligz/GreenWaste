@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movil_app/screens/reports/components/reports_body.dart';
-import 'package:movil_app/screens/rewards/components/reward_body.dart';
 
 class ReportScreen extends StatelessWidget {
 
