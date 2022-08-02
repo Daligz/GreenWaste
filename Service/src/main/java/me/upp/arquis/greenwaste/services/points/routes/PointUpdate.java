@@ -15,13 +15,14 @@ import spark.Response;
 public class PointUpdate extends RouteWrapper {
 
     public PointUpdate() {
-        super("/points/update/:idUsuario/:puntos");
+        super("/points/update/:idUsuario/:puntos/:idPremio");
     }
 
     @Override
     public Object handle (final Request request, final Response response ){
         boolean success = false;
         final int puntos = Integer.parseInt(request.params(":puntos"));
+        final String idPremio = request.params(":idPremio");
         final String idUsuario = request.params(":idUsuario");
         final String selectPoints = new LSelect()
                 .from("puntos")
@@ -31,19 +32,42 @@ public class PointUpdate extends RouteWrapper {
         final String pointsData = Connector.HIKARI_POOL.execute(connection -> JsonMapper.toJSON(connection.prepareStatement(selectPoints).executeQuery())).toString();
         final PointContainer pointContainer = GreenWaste.GSON.fromJson(pointsData, PointContainer[].class)[0];
 
-        if(pointContainer.puntos >= puntos){
-            final int newPoints = pointContainer.puntos - puntos;
-            final String update = new LUpdate()
-                    .table("puntos")
-                    .update("puntos", newPoints)
-                    .where("idPuntos", "=", pointContainer.id)
-                    .getQuery();
-            Connector.HIKARI_POOL.execute(connection -> !(connection.prepareStatement(update).execute()));
-            success = true;
-        }else{
-            success = false;
+        final String selectReward = new LSelect()
+                .from("premios")
+                .value("stock")
+                .where("idPremio", "=", idPremio)
+                .getQuery();
+
+        final String rewardData = Connector.HIKARI_POOL.execute(connection -> JsonMapper.toJSON(connection.prepareStatement(selectReward).executeQuery())).toString();
+        final RewardContainer rewardContainer = GreenWaste.GSON.fromJson(rewardData, RewardContainer[].class)[0];
+
+        if(rewardContainer.stock > 0){
+            if(pointContainer.puntos >= puntos){
+
+                int newStock = rewardContainer.stock - 1;
+                final  String updateReward = new LUpdate()
+                        .table("premios")
+                        .update("stock", newStock)
+                        .where("idPremio", "=", idPremio)
+                        .getQuery();
+                Connector.HIKARI_POOL.execute(connection -> !(connection.prepareStatement(updateReward).execute()));
+
+                final int newPoints = pointContainer.puntos - puntos;
+                final String update = new LUpdate()
+                        .table("puntos")
+                        .update("puntos", newPoints)
+                        .where("idPuntos", "=", pointContainer.id)
+                        .getQuery();
+                Connector.HIKARI_POOL.execute(connection -> !(connection.prepareStatement(update).execute()));
+                success = true;
+            }else{
+                success = false;
+            }
+            return success;
+
+        }else {
+            return "Stock";
         }
-        return success;
     }
 
     @Data
@@ -54,6 +78,12 @@ public class PointUpdate extends RouteWrapper {
         private String usuario;
         @SerializedName("puntos")
         private int puntos;
+    }
+
+    @Data
+    static class RewardContainer {
+        @SerializedName("stock")
+        private int stock;
     }
 
 }
