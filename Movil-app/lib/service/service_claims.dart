@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:http/http.dart';
+import 'package:movil_app/service/common/claim.dart';
 import 'package:movil_app/service/service_routes.dart';
 
 class ServiceClaims{
@@ -8,8 +11,8 @@ class ServiceClaims{
     return (response.statusCode == 200);
   }
 
-  static Future<bool> getClaim(final String idUsuario) async {
+  static Future<Claim> getClaim(final String idUsuario) async {
     final Response response = await get(Uri.parse(Routes.routeClaimRead(idUsuario)));
-    return false;
+    return Claim.fromJson(json.decode(response.body));
   }
 }
