@@ -98,6 +98,7 @@
                                         <th class="white--text text-center">TELEFONO</th>
                                         <th class="white--text text-center">CORREO</th>
                                         <th class="white--text text-center">CONTRASEÑA</th>
+                                        <th class="white--text text-center">ROL</th>
                                         <th class="white--text text-center">ACCIONES</th>                
                                     </tr>
                                 </thead>
@@ -106,8 +107,8 @@
                                     <tr v-for="usuario in usuarios" :key="usuarios.idusuario">
                                         <td class=" font-weight-bold text-center">{{ usuario.idusuario }}</td>
                                         <td class=" font-weight-bold text-center">{{ usuario.nombre }}</td>
-                                        <td class=" font-weight-bold text-center">{{ usuario.apellidoPaterno }}</td>
-                                        <td class=" font-weight-bold text-center">{{ usuario.apellioMaterno }}</td>
+                                        <td class=" font-weight-bold text-center">{{ usuario.apellidopaterno }}</td>
+                                        <td class=" font-weight-bold text-center">{{ usuario.apellidomaterno }}</td>
                                         <td class=" font-weight-bold text-center">{{ usuario.telefono }}</td>
                                         <td class=" font-weight-bold text-center">{{ usuario.correo }}</td>
                                         <td class=" font-weight-bold text-center">{{ usuario.psw }}</td>
@@ -115,7 +116,7 @@
 
                                         <td class=" text-center">
                                             <v-btn dark class="amber darken-3" small
-                                                @click="formEditar(usuario.idusuario,usuario.nombre,usuario.apellidoPaterno,usuario.apellidoMaterno,usuario.telefono,usuario.correo,usuario.psw,usuario.idrol)">
+                                                @click="formEditar(usuario.idusuario,usuario.nombre,usuario.apellidopaterno,usuario.apellidomaterno,usuario.telefono,usuario.correo,usuario.psw,usuario.idrol)">
                                                 <v-icon>mdi-pencil</v-icon>Editar
                                             </v-btn>
                                             <v-btn dark class="red accent-3" small @click="borrar(usuario.idusuario)">
@@ -142,18 +143,18 @@
                                                     {{usuario.nombre}}</v-text-field>
                                             </v-col>
                                             <v-col cols="12" md="6">
-                                                <v-text-field filled outlined v-model="usuario.apellidoPaterno" 
+                                                <v-text-field filled outlined v-model="usuario.apellidopaterno" 
                                                     label="Ingresa tu apellido paterno" prepend-inner-icon="mdi-account-circle" solo
                                                     required>
-                                                    {{usuario.apellidoPaterno}}</v-text-field>
+                                                    {{usuario.apellidopaterno}}</v-text-field>
                                             </v-col>
                                         </v-row>
                                         <v-row>
                                             <v-col cols="12" md="6">
-                                                <v-text-field filled outlined v-model="usuario.apellidoMaterno" 
+                                                <v-text-field filled outlined v-model="usuario.apellidomaterno" 
                                                     label="Ingresa tu apellido Materno" prepend-inner-icon="mdi-account-circle" solo
                                                     required>
-                                                    {{usuario.apellidoMaterno}}</v-text-field>
+                                                    {{usuario.apellidomaterno}}</v-text-field>
                                             </v-col>
                                             <v-col cols="12" md="6">
                                                 <v-text-field filled outlined v-model="usuario.telefono" 
@@ -176,14 +177,7 @@
                                                     {{usuario.psw}}</v-text-field>
                                             </v-col>
                                         </v-row>
-                                        <v-row>
-                                            <v-col cols="12" md="6">
-                                                <v-text-field filled outlined v-model="usuario.idrol" 
-                                                    label="Ingrese su correo electronico" prepend-inner-icon="mdi-email" solo
-                                                    required>
-                                                    {{usuario.idrol}}</v-text-field>
-                                            </v-col>
-                                        </v-row>
+                                    
                                         <!--<input v-model="usuario.idrol" hidden></input>--> 
                                         <v-row>
                                             <v-col cols="12" md="6">
@@ -226,12 +220,14 @@
                     usuario: {
                         idusuario: null,
                         nombre: '',
-                        apellidoPaterno: '',
-                        apellidoMaterno:'',
+                        apellidopaterno: '',
+                        apellidomaterno:'',
                         telefono:'',
                         correo:'',
                         psw:'',
-                        idrol:'',
+                        idrol:''
+                        
+                   
                     }
                 }
             },
@@ -241,39 +237,37 @@
             methods: {
                 //MÉTODOS PARA EL CRUD
                 mostrar: function () {
-                    let parametros={idrol: this.idrol}
-                    axios.get(url + `/read/${parametros.idrol}`)
+                    axios.get(url + '/readAdmin')
                         .then(response => {
                             this.usuarios = response.data;
                         })
                 },
-                crear: function () {
-                    let parametros = { nombre: this.nombre , apellidoPaterno: this.apellidoPaterno, apellidoMaterno:this.apellidoMaterno, telefono: this.telefono, correo:this.correo, psw: this.psw, idrol:this.idrol };
-                    if (!parametros.nombre || !parametros.apellidoPaterno || !parametros.apellidoMaterno || !parametros.telefono || !parametros.correo || !parametros.correo || !parametros.psw || parametros.idrol) {
-                        alert("Debes agregar todos los datos!");
+                crear: function(){
+                    let parametros ={nombre:this.nombre, apellidopaterno:this.apellidopaterno, apellidomaterno:this.apellidomaterno, telefono:this.telefono, correo:this.correo, psw:this.psw, idrol:2}
+                    if(!parametros.nombre || !parametros.apellidopaterno || !parametros.apellidomaterno || !parametros.telefono || !parametros.correo || !parametros.psw || !parametros.idrol){
+                        alert("Debes agregar todos los datos");
                         return;
                     }
-                    axios.get(url + `create/${parametros.nombre}/${parametros.apellidoPaterno}/${parametros.apellidoMaterno}/${parametros.telefono}/${parametros.correo}/${parametros.psw}/${parametros.idrol}`)
-                        .then(response => {
+                    axios.get(url +`create/${parametros.nombre}/${parametros.apellidopaterno}/${parametros.apellidomaterno}/${parametros.telefono}/${parametros.correo}/${parametros.psw}/${parametros.idrol}`)
+                        .then(response=>{
                             this.mostrar();
-                        }).catch(error => {
-                            alert("Insertaste datos incorrectos!");
+                        }).catch(error=>{
+                            alert("Insertates datos incorrectos");
                         });
-                    this.usuario.nombre = "";
-                    this.usuario.apellidoPaterno = "";
-                    this.usuario.apellidoMaterno="";
+                    this.usuario.nombre="";
+                    this.usuario.apellidopaterno="";
+                    this.usuario.apellidomaterno="";
                     this.usuario.telefono="";
                     this.usuario.correo="";
                     this.usuario.psw="";
-               
                 },
                 editar: function () {
-                    let parametros = { nombre: this.nombre , apellidoPaterno: this.apellidoPaterno, apellidoMaterno:this.apellidoMaterno, telefono: this.telefono, correo:this.correo, psw: this.psw, idrol:2 , idusuario: this.idusuario};
-                    if (!parametros.nombre || !parametros.apellidoPaterno || !parametros.apellidoMaterno || !parametros.telefono || !parametros.correo || !parametros.correo || !parametros.psw) {
+                    let parametros = { nombre:this.nombre, apellidopaterno:this.apellidopaterno, apellidomaterno:this.apellidomaterno, telefono:this.telefono, correo:this.correo, psw:this.psw, idrol:2 , idusuario: this.usuario.idusuario};
+                    if (!parametros.nombre || !parametros.apellidopaterno || !parametros.apellidomaterno || !parametros.telefono || !parametros.correo || !parametros.psw || !parametros.idrol) {
                         alert("Debes agregar todos los datos!");
                         return;
                     }
-                    axios.get(url + `update/${usuario.idusuario}/${parametros.nombre}/${parametros.apellidoPaterno}/${parametros.apellidoMaterno}/${parametros.telefono}/${parametros.correo}/${parametros.psw}/${parametros.idrol}`)
+                    axios.get(url + `update/${parametros.idusuario}/${parametros.nombre}/${parametros.apellidopaterno}/${parametros.apellidomaterno}/${parametros.telefono}/${parametros.correo}/${parametros.psw}/${parametros.idrol}`)
                         .then(response => {
                             this.mostrar();
                         })
@@ -300,7 +294,6 @@
                     });
                 },
 
-                //Botones y formularios
                 guardar: function () {
                     if (this.operacion == 'crear') {
                         this.crear();
@@ -313,31 +306,29 @@
                 formNuevo: function () {
                     this.dialog = true;
                     this.operacion = 'crear';
-                    this.usuario.nombre = "";
-                    this.usuario.apellidoPaterno = "";
-                    this.usuario.apellidoMaterno="";
+                    this.usuario.nombre="";
+                    this.usuario.apellidopaterno="";
+                    this.usuario.apellidomaterno="";
                     this.usuario.telefono="";
                     this.usuario.correo="";
                     this.usuario.psw="";
                     this.usuario.idrol="";
                 },
-                formEditar: function (idusuario, nombre, apellidoPaterno,apellidoMaterno,telefono,correo,psw,idrol) {
+                formEditar: function (idusuario,nombre,apellidopaterno,apellidomaterno,telefono,correo,psw,idrol) {
                     //capturamos los datos del registro seleccionado y los mostramos en el formulario
                     this.usuario.idusuario=idusuario;
-                    this.usuario.nombre =nombre;
-                    this.usuario.apellidoPaterno =apellidoPaterno;
-                    this.usuario.apellidoMaterno=apellidoMaterno;
+                    this.usuario.nombre = nombre;
+                    this.usuario.apellidopaterno=apellidopaterno;
+                    this.usuario.apellidomaterno=apellidomaterno;
                     this.usuario.telefono=telefono;
                     this.usuario.correo=correo;
                     this.usuario.psw=psw;
                     this.usuario.idrol=idrol;
-
                     this.dialog = true;
                     this.operacion = 'editar';
                 }
             }
         });
     </script>
-</body>
-
+    </body>
 </html>
