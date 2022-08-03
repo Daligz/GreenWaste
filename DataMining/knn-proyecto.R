@@ -4,7 +4,7 @@ library(RMySQL)
 library(DBI)
 database<-dbConnect(MySQL(), user = "root", host = "localhost", password = "", dbname = "dali_greenwaste")
 gen_data<-dbGetQuery(database, statement = "Select * From dataset")
-on.exit(dbDisconnect(DB))
+on.exit(dbDisconnect(database))
 head(gen_data)
 
 # Ventas : 1 = Altas (> 50,000), 2 = Medias (16,000 - 49,999), 3 = Bajas (0 - 15,999)
