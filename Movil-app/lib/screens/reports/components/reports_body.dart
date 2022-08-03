@@ -73,16 +73,16 @@ class _ReportBodyState extends State<ReportBody> {
               padding: const EdgeInsets.symmetric(horizontal: 95.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget> [
+                children: <Widget> [
                   Text(
-                      '306 puntos',
+                      '${claim.usedPoints.toString()} puntos',
                       style: pointsStyle
                   ),
-                  Text(
+                  const Text(
                       'Utilizados',
                       style: pointsText
                   ),
-                  Text(
+                  const Text(
                       'durante este mes',
                       style: pointsText
                   )
@@ -94,19 +94,7 @@ class _ReportBodyState extends State<ReportBody> {
                 'Lista de recompensas obtenidas durante este mes',
                 style: pointsText
             ),
-            const SizedBox(height: 25.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const <Widget> [
-                Text(
-                    'Linterna'
-                ),
-                SizedBox(width: 50.0),
-                Text(
-                    '89 pts'
-                )
-              ],
-            ),
+            _itemList(),
           ],
         )
       ),
@@ -116,6 +104,33 @@ class _ReportBodyState extends State<ReportBody> {
         backgroundColor: const Color(0xFF358F80),
         foregroundColor: const Color(0xFFF4F0F0),
         child: const Icon(Icons.share)
+      )
+    );
+  }
+
+  Widget _itemList() {
+    const TextStyle pointsText = TextStyle(
+        fontSize: 15.0,
+        color: Color(0xFF000000)
+    );
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: claim.rewardData.length,
+      itemBuilder: (context, index) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget> [
+          Text(
+              claim.rewardData[index].nombre,
+              style: pointsText
+          ),
+          const SizedBox(width: 50.0),
+          Text(
+              '${claim.rewardData[index].valor.toString()} pts',
+              style: pointsText
+          ),
+          const SizedBox(height: 55.0)
+        ]
       )
     );
   }

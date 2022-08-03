@@ -9,7 +9,11 @@ class ReportScreen extends StatelessWidget {
   Widget build(final BuildContext context) {
     List<RewardData> rewards = [
       RewardData('nombre', 'descripcion', 'imagen', 50, 5),
-      RewardData('nombre2', 'descripcion', 'imagen', 25, 5)
+      RewardData('nombre2', 'descripcion', 'imagen', 25, 5),
+      RewardData('nombre2', 'descripcion', 'imagen', 25, 5),
+      RewardData('nombre2', 'descripcion', 'imagen', 25, 5),
+      RewardData('nombre2', 'descripcion', 'imagen', 25, 5),
+      RewardData('testerrr', 'descripcion', 'imagen', 25, 5)
     ];
     return Scaffold(
       body: ReportBody(Claim(75, rewards)),
