@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         '/main-screen': (context) => MainScreen(),
       },
       debugShowCheckedModeBanner: false,
-      home: ReportScreen(),
+      home: ReportScreen('8'),
         //SplashScreen()
       //ProfileScreen
       //const MyHomePage(title: 'Flutter Demo Home Page'),
