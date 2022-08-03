@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
@@ -16,7 +15,7 @@
 
 <body>
 
-    <v-app id="view-panel-materiales">
+    <v-app id="view-panel-usuarios">
         <v-main>
             <nav>
                 <div class="logo-name">
@@ -76,12 +75,12 @@
                         <sidebar-view :drawer="drawer" />
                         <div class="grid-container">
                             <div class="grid-item">
-                                <v-img src="../assets/img/img_panelMateriales_web.png" class="my-2" contain height="400" />
+                                <v-img src="../assets/img/img_panelUsuarios_web.png" class="my-2" contain height="400" />
                             </div>
                             <div class="grid-item">
-                                <h1 id="title-panel">PANEL DE CONTROL DE MATERIALES</h1>
+                                <h1 id="title-panel">PANEL DE CONTROL DE USUARIOS</h1>
                                 <v-btn class=" pa-5 cyan darken-3" block dark color="#358F80" @click="formNuevo()">
-                                    <v-icon dark>mdi-plus</v-icon>Agregar nuevo Material
+                                    <v-icon dark>mdi-plus</v-icon>Agregar nuevo Usuario
                                 </v-btn>
                             </div>
                         </div>
@@ -94,22 +93,32 @@
                                     <tr class="cyan darken-4">
                                         <th class="white--text text-center">NO.</th>
                                         <th class="white--text text-center">NOMBRE</th>
-                                        <th class="white--text text-center">COSTO</th>
-                                        <th class="white--text text-center">ACCIONES</th>                  
+                                        <th class="white--text text-center">APELLIDO PATERNO</th>
+                                        <th class="white--text text-center">APELLIDO MATERNO</th>
+                                        <th class="white--text text-center">TELEFONO</th>
+                                        <th class="white--text text-center">CORREO</th>
+                                        <th class="white--text text-center">CONTRASEÑA</th>
+                                        <th class="white--text text-center">ACCIONES</th>                
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    <tr v-for="material in materiales" :key="materiales.idmaterial">
-                                        <td class=" font-weight-bold text-center">{{ material.idmaterial }}</td>
-                                        <td class=" font-weight-bold text-center">{{ material.nombre}}</td>
-                                        <td class=" font-weight-bold text-center">{{ material.costo }}</td>
+                                    <tr v-for="usuario in usuarios" :key="usuarios.idusuario">
+                                        <td class=" font-weight-bold text-center">{{ usuario.idusuario }}</td>
+                                        <td class=" font-weight-bold text-center">{{ usuario.nombre }}</td>
+                                        <td class=" font-weight-bold text-center">{{ usuario.apellidoPaterno }}</td>
+                                        <td class=" font-weight-bold text-center">{{ usuario.apellioMaterno }}</td>
+                                        <td class=" font-weight-bold text-center">{{ usuario.telefono }}</td>
+                                        <td class=" font-weight-bold text-center">{{ usuario.correo }}</td>
+                                        <td class=" font-weight-bold text-center">{{ usuario.psw }}</td>
+                                        <td class=" font-weight-bold text-center">{{ usuario.idrol }}</td>
+
                                         <td class=" text-center">
                                             <v-btn dark class="amber darken-3" small
-                                                @click="formEditar(material.idmaterial,material.nombre,material.costo)">
+                                                @click="formEditar(usuario.idusuario,usuario.nombre,usuario.apellidoPaterno,usuario.apellidoMaterno,usuario.telefono,usuario.correo,usuario.psw,usuario.idrol)">
                                                 <v-icon>mdi-pencil</v-icon>Editar
                                             </v-btn>
-                                            <v-btn dark class="red accent-3" small @click="borrar(material.idmaterial)">
+                                            <v-btn dark class="red accent-3" small @click="borrar(usuario.idusuario)">
                                                 <v-icon>mdi-delete</v-icon>Eliminar
                                             </v-btn>
                                         </td>
@@ -122,23 +131,60 @@
                         <v-card>
                                 <v-form><br>
                                     <v-container class="content-form-materiales">
-                                        <v-card-title class="title-form-materiales">AGREGA MATERIAL</v-card-title>
-                                        <img id="img-materiales" src="../assets/img/img_formulario_agregarMateriales.png" alt="">
-                                        <input v-model="material.idmaterial" hidden></input>
+                                        <v-card-title class="title-form-materiales">AGREGA USUARIO</v-card-title>
+                                        <img id="img-materiales" src="../assets/img/img_agregarUsuario_web.png" alt=""><br>
+                                        <input v-model="usuario.idusuario" hidden></input>
                                         <v-row>
                                             <v-col cols="12" md="6">
-                                                <v-text-field filled outlined v-model="material.nombre" 
-                                                    label="Nombre del Material" prepend-inner-icon="mdi-gift" solo
+                                                <v-text-field filled outlined v-model="usuario.nombre" 
+                                                    label="Ingresa tu nombre" prepend-inner-icon="mdi-account-circle" solo
                                                     required>
-                                                    {{material.nombre}}</v-text-field>
+                                                    {{usuario.nombre}}</v-text-field>
                                             </v-col>
                                             <v-col cols="12" md="6">
-                                                <v-text-field filled outlined v-model="material.costo" 
-                                                    label="Costo del material" prepend-inner-icon="mdi-cash-multiple" solo
+                                                <v-text-field filled outlined v-model="usuario.apellidoPaterno" 
+                                                    label="Ingresa tu apellido paterno" prepend-inner-icon="mdi-account-circle" solo
                                                     required>
-                                                    {{material.costo}}</v-text-field>
+                                                    {{usuario.apellidoPaterno}}</v-text-field>
                                             </v-col>
                                         </v-row>
+                                        <v-row>
+                                            <v-col cols="12" md="6">
+                                                <v-text-field filled outlined v-model="usuario.apellidoMaterno" 
+                                                    label="Ingresa tu apellido Materno" prepend-inner-icon="mdi-account-circle" solo
+                                                    required>
+                                                    {{usuario.apellidoMaterno}}</v-text-field>
+                                            </v-col>
+                                            <v-col cols="12" md="6">
+                                                <v-text-field filled outlined v-model="usuario.telefono" 
+                                                    label="Ingresa tu telefono" prepend-inner-icon="mdi-phone" solo
+                                                    required>
+                                                    {{usuario.telefono}}</v-text-field>
+                                            </v-col>
+                                        </v-row>
+                                        <v-row>
+                                            <v-col cols="12" md="6">
+                                                <v-text-field filled outlined v-model="usuario.correo" 
+                                                    label="Ingrese su correo electronico" prepend-inner-icon="mdi-email" solo
+                                                    required>
+                                                    {{usuario.correo}}</v-text-field>
+                                            </v-col>
+                                            <v-col cols="12" md="6">
+                                                <v-text-field filled outlined v-model="usuario.psw" 
+                                                    label="Ingrese una contraseña" prepend-inner-icon="mdi-lock" solo
+                                                    required>
+                                                    {{usuario.psw}}</v-text-field>
+                                            </v-col>
+                                        </v-row>
+                                        <v-row>
+                                            <v-col cols="12" md="6">
+                                                <v-text-field filled outlined v-model="usuario.idrol" 
+                                                    label="Ingrese su correo electronico" prepend-inner-icon="mdi-email" solo
+                                                    required>
+                                                    {{usuario.idrol}}</v-text-field>
+                                            </v-col>
+                                        </v-row>
+                                        <!--<input v-model="usuario.idrol" hidden></input>--> 
                                         <v-row>
                                             <v-col cols="12" md="6">
                                                 <v-btn @click="guardar()" id="button-Agregar" type="submit">Guardar</v-btn>
@@ -167,20 +213,25 @@
 
     <script>
         //? hacemos referencia a nuestro recursos de la api
-        let url = 'http://127.0.0.1:6969/materials/';
+        let url = 'http://127.0.0.1:6969/users/';
 
         new Vue({
-            el: '#view-panel-materiales',
+            el: '#view-panel-usuarios',
             vuetify: new Vuetify(),
             data() {
                 return {
-                    materiales: [],
+                    usuarios: [],
                     dialog: false,
                     operacion: '',
-                    material: {
-                        idmaterial: null,
+                    usuario: {
+                        idusuario: null,
                         nombre: '',
-                        costo: '',
+                        apellidoPaterno: '',
+                        apellidoMaterno:'',
+                        telefono:'',
+                        correo:'',
+                        psw:'',
+                        idrol:'',
                     }
                 }
             },
@@ -190,33 +241,39 @@
             methods: {
                 //MÉTODOS PARA EL CRUD
                 mostrar: function () {
-                    axios.get(url + '/read')
+                    let parametros={idrol: this.idrol}
+                    axios.get(url + `/read/${parametros.idrol}`)
                         .then(response => {
-                            this.materiales = response.data;
+                            this.usuarios = response.data;
                         })
                 },
                 crear: function () {
-                    let parametros = { nombre: this.material.nombre, costo: this.material.costo };
-                    if (!parametros.nombre || !parametros.costo) {
+                    let parametros = { nombre: this.nombre , apellidoPaterno: this.apellidoPaterno, apellidoMaterno:this.apellidoMaterno, telefono: this.telefono, correo:this.correo, psw: this.psw, idrol:this.idrol };
+                    if (!parametros.nombre || !parametros.apellidoPaterno || !parametros.apellidoMaterno || !parametros.telefono || !parametros.correo || !parametros.correo || !parametros.psw || parametros.idrol) {
                         alert("Debes agregar todos los datos!");
                         return;
                     }
-                    axios.get(url + `create/${parametros.nombre}/${parametros.costo}`)
+                    axios.get(url + `create/${parametros.nombre}/${parametros.apellidoPaterno}/${parametros.apellidoMaterno}/${parametros.telefono}/${parametros.correo}/${parametros.psw}/${parametros.idrol}`)
                         .then(response => {
                             this.mostrar();
                         }).catch(error => {
                             alert("Insertaste datos incorrectos!");
                         });
-                    this.material.nombre = "";
-                    this.material.costo = "";
+                    this.usuario.nombre = "";
+                    this.usuario.apellidoPaterno = "";
+                    this.usuario.apellidoMaterno="";
+                    this.usuario.telefono="";
+                    this.usuario.correo="";
+                    this.usuario.psw="";
+               
                 },
                 editar: function () {
-                    let parametros = { nombre: this.material.nombre, costo: this.material.costo, idmaterial: this.material.idmaterial };
-                    if (!parametros.nombre || !parametros.costo) {
+                    let parametros = { nombre: this.nombre , apellidoPaterno: this.apellidoPaterno, apellidoMaterno:this.apellidoMaterno, telefono: this.telefono, correo:this.correo, psw: this.psw, idrol:2 , idusuario: this.idusuario};
+                    if (!parametros.nombre || !parametros.apellidoPaterno || !parametros.apellidoMaterno || !parametros.telefono || !parametros.correo || !parametros.correo || !parametros.psw) {
                         alert("Debes agregar todos los datos!");
                         return;
                     }
-                    axios.get(url + `update/${parametros.idmaterial}/${parametros.nombre}/${parametros.costo}`)
+                    axios.get(url + `update/${usuario.idusuario}/${parametros.nombre}/${parametros.apellidoPaterno}/${parametros.apellidoMaterno}/${parametros.telefono}/${parametros.correo}/${parametros.psw}/${parametros.idrol}`)
                         .then(response => {
                             this.mostrar();
                         })
@@ -225,7 +282,7 @@
                             console.log(error);
                         });
                 },
-                borrar: function (idmaterial) {
+                borrar: function (idusuario) {
                     Swal.fire({
                         title: '¿Confirma eliminar el registro?',
                         confirmButtonText: `Confirmar`,
@@ -233,7 +290,7 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             //procedimiento borrar
-                            axios.get(url + `/delete/${idmaterial}`)
+                            axios.get(url + `/delete/${idusuario}`)
                                 .then(response => {
                                     this.mostrar();
                                 });
@@ -256,14 +313,24 @@
                 formNuevo: function () {
                     this.dialog = true;
                     this.operacion = 'crear';
-                    this.material.nombre = "";
-                    this.material.costo = "";
+                    this.usuario.nombre = "";
+                    this.usuario.apellidoPaterno = "";
+                    this.usuario.apellidoMaterno="";
+                    this.usuario.telefono="";
+                    this.usuario.correo="";
+                    this.usuario.psw="";
+                    this.usuario.idrol="";
                 },
-                formEditar: function (idmaterial, nombre, costo) {
+                formEditar: function (idusuario, nombre, apellidoPaterno,apellidoMaterno,telefono,correo,psw,idrol) {
                     //capturamos los datos del registro seleccionado y los mostramos en el formulario
-                    this.material.idmaterial = idmaterial;
-                    this.material.nombre = nombre;
-                    this.material.costo = costo;
+                    this.usuario.idusuario=idusuario;
+                    this.usuario.nombre =nombre;
+                    this.usuario.apellidoPaterno =apellidoPaterno;
+                    this.usuario.apellidoMaterno=apellidoMaterno;
+                    this.usuario.telefono=telefono;
+                    this.usuario.correo=correo;
+                    this.usuario.psw=psw;
+                    this.usuario.idrol=idrol;
 
                     this.dialog = true;
                     this.operacion = 'editar';
