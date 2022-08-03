@@ -6,19 +6,16 @@ import 'package:movil_app/service/service_claims.dart';
 
 class ReportBody extends StatefulWidget {
 
-  final Claim claim;
-
-  ReportBody(this.claim);
+  const ReportBody({Key? key}) : super(key: key);
 
   @override
-  _ReportBodyState createState() => _ReportBodyState(claim);
+  _ReportBodyState createState() => _ReportBodyState();
 }
 
 class _ReportBodyState extends State<ReportBody> {
 
-  final Claim claim;
-
-  _ReportBodyState(this.claim);
+  Claim claim = Claim(0, List.empty());
+  bool loading = true;
 
   @override
   Widget build(final BuildContext context) {
@@ -27,8 +24,11 @@ class _ReportBodyState extends State<ReportBody> {
   }
 
   void _loadData() async {
-    final Claim claim = await ServiceClaims.getClaim("8");
-    print(claim);
+    final Claim claimData = await ServiceClaims.getClaim("8");
+    setState(() {
+      claim = claimData;
+      loading = false;
+    });
   }
 
   Widget _local() {
@@ -120,7 +120,7 @@ class _ReportBodyState extends State<ReportBody> {
         fontSize: 15.0,
         color: Color(0xFF000000)
     );
-    return ListView.builder(
+    return (!loading) ? ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: claim.rewardData.length,
@@ -139,7 +139,7 @@ class _ReportBodyState extends State<ReportBody> {
           const SizedBox(height: 55.0)
         ]
       )
-    );
+    ) : const LinearProgressIndicator();
   }
 }
 
