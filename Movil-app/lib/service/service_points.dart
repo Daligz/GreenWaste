@@ -7,8 +7,8 @@ class ServicePoints{
     return (response.statusCode == 200);
   }
 
-  static Future<String> updatePoints(final int idUsuario, final int puntos) async {
-    final Response response = await get(Uri.parse(Routes.routePointsUpdate(idUsuario, puntos)));
+  static Future<String> updatePoints(final int idUsuario, final int puntos, final int idPremio) async {
+    final Response response = await get(Uri.parse(Routes.routePointsUpdate(idUsuario, puntos, idPremio)));
     return (response.body);
   }
 }
