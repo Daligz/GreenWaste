@@ -19,6 +19,7 @@ class _ReportBodyState extends State<ReportBody> {
   Claim claim = Claim(0, List.empty());
   bool loading = true;
   final String idUsuario;
+  final _controller = ScrollController();
 
   _ReportBodyState(this.idUsuario);
 
@@ -120,12 +121,17 @@ class _ReportBodyState extends State<ReportBody> {
     );
   }
 
+  void _shareReport() {
+
+  }
+
   Widget _itemList() {
     const TextStyle pointsText = TextStyle(
         fontSize: 15.0,
         color: Color(0xFF000000)
     );
     return (!loading) ? ListView.builder(
+      controller: _controller,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: claim.rewardData.length,
