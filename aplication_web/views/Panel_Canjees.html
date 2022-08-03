@@ -16,7 +16,7 @@
 
 <body>
 
-    <v-app id="view-panel-materiales">
+    <v-app id="view-panel-canjees">
         <v-main>
             <nav>
                 <div class="logo-name">
@@ -79,7 +79,7 @@
                                 <v-img src="../assets/img/img_panelCanjee_web.png" class="my-2" contain height="400" />
                             </div>
                             <div class="grid-item">
-                                <h1 id="title-panel">PANEL DE CONTROL DE MATERIALES</h1>
+                                <h1 id="title-panel">PANEL DE CONTROL DE CANJEES</h1>
                             
                             </div>
                         </div>
@@ -91,18 +91,20 @@
                                 <thead>
                                     <tr class="cyan darken-4">
                                         <th class="white--text text-center">NO.</th>
-                                        <th class="white--text text-center">NOMBRE</th>
-                                        <th class="white--text text-center">COSTO</th>
-                                        <th class="white--text text-center">ACCIONES</th>                  
+                                        <th class="white--text text-center">USUARIO</th>
+                                        <th class="white--text text-center">PREMIO</th>
+                                        <th class="white--text text-center">FECHA</th>
+                                        <!--<th class="white--text text-center">ACCIONES</th>-->                  
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    <tr v-for="material in materiales" :key="materiales.idmaterial">
-                                        <td class=" font-weight-bold text-center">{{ material.idmaterial }}</td>
-                                        <td class=" font-weight-bold text-center">{{ material.nombre}}</td>
-                                        <td class=" font-weight-bold text-center">{{ material.costo }}</td>
-                                        <td class=" text-center">
+                                        <tr v-for="canjee in canjees" :key="canjees.idcanje">
+                                        <td class=" font-weight-bold text-center">{{ canjee.idcanje }}</td>
+                                        <td class=" font-weight-bold text-center">{{ canjee.nombreusuario}}</td>
+                                        <td class=" font-weight-bold text-center">{{ canjee.nombrepremio }}</td>
+                                        <td class=" font-weight-bold text-center">{{ canjee.fechacanjee }}</td>
+                                       <!-- <td class=" text-center">
                                             <v-btn dark class="amber darken-3" small
                                                 @click="formEditar(material.idmaterial,material.nombre,material.costo)">
                                                 <v-icon>mdi-pencil</v-icon>Editar
@@ -110,7 +112,7 @@
                                             <v-btn dark class="red accent-3" small @click="borrar(material.idmaterial)">
                                                 <v-icon>mdi-delete</v-icon>Eliminar
                                             </v-btn>
-                                        </td>
+                                        </td> //-->
                                     </tr>
                                 </tbody>
                             </template>
@@ -133,20 +135,22 @@
 
     <script>
         //? hacemos referencia a nuestro recursos de la api
-        let url = 'http://127.0.0.1:6969/materials/';
+        let url = 'http://127.0.0.1:6969/claims/';
 
         new Vue({
-            el: '#view-panel-materiales',
+            el: '#view-panel-canjees',
             vuetify: new Vuetify(),
             data() {
                 return {
-                    materiales: [],
+                    canjees: [],
                     dialog: false,
                     operacion: '',
-                    material: {
-                        idmaterial: null,
-                        nombre: '',
-                        costo: '',
+                    canjee: {
+                        nombreusuario: '',
+                        idcanje: null,
+                        fechacanjee: '',
+                        nombrepremio: '',
+                        
                     }
                 }
             },
@@ -156,9 +160,9 @@
             methods: {
                 //MÉTODOS PARA EL CRUD
                 mostrar: function () {
-                    axios.get(url + '/read')
+                    axios.get(url + '/readAll')
                         .then(response => {
-                            this.materiales = response.data;
+                            this.canjees = response.data;
                         })
                 },
             }
