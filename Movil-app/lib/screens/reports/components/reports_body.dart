@@ -21,7 +21,6 @@ class _ReportBodyState extends State<ReportBody> {
 
   @override
   Widget build(final BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return _local();
   }
 
