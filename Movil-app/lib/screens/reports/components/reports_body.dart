@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:movil_app/service/common/claim.dart';
+import 'package:movil_app/service/service_claims.dart';
 
 class ReportBody extends StatefulWidget {
 
@@ -21,7 +22,13 @@ class _ReportBodyState extends State<ReportBody> {
 
   @override
   Widget build(final BuildContext context) {
+    _loadData();
     return _local();
+  }
+
+  void _loadData() async {
+    final Claim claim = await ServiceClaims.getClaim("8");
+    print(claim);
   }
 
   Widget _local() {

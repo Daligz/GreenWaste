@@ -21,7 +21,6 @@ class RewardData {
   RewardData(this.nombre, this.descripcion, this.imagen, this.valor, this.stock);
 
   static List<RewardData> build(final String data) {
-
     return List.empty();
   }
 
