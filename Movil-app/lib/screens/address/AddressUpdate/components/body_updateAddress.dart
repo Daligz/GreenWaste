@@ -7,6 +7,8 @@ import 'package:movil_app/service/common/address.dart';
 import 'package:movil_app/service/common/user.dart';
 import 'package:movil_app/service/service.dart';
 
+import '../../../UpdateUser/update_user.dart';
+import '../../AddressRead/read_addres.dart';
 import '../update_address.dart';
 
 class BodyUpdateAddress extends StatelessWidget {
@@ -45,8 +47,7 @@ class BodyUpdateAddress extends StatelessWidget {
                 hintText: "Colonia",
                 icon: Icons.home,
                 onChanged: (value) {},
-                controller: coloniaTextController
-                  ..text = address!.colonia ?? ""),
+                controller: coloniaTextController..text = address!.colonia ?? ""),
             RoundedInputField(
                 hintText: "Calle",
                 icon: Icons.home,
@@ -61,55 +62,36 @@ class BodyUpdateAddress extends StatelessWidget {
                 hintText: "Municipio",
                 icon: Icons.home,
                 onChanged: (value) {},
-                controller: municipioTextController
-                  ..text = address!.municipio ?? ""),
+                controller: municipioTextController..text = address!.municipio ?? ""),
             RoundedInputField(
                 hintText: "estado",
                 icon: Icons.home,
                 onChanged: (value) {},
                 controller: estadoTextController..text = address!.estado ?? ""),
             RoundedButton(
-              text: "Agregar Dirección",
+              text: "Editar Dirección",
               press: () async {
-                if (coloniaTextController.text.isNotEmpty &&
-                    calleTextController.text.isNotEmpty &&
-                    numeroTextController.text.isNotEmpty &&
-                    municipioTextController.text.isNotEmpty &&
-                    estadoTextController.text.isNotEmpty) {
-                  bool valor = await Service.updateAddress(
-                    address!.idDireccion,
-                    coloniaTextController.text,
-                    calleTextController.text,
-                    numeroTextController.text,
-                    municipioTextController.text,
-                    estadoTextController.text,
-                    user!.idUsuario,
-                  );
-                  // User newUser = User(user!.idUsuario, nameTextController.text, lastNameTextController.text, lastName2TextController.text, phoneTextController.text, emailTextController.text, passwordTextController.text, 1);
-                  if (valor != false) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Éxito!"),
-                    ));
-                    Address? newAddress =
-                        await Service.readAddress(address!.idDireccion);
-                    //Navigator.of(context).pushNamed('/main-screen', arguments: {'user': newUser!,},);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AddressUpdate(
-                                  address: newAddress!,
-                                  user: user!,
-                                )));
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Error al guardar al usuario!"),
-                    ));
-                  }
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(
-                        "No se ha podido crear el usuario, falta campos por llenar"),
-                  ));
+                if(coloniaTextController.text.isNotEmpty && calleTextController.text.isNotEmpty &&
+                    numeroTextController.text.isNotEmpty && municipioTextController.text.isNotEmpty &&
+                    estadoTextController.text.isNotEmpty){
+
+                    bool valor = await Service.updateAddress(address!.idDireccion,coloniaTextController.text,
+                        calleTextController.text,numeroTextController.text, municipioTextController.text,
+                        estadoTextController.text, user!.idUsuario);
+                    // User newUser = User(user!.idUsuario, nameTextController.text, lastNameTextController.text, lastName2TextController.text, phoneTextController.text, emailTextController.text, passwordTextController.text, 1);
+                    if(valor != false){
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Éxito!"),));
+                      //List<Address>? newAddress = (await Service.readAddress(user!.idUsuario));
+                      //Navigator.of(context).pushNamed('/main-screen', arguments: {'user': newUser!,},);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> AddressReadScreen(user: user)));
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Error al editar la dirección!"),));
+                    }
+
+                  /**/
+
+                } else{
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("No se ha podido editar la dirección, falta campos por llenar"),));
                 }
               },
             ),
