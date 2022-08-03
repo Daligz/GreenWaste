@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:movil_app/service/common/claim.dart';
 
-class ReportBody extends StatelessWidget {
+class ReportBody extends StatefulWidget {
 
-  const ReportBody({Key? key}) : super(key: key);
+  final Claim claim;
+
+  ReportBody(this.claim);
+
+  @override
+  _ReportBodyState createState() => _ReportBodyState(claim);
+}
+
+class _ReportBodyState extends State<ReportBody> {
+
+  final Claim claim;
+
+  _ReportBodyState(this.claim);
 
   @override
   Widget build(final BuildContext context) {

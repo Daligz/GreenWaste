@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:movil_app/constants.dart';
-import 'package:movil_app/screens/login/login.dart';
 import 'package:movil_app/screens/main_screen.dart';
 import 'package:movil_app/screens/reports/reports_screen.dart';
 
