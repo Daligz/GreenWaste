@@ -99,7 +99,7 @@ class RewardCard extends StatelessWidget {
               RaisedButton(
                 child: Text("Aceptar", style: TextStyle(color: kPrimaryColor),),
                 onPressed: () async {
-                  String points = await ServicePoints.updatePoints(user!.idUsuario, model!.valor);
+                  String points = await ServicePoints.updatePoints(user!.idUsuario, model!.valor, model!.idPremio);
                   if(points == "true"){
                     bool claim = await ServiceClaims.createClaim(user!.correo, model!.idPremio);
                     if(claim){
@@ -108,7 +108,12 @@ class RewardCard extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Error al realizar el canjee")));
                     }
                   }else{
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Puntos insuficientes")));
+                    if(points == "false"){
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Puntos insuficientes")));
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Sin stock")));
+                    }
+
                   }
 
 
