@@ -6,16 +6,21 @@ import 'package:movil_app/service/service_claims.dart';
 
 class ReportBody extends StatefulWidget {
 
-  const ReportBody({Key? key}) : super(key: key);
+  final String idUsuario;
+
+  const ReportBody(this.idUsuario);
 
   @override
-  _ReportBodyState createState() => _ReportBodyState();
+  _ReportBodyState createState() => _ReportBodyState(idUsuario);
 }
 
 class _ReportBodyState extends State<ReportBody> {
 
   Claim claim = Claim(0, List.empty());
   bool loading = true;
+  final String idUsuario;
+
+  _ReportBodyState(this.idUsuario);
 
   @override
   Widget build(final BuildContext context) {
@@ -24,7 +29,7 @@ class _ReportBodyState extends State<ReportBody> {
   }
 
   void _loadData() async {
-    final Claim claimData = await ServiceClaims.getClaim("8");
+    final Claim claimData = await ServiceClaims.getClaim(idUsuario);
     setState(() {
       claim = claimData;
       loading = false;
