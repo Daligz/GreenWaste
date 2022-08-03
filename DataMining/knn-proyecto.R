@@ -60,11 +60,21 @@ ui <- fluidPage(
     
     sidebarPanel(
       
-      sliderInput(inputId = "bins",
-                  label = "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
+      selectInput("select_produto", label = h3("Producto"), 
+                  choices = list("1" = 1, "2" = 2, "3" = 3, "4" = 4, "5" = 5,
+                                 "6" = 6, "7" = 7, "8" = 8, "9" = 9, "10" = 10), 
+                  selected = 1),
+      
+      selectInput("select_mes", label = h3("Mes"), 
+                  choices = list("1" = 1, "2" = 2, "3" = 3, "4" = 4, "5" = 5,
+                                 "6" = 6, "7" = 7, "8" = 8, "9" = 9, "10" = 10,
+                                 "11" = 11, "12" = 12), 
+                  selected = 1),
+      
+      selectInput("select_anio", label = h3("Año"), 
+                  choices = list("2013" = 2013, "2014" = 2014, "2015" = 2015, "2016" = 2016, "2017" = 2017,
+                                 "2018" = 2018, "2019" = 2019, "2020" = 2020, "2021" = 2021), 
+                  selected = 2013),
       
     ),
     
@@ -77,14 +87,10 @@ ui <- fluidPage(
 )
 
 server <- function(input, output) {
+  #output$value <- renderPrint({ input$select })
   output$distPlot <- renderPlot({
     
-    x    <- faithful$waiting
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-    
-    hist(x, breaks = bins, col = "#75AADB", border = "white",
-         xlab = "Waiting time to next eruption (in mins)",
-         main = "Histogram of waiting times")
+    plot(factor(df$ventas), main = "Diagrama de cantidad de tipo de ventas")
     
   })
   
