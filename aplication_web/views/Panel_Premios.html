@@ -227,7 +227,7 @@
                         })
                 },
                 crear: function () {
-                    let parametros = { nombre: this.recompensa.nombre, descripcion: this.recompensa.descripcion, imagen: this.recompensa.imagen, valor: this.recompensa.valor, stock: this.recompensa.stock };
+                    let parametros = { nombre: this.recompensa.nombre, descripcion: this.recompensa.descripcion, imagen: encodeURIComponent(this.recompensa.imagen), valor: this.recompensa.valor, stock: this.recompensa.stock };
                     if (!parametros.nombre || !parametros.descripcion || !parametros.imagen || !parametros.valor || !parametros.stock) {
                         alert("Debes agregar todos los datos!");
                         return;
@@ -245,7 +245,7 @@
                     this.recompensa.stock = "";
                 },
                 editar: function () {
-                    let parametros = { nombre: this.recompensa.nombre, descripcion: this.recompensa.descripcion, imagen: this.recompensa.imagen, valor: this.recompensa.valor, stock: this.recompensa.stock, idpremio: this.recompensa.idpremio };
+                    let parametros = { nombre: this.recompensa.nombre, descripcion: this.recompensa.descripcion, imagen: encodeURIComponent(this.recompensa.imagen), valor: this.recompensa.valor, stock: this.recompensa.stock, idpremio: this.recompensa.idpremio };
                     if (!parametros.nombre || !parametros.descripcion || !parametros.imagen || !parametros.valor || !parametros.stock) {
                         alert("Debes agregar todos los datos!");
                         return;
