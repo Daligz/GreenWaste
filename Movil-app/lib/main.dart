@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movil_app/constants.dart';
+import 'package:movil_app/screens/login/login.dart';
 import 'package:movil_app/screens/main_screen.dart';
-import 'package:movil_app/screens/reports/reports_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         '/main-screen': (context) => MainScreen(),
       },
       debugShowCheckedModeBanner: false,
-      home: ReportScreen(),
+      home: Login()
         //SplashScreen()
       //ProfileScreen
       //const MyHomePage(title: 'Flutter Demo Home Page'),

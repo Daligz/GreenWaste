@@ -1,27 +1,50 @@
+import 'dart:typed_data';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:movil_app/service/common/claim.dart';
+import 'package:movil_app/service/service_claims.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:path_provider/path_provider.dart';
 
 class ReportBody extends StatefulWidget {
 
-  final Claim claim;
+  final String idUsuario;
 
-  ReportBody(this.claim);
+  const ReportBody(this.idUsuario);
 
   @override
-  _ReportBodyState createState() => _ReportBodyState(claim);
+  _ReportBodyState createState() => _ReportBodyState(idUsuario);
 }
 
 class _ReportBodyState extends State<ReportBody> {
 
-  final Claim claim;
+  Claim claim = Claim(0, List.empty());
+  bool loading = true;
+  final String idUsuario;
+  final _controller = ScrollController();
+  final ScreenshotController _screenshotController = ScreenshotController();
 
-  _ReportBodyState(this.claim);
+  _ReportBodyState(this.idUsuario);
 
   @override
   Widget build(final BuildContext context) {
-    return _local();
+    _loadData();
+    return Screenshot(
+      controller: _screenshotController,
+      child: _local()
+    );
+  }
+
+  void _loadData() async {
+    final Claim claimData = await ServiceClaims.getClaim(idUsuario);
+    setState(() {
+      claim = claimData;
+      loading = false;
+    });
   }
 
   Widget _local() {
@@ -99,7 +122,7 @@ class _ReportBodyState extends State<ReportBody> {
         )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () => _shareReport(),
         tooltip: 'Compartir',
         backgroundColor: const Color(0xFF358F80),
         foregroundColor: const Color(0xFFF4F0F0),
@@ -108,12 +131,25 @@ class _ReportBodyState extends State<ReportBody> {
     );
   }
 
+  void _shareReport() async {
+    await _screenshotController.capture(delay: const Duration(milliseconds: 10)).then((Uint8List? image) async {
+      if (image != null) {
+        final directory = await getApplicationDocumentsDirectory();
+        final imagePath = await File('${directory.path}/image-${DateTime.now().microsecond}.png').create();
+        await imagePath.writeAsBytes(image);
+
+        await Share.shareFiles([imagePath.path]);
+      }
+    });
+  }
+
   Widget _itemList() {
     const TextStyle pointsText = TextStyle(
         fontSize: 15.0,
         color: Color(0xFF000000)
     );
-    return ListView.builder(
+    return (!loading) ? ListView.builder(
+      controller: _controller,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: claim.rewardData.length,
@@ -132,7 +168,7 @@ class _ReportBodyState extends State<ReportBody> {
           const SizedBox(height: 55.0)
         ]
       )
-    );
+    ) : const LinearProgressIndicator();
   }
 }
 
