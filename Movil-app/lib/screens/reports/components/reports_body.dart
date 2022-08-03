@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movil_app/screens/Profile/components/background.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class ReportBody extends StatelessWidget {
 
@@ -14,43 +15,84 @@ class ReportBody extends StatelessWidget {
   Widget _local() {
     const TextStyle titleStyle = TextStyle(
       fontSize: 25.0,
-      fontWeight: FontWeight.bold,
-      color: Color(0xFF358F80),
+      fontWeight: FontWeight.w800,
+      color: Color(0xFF358F80)
     );
+    const TextStyle subtitleStyle = TextStyle(
+      fontSize: 20.0,
+      fontWeight: FontWeight.w500,
+      color: Color(0xFF358F80)
+    );
+    const TextStyle pointsStyle = TextStyle(
+      fontSize: 20.0,
+      /**shadows: [
+        BoxShadow(
+          offset: Offset.zero,
+          blurRadius: 50.0
+        )
+      ],*/
+      color: Color(0x7D000000)
+    );
+    const TextStyle pointsText = TextStyle(
+      fontSize: 20.0,
+      color: Color(0xFF000000)
+    );
+    initializeDateFormatting();
+    Intl.defaultLocale = 'es';
+    String monthName = DateFormat('MMMM').format(DateTime(0, DateTime.now().month)).toCapitalized();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const <Widget> [
+        children: <Widget> [
           const SizedBox(height: 50.0),
-          Text(
+          const Text(
             'Historial de Recompensas',
-            style: titleStyle,
+            style: titleStyle
           ),
           Text(
-              'SEPTIEMBRE'
+            monthName,
+            style: subtitleStyle
           ),
-          Text(
-              '306 puntos'
+          const SizedBox(height: 50.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 75.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const <Widget> [
+                Text(
+                  '306 puntos',
+                  style: pointsStyle
+                ),
+                Text(
+                  'Utilizados',
+                    style: pointsText
+                ),
+                Text(
+                  'durante este mes',
+                    style: pointsText
+                )
+              ],
+            ),
           ),
-          Text(
-              'Utilizados'
-          ),
-          Text(
-              'durante este mes'
-          ),
-          Text(
+          const SizedBox(height: 50.0),
+          const Text(
               'Lista de recompensas obtenidas durante este mes'
           ),
-          Text(
+          const Text(
               'Linterna'
           ),
-          Text(
+          const Text(
               '89 pts'
           ),
         ],
       )
     );
   }
+}
+
+extension StringCasingExtension on String {
+  String toCapitalized() => length > 0 ?'${this[0].toUpperCase()}${substring(1).toLowerCase()}':'';
+  String toTitleCase() => replaceAll(RegExp(' +'), ' ').split(' ').map((str) => str.toCapitalized()).join(' ');
 }
