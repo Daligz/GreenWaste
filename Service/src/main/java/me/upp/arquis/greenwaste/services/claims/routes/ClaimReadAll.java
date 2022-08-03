@@ -15,7 +15,7 @@ public class ClaimReadAll extends RouteWrapper {
 
     @Override
     public Object handle (final Request request, final Response response) {
-        final String prueba = "SELECT canjee.idCanje, usuario.nombre as NombreUsuario, premios.nombre as NombrePremio, canjee.fechaCanjee FROM canjee\n" +
+        final String prueba = "SELECT canjee.idCanje, usuario.nombre as NombreUsuario, usuario.apellidoPaterno as ApellidoPaterno, usuario.apellidoMaterno as ApellidoMaterno, premios.nombre as NombrePremio, canjee.fechaCanjee FROM canjee\n" +
                 "INNER JOIN puntos ON canjee.idPuntos = puntos.idPuntos\n" +
                 "INNER JOIN premios ON canjee.idPremio = premios.idPremio\n" +
                 "INNER JOIN usuario ON puntos.idUsuario = usuario.idUsuario";

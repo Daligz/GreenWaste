@@ -101,7 +101,9 @@
 
                                         <tr v-for="canjee in canjees" :key="canjees.idcanje">
                                         <td class=" font-weight-bold text-center">{{ canjee.idcanje }}</td>
-                                        <td class=" font-weight-bold text-center">{{ canjee.nombreusuario}}</td>
+                                        <td class=" font-weight-bold text-center">{{ canjee.nombreusuario}} {{ canjee.apellidopaterno }} {{ canjee.apellidomaterno }}</td>
+                                        <!--<td class=" font-weight-bold text-center">{{ canjee.apellidopaterno }}</td> -->
+                                        <!--<td class=" font-weight-bold text-center">{{ canjee.apellidomaterno }}</td> -->
                                         <td class=" font-weight-bold text-center">{{ canjee.nombrepremio }}</td>
                                         <td class=" font-weight-bold text-center">{{ canjee.fechacanjee }}</td>
                                        <!-- <td class=" text-center">
@@ -148,7 +150,9 @@
                     canjee: {
                         nombreusuario: '',
                         idcanje: null,
+                        apellidomaterno: '',
                         fechacanjee: '',
+                        apellidopaterno: '',
                         nombrepremio: '',
                         
                     }
