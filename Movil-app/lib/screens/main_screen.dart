@@ -15,10 +15,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int index = 0;
   User? user;
-  late List<User> users;
-  Address? address;
   final screens = [
-    //ProfileScreen(user: null),
+    ProfileScreen(user: null),
     RewardScreen(user: null),
     RewardScreen(user: null),
     RewardScreen(user: null),
@@ -32,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
         final Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
         user = arguments['user'];
         screens.removeRange(0, 3);
-        //screens.add(ProfileScreen(user: user));
+        screens.add(ProfileScreen(user: user));
         screens.add(RewardScreen(user: user));
         screens.add(RewardScreen(user: user,));
         screens.add(RewardScreen(user: user,));

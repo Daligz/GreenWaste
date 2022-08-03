@@ -14,13 +14,10 @@ import '../../address/AddressRead/read_addres.dart';
 
 class Body extends StatelessWidget {
   final User? user;
-  final List<User> users;
-  final Address? address;
+
   const Body(
       {Key? key,
-      required this.user,
-      required this.users,
-      required this.address})
+      required this.user})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -60,10 +57,8 @@ class Body extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ReadAddress(
-                            user: user!,
-                            users: const [],
-                            address: address,
+                      builder: (context) => AddressReadScreen(
+                            user: user!
                           )),
                 );
               },

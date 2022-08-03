@@ -72,24 +72,11 @@ class Service {
     return (response.statusCode == 200);
   }
 
-  /*static Future<List<Address>> readAddress(final int idUsuario) async {
-    final Response response =
-        await get(Uri.parse(Routes.routeAddressRead(idUsuario)));
-    if (response.statusCode != 200) return List.empty();
-    final List<Address> address = (json.decode(response.body) as List)
-        .map((e) => Address.fromJson(e))
-        .toList();
-    address.shuffle();
-    return address.getRange(0, idUsuario).toList();
-  }*/
 
-  static Future<Address?> readAddress(final int idUsuario) async {
-    final Response response =
-        await get(Uri.parse(Routes.routeAddressRead(idUsuario)));
-    print(response.body);
-    if (response.body == "[]") {
-      return null;
-    }
+  static Future<List<Address>?> readAddress(final int idUsuario) async {
+    final Response response = await get(Uri.parse(Routes.routeAddressRead(idUsuario)));
+    if(response.statusCode != 200) return List.empty();
+    return (json.decode(response.body) as List).map((e) => Address.fromJson(e)).toList();
   }
 
   static Future<bool> updateAddress(
