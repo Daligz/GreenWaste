@@ -1,7 +1,11 @@
+#install.packages("shinydashboard")
+
+
 library(kknn)
 library(ggplot2)
 library(RMySQL)
 library(DBI)
+
 database<-dbConnect(MySQL(), user = "root", host = "localhost", password = "", dbname = "dali_greenwaste")
 gen_data<-dbGetQuery(database, statement = "Select * From dataset")
 on.exit(dbDisconnect(database))
@@ -48,52 +52,146 @@ plot(model)
 tabla   <- table(prediction, factor(prueba$ventas))
 tabla
 
+valores <- cbind(prueba, prediction) 
+
+valores
+
 boxplot(df$producto ~ factor(df$ventas), data = df, col = c("yellow"))
 
 library(shiny)
+library(shinydashboard)
 
-ui <- fluidPage(
-  
-  titlePanel("NO SE QUE TITULO  PONER"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      
-      selectInput("select_produto", label = h3("Producto"), 
-                  choices = list("1" = 1, "2" = 2, "3" = 3, "4" = 4, "5" = 5,
-                                 "6" = 6, "7" = 7, "8" = 8, "9" = 9, "10" = 10), 
-                  selected = 1),
-      
-      selectInput("select_mes", label = h3("Mes"), 
-                  choices = list("1" = 1, "2" = 2, "3" = 3, "4" = 4, "5" = 5,
-                                 "6" = 6, "7" = 7, "8" = 8, "9" = 9, "10" = 10,
-                                 "11" = 11, "12" = 12), 
-                  selected = 1),
-      
-      selectInput("select_anio", label = h3("Año"), 
-                  choices = list("2013" = 2013, "2014" = 2014, "2015" = 2015, "2016" = 2016, "2017" = 2017,
-                                 "2018" = 2018, "2019" = 2019, "2020" = 2020, "2021" = 2021), 
-                  selected = 2013),
-      
-    ),
-    
-    mainPanel(
-      
-      plotOutput(outputId = "distPlot")
-      
+ui <- dashboardPage(skin = "green",
+  dashboardHeader(title = "GreenWaste"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Ventas", tabName = "v", icon = icon("money-bill")),
+      menuItem("Frecuencia", tabName = "f", icon = icon("chart-line"))
     )
-  )
+  ),
+      dashboardBody(
+        tabItems(
+        # Primer tab
+        tabItem(tabName = "v",
+                titlePanel("GreenWaste"),
+                fluidPage(
+                  
+                  
+                  sidebarLayout(
+                    
+                    sidebarPanel(
+                      
+                      selectInput("select_producto", label = h3("Producto"), 
+                                  choices = list("Lapiz" = 1, "Borrador" = 2, "Lapicera" = 3, "Jarra" = 4, "Telefono" = 5,
+                                                 "Lapicero" = 6, "Libreta" = 7, "Colores" = 8, "Eco egg holder" = 9, "Television" = 10), 
+                                  selected = 1),
+                      
+                      selectInput("select_mes", label = h3("Mes"), 
+                                  choices = list("Enero" = 1, "Febrero" = 2, "Marzo" = 3, "Abril" = 4, "Mayo" = 5,
+                                                 "Junio" = 6, "Julio" = 7, "Agosto" = 8, "Septiembre" = 9, "Octubre" = 10,
+                                                 "Noviembre" = 11, "Diciembre" = 12), 
+                                  selected = 1),
+                      
+                      selectInput("select_anio", label = h3("Año"), 
+                                  choices = list("2013" = 2013, "2014" = 2014, "2015" = 2015, "2016" = 2016, "2017" = 2017,
+                                                 "2018" = 2018, "2019" = 2019, "2020" = 2020, "2021" = 2021), 
+                                  selected = 2013),
+                      
+                    ),
+                    
+                    mainPanel(
+                      h2("Diagrama de cantidad de tipo de ventas"),
+                    
+                      div("Este algoritmo permite ver a travez de una grafica los productos más vendidos y se categorizan de acuerdo a tres etiquetas que se 
+                          representan en numero, cuyo significado son los siguientes: "),
+                      h3("Etiquetas"),
+                      p("1 = Altas (> 50,000)"),
+                      p("2 = Medias (16,000 - 49,999)"),
+                      p(" 3 = Bajas (0 - 15,999)"),
+                      hr(),
+                      plotOutput(outputId = "distPlot")
+                      
+                    )
+                  )
+                )
+            
+        ),
+        
+        
+        #Segundo tab
+        tabItem(tabName = "f",
+                titlePanel("GreenWaste"),
+                
+                sidebarLayout(
+                  
+                  sidebarPanel(
+                    
+                    
+                    selectInput("select_mes_two", label = h3("Mes"), 
+                                choices = list("Ninguno" = 0, "Enero" = 1, "Febrero" = 2, "Marzo" = 3, "Abril" = 4, "Mayo" = 5,
+                                               "Junio" = 6, "Julio" = 7, "Agosto" = 8, "Septiembre" = 9, "Octubre" = 10,
+                                               "Noviembre" = 11, "Diciembre" = 12), 
+                                selected = 0),
+                    
+                  ),
+                  
+                  mainPanel(
+                    h2("Diagrama de ventas de los prductos por mes"),
+                    
+                    div("Este grafica nos permite mostrar el compartimento de las ventas de los 10 productos que tenemos en nuestro dataset de acuerdo 
+                        al mes seleccionas a traves del dropdownlist, asi mismo lo categoriza por las etiquetas de ventas las cuales son las siguientes: "),
+                    h3("Etiquetas"),
+                    p("1 = Altas (> 50,000)"),
+                    p("2 = Medias (16,000 - 49,999)"),
+                    p(" 3 = Bajas (0 - 15,999)"),
+                    hr(),
+                    
+                    plotOutput(outputId = "ggplot")
+                    
+                  )
+                )
+               
+        )
+      )
+    )
+  
 )
 
 server <- function(input, output) {
   #output$value <- renderPrint({ input$select })
   output$distPlot <- renderPlot({
     
-    plot(factor(df$ventas), main = "Diagrama de cantidad de tipo de ventas")
+    resultados <- subset(valores, producto == input$select_producto)
+    
+    if(input$select_anio != 0){
+      resultados <- subset(resultados, anio == input$select_anio)
+    }
+    
+    if(input$select_mes != 0){
+      resultados <- subset(resultados, mes == input$select_mes)
+    }
+    if(nrow(resultados) != 0){
+      plot(factor(resultados$prediction), main = "", col = c("#FBEC85", "#FE8100", "#FBEC85")) 
+    }
+    #------------------
+    
+  })
+  
+  output$ggplot <- renderPlot({
+    
+    
+    resultados <- subset(valores, mes == input$select_mes_two)
+    
+    if(input$select_mes_two != 0){
+      resultados <- subset(resultados, mes == input$select_mes_two)
+    }
+    if(nrow(resultados) != 0){
+      ggplot(data = resultados, aes(x=producto, y=cantidad, color=(factor(prediction))))+ geom_point()
+      ##plot(factor(resultados$producto), main = "Diagrama de cantidad de tipo de ventas", col = c("blue", "yellow", "red")) 
+    }
+    
     
   })
   
 }
-
 shinyApp(ui = ui, server = server)
