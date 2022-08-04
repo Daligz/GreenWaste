@@ -13,5 +13,4 @@ class ServiceContainer{
         idMaterial, idDireccion, estado)));
     return (response.statusCode == 200);
   }
-  }
 }
