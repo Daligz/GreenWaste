@@ -50,8 +50,7 @@ class Routes {
   static String routeClaimRead(final String idUsuario) =>
       _url + "/claims/read/$idUsuario";
 
-
-
+  //Address routes
   static String routeAddressRead(final int idUsuario) => _url + "/address/read/$idUsuario";
 
   static String routeAddressCreate(
@@ -74,4 +73,17 @@ class Routes {
           final int idUsuario) =>
       _url +
       "/address/update/$idDireccion,$colonia,$calle,$numero,$municipio,$estado,$idUsuario";
+
+  //Materials routes
+  static String routeMaterialsReadAll() => _url + "/material/read/";
+
+  static String routeMaterialsRead(final int idMaterial) => _url + "/material/read/$idMaterial";
+
+  static String routeContainerCreate(
+      final int idMaterial,
+      final int idDireccion,
+      final String estado) =>
+      _url +
+          "/container/create/$idMaterial/$idDireccion/$estado";
+  //Container routes
 }
