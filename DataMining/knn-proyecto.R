@@ -75,28 +75,21 @@ ui <- dashboardPage(skin = "green",
         tabItem(tabName = "v",
                 titlePanel("GreenWaste"),
                 fluidPage(
-                  
-                  
                   sidebarLayout(
-                    
                     sidebarPanel(
-                      
                       selectInput("select_producto", label = h3("Producto"), 
                                   choices = list("Lapiz" = 1, "Borrador" = 2, "Lapicera" = 3, "Jarra" = 4, "Telefono" = 5,
                                                  "Lapicero" = 6, "Libreta" = 7, "Colores" = 8, "Eco egg holder" = 9, "Television" = 10), 
                                   selected = 1),
-                      
                       selectInput("select_mes", label = h3("Mes"), 
                                   choices = list("Enero" = 1, "Febrero" = 2, "Marzo" = 3, "Abril" = 4, "Mayo" = 5,
                                                  "Junio" = 6, "Julio" = 7, "Agosto" = 8, "Septiembre" = 9, "Octubre" = 10,
                                                  "Noviembre" = 11, "Diciembre" = 12), 
                                   selected = 1),
-                      
                       selectInput("select_anio", label = h3("Año"), 
                                   choices = list("2013" = 2013, "2014" = 2014, "2015" = 2015, "2016" = 2016, "2017" = 2017,
                                                  "2018" = 2018, "2019" = 2019, "2020" = 2020, "2021" = 2021), 
                                   selected = 2013),
-                      
                     ),
                     
                     mainPanel(
@@ -114,30 +107,20 @@ ui <- dashboardPage(skin = "green",
                     )
                   )
                 )
-            
         ),
-        
-        
         #Segundo tab
         tabItem(tabName = "f",
                 titlePanel("GreenWaste"),
-                
                 sidebarLayout(
-                  
                   sidebarPanel(
-                    
-                    
-                    selectInput("select_mes_two", label = h3("Mes"), 
-                                choices = list("Ninguno" = 0, "Enero" = 1, "Febrero" = 2, "Marzo" = 3, "Abril" = 4, "Mayo" = 5,
-                                               "Junio" = 6, "Julio" = 7, "Agosto" = 8, "Septiembre" = 9, "Octubre" = 10,
-                                               "Noviembre" = 11, "Diciembre" = 12), 
-                                selected = 0),
+                    selectInput("select_anio_two", label = h3("Año"), 
+                                choices = list("2013" = 2013, "2014" = 2014, "2015" = 2015, "2016" = 2016, "2017" = 2017,
+                                               "2018" = 2018, "2019" = 2019, "2020" = 2020, "2021" = 2021), 
+                                selected = 2013),
                     
                   ),
-                  
                   mainPanel(
                     h2("Diagrama de ventas de los prductos por mes"),
-                    
                     div("Este grafica nos permite mostrar el compartimento de las ventas de los 10 productos que tenemos en nuestro dataset de acuerdo 
                         al mes seleccionas a traves del dropdownlist, asi mismo lo categoriza por las etiquetas de ventas las cuales son las siguientes: "),
                     h3("Etiquetas"),
@@ -145,12 +128,10 @@ ui <- dashboardPage(skin = "green",
                     p("2 = Medias (16,000 - 49,999)"),
                     p(" 3 = Bajas (0 - 15,999)"),
                     hr(),
-                    
                     plotOutput(outputId = "ggplot")
                     
                   )
                 )
-               
         )
       )
     )
@@ -180,13 +161,13 @@ server <- function(input, output) {
   output$ggplot <- renderPlot({
     
     
-    resultados <- subset(valores, mes == input$select_mes_two)
+    resultados1 <- subset(valores, anio == input$select_anio_two)
     
-    if(input$select_mes_two != 0){
-      resultados <- subset(resultados, mes == input$select_mes_two)
+    if(input$select_anio_two != 0){
+      resultados1 <- subset(resultados1, anio== input$select_anio_two)
     }
-    if(nrow(resultados) != 0){
-      ggplot(data = resultados, aes(x=producto, y=cantidad, color=(factor(prediction))))+ geom_point()
+    if(nrow(resultados1) != 0){
+      ggplot(data = resultados1, aes(x=producto, y=cantidad, color=(factor(prediction))))+ geom_point()
       ##plot(factor(resultados$producto), main = "Diagrama de cantidad de tipo de ventas", col = c("blue", "yellow", "red")) 
     }
     
