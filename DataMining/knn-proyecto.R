@@ -1,7 +1,11 @@
+install.packages("shinydashboard")
+
+
 library(kknn)
 library(ggplot2)
 library(RMySQL)
 library(DBI)
+
 database<-dbConnect(MySQL(), user = "root", host = "localhost", password = "", dbname = "dali_greenwaste")
 gen_data<-dbGetQuery(database, statement = "Select * From dataset")
 on.exit(dbDisconnect(database))
@@ -55,6 +59,7 @@ valores
 boxplot(df$producto ~ factor(df$ventas), data = df, col = c("yellow"))
 
 library(shiny)
+library(shinydashboard)
 
 ui <- dashboardPage(skin = "green",
   dashboardHeader(title = "GreenWaste"),
