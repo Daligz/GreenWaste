@@ -64,6 +64,8 @@ library(shinydashboard)
 ui <- dashboardPage(skin = "green",
   dashboardHeader(title = "GreenWaste"),
   dashboardSidebar(
+    div(img(src = "img_logo_web.png", width = "50%", height = "50%"),
+        style = "text-align: center;"),
     sidebarMenu(
       menuItem("Ventas", tabName = "v", icon = icon("money-bill")),
       menuItem("Frecuencia", tabName = "f", icon = icon("chart-line"))
@@ -82,12 +84,12 @@ ui <- dashboardPage(skin = "green",
                                                  "Lapicero" = 6, "Libreta" = 7, "Colores" = 8, "Eco egg holder" = 9, "Television" = 10), 
                                   selected = 1),
                       selectInput("select_mes", label = h3("Mes"), 
-                                  choices = list("Enero" = 1, "Febrero" = 2, "Marzo" = 3, "Abril" = 4, "Mayo" = 5,
+                                  choices = list("Ninguno"=0,  "Enero" = 1, "Febrero" = 2, "Marzo" = 3, "Abril" = 4, "Mayo" = 5,
                                                  "Junio" = 6, "Julio" = 7, "Agosto" = 8, "Septiembre" = 9, "Octubre" = 10,
                                                  "Noviembre" = 11, "Diciembre" = 12), 
                                   selected = 1),
                       selectInput("select_anio", label = h3("Año"), 
-                                  choices = list("2013" = 2013, "2014" = 2014, "2015" = 2015, "2016" = 2016, "2017" = 2017,
+                                  choices = list("Ninguno"=0,  "2013" = 2013, "2014" = 2014, "2015" = 2015, "2016" = 2016, "2017" = 2017,
                                                  "2018" = 2018, "2019" = 2019, "2020" = 2020, "2021" = 2021), 
                                   selected = 2013),
                     ),
