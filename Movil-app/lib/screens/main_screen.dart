@@ -5,6 +5,7 @@ import 'package:movil_app/screens/rewards/rewards_screen.dart';
 import 'package:movil_app/service/common/address.dart';
 import 'package:movil_app/service/common/user.dart';
 
+import 'addContainer/add_container_screen.dart';
 import 'address/AddressRead/read_addres.dart';
 
 class MainScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
     ProfileScreen(user: null),
     RewardScreen(user: null),
     RewardScreen(user: null),
-    RewardScreen(user: null),
+    AddContainerScreen(user: null),
   ];
 
   @override
