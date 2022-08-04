@@ -1,4 +1,4 @@
-install.packages("shinydashboard")
+#install.packages("shinydashboard")
 
 
 library(kknn)
@@ -76,6 +76,7 @@ ui <- dashboardPage(skin = "green",
                 titlePanel("GreenWaste"),
                 fluidPage(
                   
+                  
                   sidebarLayout(
                     
                     sidebarPanel(
@@ -99,7 +100,15 @@ ui <- dashboardPage(skin = "green",
                     ),
                     
                     mainPanel(
-                      
+                      h2("Diagrama de cantidad de tipo de ventas"),
+                    
+                      div("Este algoritmo permite ver a travez de una grafica los productos más vendidos y se categorizan de acuerdo a tres etiquetas que se 
+                          representan en numero, cuyo significado son los siguientes: "),
+                      h3("Etiquetas"),
+                      p("1 = Altas (> 50,000)"),
+                      p("2 = Medias (16,000 - 49,999)"),
+                      p(" 3 = Bajas (0 - 15,999)"),
+                      hr(),
                       plotOutput(outputId = "distPlot")
                       
                     )
@@ -127,6 +136,15 @@ ui <- dashboardPage(skin = "green",
                   ),
                   
                   mainPanel(
+                    h2("Diagrama de ventas de los prductos por mes"),
+                    
+                    div("Este grafica nos permite mostrar el compartimento de las ventas de los 10 productos que tenemos en nuestro dataset de acuerdo 
+                        al mes seleccionas a traves del dropdownlist, asi mismo lo categoriza por las etiquetas de ventas las cuales son las siguientes: "),
+                    h3("Etiquetas"),
+                    p("1 = Altas (> 50,000)"),
+                    p("2 = Medias (16,000 - 49,999)"),
+                    p(" 3 = Bajas (0 - 15,999)"),
+                    hr(),
                     
                     plotOutput(outputId = "ggplot")
                     
@@ -153,7 +171,7 @@ server <- function(input, output) {
       resultados <- subset(resultados, mes == input$select_mes)
     }
     if(nrow(resultados) != 0){
-      plot(factor(resultados$prediction), main = "Diagrama de cantidad de tipo de ventas", col = c("#FBEC85", "#FE8100", "#FBEC85")) 
+      plot(factor(resultados$prediction), main = "", col = c("#FBEC85", "#FE8100", "#FBEC85")) 
     }
     #------------------
     
@@ -176,7 +194,4 @@ server <- function(input, output) {
   })
   
 }
-
-
-
 shinyApp(ui = ui, server = server)
