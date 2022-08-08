@@ -20,7 +20,6 @@ class _MainScreenState extends State<MainScreen> {
     ProfileScreen(user: null),
     RewardScreen(user: null),
     RewardScreen(user: null),
-    AddContainerScreen(user: null),
   ];
 
   @override
@@ -33,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
         screens.removeRange(0, 3);
         screens.add(ProfileScreen(user: user));
         screens.add(RewardScreen(user: user));
-        screens.add(RewardScreen(user: user,));
+        screens.add(RewardScreen(user: user));
         screens.add(RewardScreen(user: user,));
         if(arguments['index']!=null){
           index = arguments['index'];

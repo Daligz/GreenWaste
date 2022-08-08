@@ -5,6 +5,7 @@ import 'package:movil_app/components/rounded_password_field.dart';
 import 'package:movil_app/screens/Profile/components/background.dart';
 import 'package:movil_app/components/already_have_a_container_check.dart';
 import 'package:movil_app/screens/UpdateUser/update_user.dart';
+import 'package:movil_app/screens/addContainer/add_container_screen.dart';
 import 'package:movil_app/screens/address/AddressCreate/create_address.dart';
 import 'package:movil_app/screens/login/login.dart';
 import 'package:movil_app/service/common/address.dart';
@@ -63,6 +64,9 @@ class Body extends StatelessWidget {
                 );
               },
             ),
+            RoundedButton(text: "Agregar contenedor", press: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => AddContainerScreen(user: user!)));
+            }),
             RoundedButton(
               text: "Historial de recompensas",
               press: () {},

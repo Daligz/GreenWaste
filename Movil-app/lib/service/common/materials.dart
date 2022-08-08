@@ -7,7 +7,7 @@ class Materials {
 
   factory Materials.fromJson(final Map<String, dynamic> jsonMap) {
     return Materials(
-        jsonMap['idMaterial'],
+        jsonMap['idmaterial'],
         jsonMap['nombre'],
         jsonMap['costo']
     );

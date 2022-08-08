@@ -1,5 +1,5 @@
 class Routes {
-  static const String _url = "http://192.168.0.14:6969";
+  static const String _url = "http://192.168.0.5:6969";
 
   // User routes
   static String routeUserCreate(
@@ -75,7 +75,7 @@ class Routes {
       "/address/update/$idDireccion,$colonia,$calle,$numero,$municipio,$estado,$idUsuario";
 
   //Materials routes
-  static String routeMaterialsReadAll() => _url + "/material/read/";
+  static String routeMaterialsReadAll() => _url + "/materials/read";
 
   static String routeMaterialsRead(final int idMaterial) => _url + "/material/read/$idMaterial";
 
