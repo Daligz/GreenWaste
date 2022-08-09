@@ -79,11 +79,20 @@ class Routes {
 
   static String routeMaterialsRead(final int idMaterial) => _url + "/material/read/$idMaterial";
 
+
+  static String routeContainersUpdate(
+      final int idContenedor,
+      final String estado) =>
+      _url +
+          "/containers/update/$idContenedor,$estado";
+
+  //Container routes
   static String routeContainerCreate(
       final int idMaterial,
       final int idDireccion,
       final String estado) =>
       _url +
           "/container/create/$idMaterial/$idDireccion/$estado";
-  //Container routes
+
+  static String routeContainersRead(final int idUsuario) => _url + "/containers/read/$idUsuario";
 }
