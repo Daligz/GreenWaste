@@ -3,8 +3,10 @@ import 'package:movil_app/constants.dart';
 import 'package:movil_app/screens/Profile/profile_screen.dart';
 import 'package:movil_app/screens/rewards/rewards_screen.dart';
 import 'package:movil_app/service/common/address.dart';
+import 'package:movil_app/service/common/containers.dart';
 import 'package:movil_app/service/common/user.dart';
-
+import 'package:movil_app/screens/Containers/containers.dart';
+import 'package:movil_app/screens/addContainer/add_container_screen.dart';
 import 'addContainer/add_container_screen.dart';
 import 'address/AddressRead/read_addres.dart';
 
@@ -20,7 +22,9 @@ class _MainScreenState extends State<MainScreen> {
     ProfileScreen(user: null),
     RewardScreen(user: null),
     RewardScreen(user: null),
-    AddContainerScreen(user: null),
+    ContainersScreen(user: null),
+
+    //AddContainerScreen(user: null),
   ];
 
   @override
@@ -34,7 +38,7 @@ class _MainScreenState extends State<MainScreen> {
         screens.add(ProfileScreen(user: user));
         screens.add(RewardScreen(user: user));
         screens.add(RewardScreen(user: user,));
-        screens.add(RewardScreen(user: user,));
+        screens.add(ContainersScreen(user: user));
         if(arguments['index']!=null){
           index = arguments['index'];
         }
