@@ -243,7 +243,7 @@
                         })
                 },
                 crear: function(){
-                    let parametros ={nombre:this.nombre, apellidopaterno:this.apellidopaterno, apellidomaterno:this.apellidomaterno, telefono:this.telefono, correo:this.correo, psw:this.psw, idrol:2}
+                    let parametros ={nombre:this.usuario.nombre, apellidopaterno:this.usuario.apellidopaterno, apellidomaterno:this.usuario.apellidomaterno, telefono:this.usuario.telefono, correo:this.usuario.correo, psw:this.usuario.psw, idrol:1}
                     if(!parametros.nombre || !parametros.apellidopaterno || !parametros.apellidomaterno || !parametros.telefono || !parametros.correo || !parametros.psw || !parametros.idrol){
                         alert("Debes agregar todos los datos");
                         return;
@@ -262,7 +262,7 @@
                     this.usuario.psw="";
                 },
                 editar: function () {
-                    let parametros = { nombre:this.nombre, apellidopaterno:this.apellidopaterno, apellidomaterno:this.apellidomaterno, telefono:this.telefono, correo:this.correo, psw:this.psw, idrol:2 , idusuario: this.usuario.idusuario};
+                    let parametros = { nombre:this.usuario.nombre, apellidopaterno:this.usuario.apellidopaterno, apellidomaterno:this.usuario.apellidomaterno, telefono:this.usuario.telefono, correo:this.usuario.correo, psw:this.usuario.psw, idrol:2 , idusuario: this.usuario.idusuario};
                     if (!parametros.nombre || !parametros.apellidopaterno || !parametros.apellidomaterno || !parametros.telefono || !parametros.correo || !parametros.psw || !parametros.idrol) {
                         alert("Debes agregar todos los datos!");
                         return;
