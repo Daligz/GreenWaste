@@ -48,9 +48,8 @@ class AddressReadScreen extends StatelessWidget {
             ],
           ),
         ),
-        body: AddressBody(user: user,
+        body: AddressBody(user: user),
 
-        ),
       ),
     );
   }
