@@ -19,12 +19,10 @@ class _MainScreenState extends State<MainScreen> {
   int index = 0;
   User? user;
   final screens = [
+    ContainersScreen(user: null),
     ProfileScreen(user: null),
     RewardScreen(user: null),
     RewardScreen(user: null),
-    ContainersScreen(user: null),
-
-    //AddContainerScreen(user: null),
   ];
 
   @override
@@ -34,11 +32,12 @@ class _MainScreenState extends State<MainScreen> {
       if (ModalRoute.of(context)?.settings.arguments != null) {
         final Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
         user = arguments['user'];
-        screens.removeRange(0, 3);
+        screens.removeRange(0, 4);
+        screens.add(ContainersScreen(user: user));
         screens.add(ProfileScreen(user: user));
         screens.add(RewardScreen(user: user));
-        screens.add(RewardScreen(user: user,));
-        screens.add(ContainersScreen(user: user));
+        screens.add(RewardScreen(user: user));
+        screens.add(RewardScreen(user: user));
         if(arguments['index']!=null){
           index = arguments['index'];
         }

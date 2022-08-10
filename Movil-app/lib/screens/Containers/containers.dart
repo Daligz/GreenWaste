@@ -13,7 +13,7 @@ class ContainersScreen extends StatelessWidget{
     return Scaffold(
       body: BodyContainers(
         user: user,
-      )
+      ),
     );
   }
 }
