@@ -29,6 +29,7 @@ class ContainersCard extends StatelessWidget {
 
           SizedBox(
 
+
             width: 250,
             height: 350,
             child: Card(

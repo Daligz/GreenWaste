@@ -19,7 +19,7 @@ class AddressBody extends StatelessWidget {
           children: <Widget> [
           AddressContainer(user: user,),
             RoundedButton(
-              text: "Agrrgar Dirección",
+              text: "Agregar Dirección",
               press: () {
                 Navigator.push(
                   context,

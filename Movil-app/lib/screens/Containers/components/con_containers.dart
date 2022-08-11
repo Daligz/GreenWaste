@@ -3,6 +3,8 @@ import 'package:movil_app/screens/addContainer/add_container_screen.dart';
 import 'package:movil_app/service/common/containers.dart';
 import 'package:movil_app/service/common/user.dart';
 import 'package:movil_app/service/service.dart';
+import 'package:movil_app/constants.dart';
+import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:movil_app/components/already_have_a_container_check.dart';
 import 'card.dart';
 class conContainers extends StatelessWidget {
@@ -41,7 +43,7 @@ class conContainers extends StatelessWidget {
               );
             },
           ),
-          SizedBox(height: size.height * 0.02),
+          SizedBox(height: 25),
         ],
       ),
     );
@@ -75,13 +77,14 @@ class conContainers extends StatelessWidget {
 
   Widget listContainers(containers){
     return  ListView.builder(
-        //scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        itemCount: containers.length,
-        itemBuilder: (context, index) => ContainersCard(
-          containers: containers[index],
-          user: user,
-        ),
+
+      //scrollDirection: Axis.horizontal,
+      shrinkWrap: true,
+      itemCount: containers.length,
+      itemBuilder: (context, index) => ContainersCard(
+        containers: containers[index],
+        user: user,
+      ),
     );
   }
 
