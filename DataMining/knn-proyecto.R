@@ -1,10 +1,11 @@
 #install.packages("shinydashboard")
-
+#install.packages("scales")
 
 library(kknn)
 library(ggplot2)
 library(RMySQL)
 library(DBI)
+library("scales")
 
 database<-dbConnect(MySQL(), user = "root", host = "localhost", password = "", dbname = "dali_greenwaste")
 gen_data<-dbGetQuery(database, statement = "Select * From dataset")
@@ -27,40 +28,68 @@ dim(prueba)
 
 
 p<-ggplot(data = entrenamiento, aes(x=producto, y=cantidad, color=(factor(ventas))))+ geom_point()
-
 p
 
 plot(factor(df$ventas), main = "Diagrama de cantidad de tipo de ventas")
 
 plot(factor(df$producto), df$ventas, main = "Diagrama de cajas y bigotes")
 
+
+#modelo optimal con Kmax=3
+modelk3 <- train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 3)
+plot(modelk3)
+
+#Predicción con K=3
+
+summary(modelk3)
+
+predictionk3 <- predict(modelk3, prueba[, -6])
+print(predictionk3)
+
+CMk3 <- table(prueba[, 6], predictionk3)
+print(CMk3)
+
+accuracyk3 <- (sum(diag(CMk3)))/sum(CMk3)
+print(accuracyk3)
+
+tablak3   <- table(predictionk3, factor(prueba$ventas))
+tablak3
+print(tablak3)
+
+valoresk3 <- cbind(prueba, predictionk3) 
+
+valoresk3
+print(valoresk3)
+
+
 #modelo optimal con Kmax=9
 model <- train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 9)
 
-#modelo optimal con Kmax=3
-modelk9 <- train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 3)
-plot(modelk9)
 
-
+#Predicción con K=6-------------------------------------------------
 summary(model)
 
 prediction <- predict(model, prueba[, -6])
 prediction
+print(prediction)
 
 CM <- table(prueba[, 6], prediction)
 CM
+print(CM)
 
 accuracy <- (sum(diag(CM)))/sum(CM)
 accuracy
+print(accuracy)
 
 plot(model)
 
 tabla   <- table(prediction, factor(prueba$ventas))
 tabla
+print(tabla)
 
 valores <- cbind(prueba, prediction) 
-
 valores
+print(valores)
 
 boxplot(df$producto ~ factor(df$ventas), data = df, col = c("yellow"))
 
@@ -174,6 +203,12 @@ ui <- dashboardPage(skin = "green",
                                                "Lapicero" = 6, "Libreta" = 7, "Colores" = 8, "Eco egg holder" = 9, "Television" = 10), 
                                 selected = 1),
                     
+                    selectInput("select_mesTendencia", label = h3("Mes"), 
+                                choices = list("Ninguno"=0,  "Enero" = 1, "Febrero" = 2, "Marzo" = 3, "Abril" = 4, "Mayo" = 5,
+                                               "Junio" = 6, "Julio" = 7, "Agosto" = 8, "Septiembre" = 9, "Octubre" = 10,
+                                               "Noviembre" = 11, "Diciembre" = 12), 
+                                selected = 1),
+                    
                   ),
                   mainPanel(
                     h2("Diagrama de Tendencia del Poroducto al Año"),
@@ -223,7 +258,7 @@ server <- function(input, output) {
       resultados1 <- subset(resultados1, anio== input$select_anio_two)
     }
     if(nrow(resultados1) != 0){
-      ggplot(data = resultados1, aes(x=producto, y=cantidad, color=(factor(prediction))))+ geom_point()
+      ggplot(data = resultados1, aes(x=producto, y=cantidad, color=(factor(prediction))))+ geom_point()+scale_x_discrete(limit = c(1,2, 3, 4, 5, 6, 7, 8, 9, 10))
       ##plot(factor(resultados$producto), main = "Diagrama de cantidad de tipo de ventas", col = c("blue", "yellow", "red")) 
     }
     
@@ -249,13 +284,20 @@ server <- function(input, output) {
   ##-----------------------------
   output$tendencia <- renderPlot({
     
-    resultadoTendencia <- subset(valores, producto == input$select_producto_tendencia)
     
+    resultadoTendencia <- subset(valores, producto == input$select_producto_tendencia)
+    print(resultadoTendencia)
+    
+
     if(input$select_producto_tendencia != 0){
       resultadoTendencia <- subset(resultadoTendencia, producto== input$select_producto_tendencia)
     }
+    if(input$select_mesTendencia != 0){
+      resultadoTendencia <- subset(resultadoTendencia, mes == input$select_mesTendencia)
+    }
     if(nrow(resultadoTendencia) != 0){
-      ggplot(data = resultadoTendencia, aes(x=anio , y=ventas, color=(factor(prediction))))+ geom_point()
+      ggplot(data = resultadoTendencia, aes(x=anio , y=ventas, color=(factor(prediction))))+ geom_point()+scale_x_discrete(limit = c(2013,2014,2015,2016,2017,2018,2019,2020,2021))+scale_y_discrete(limit = c(1,2,3))
+
     }
     
   })
