@@ -77,7 +77,8 @@
                         await axios.get(url + `login/${this.usuario.correo}/${this.usuario.password}`)
                         .then(response=>{
                             console.log(response);
-                            if(!response.length){
+                            console.log(response.length);
+                            if(response.data.length > 0){
                                 window.open('dashboard.html')
                             
                             }else{

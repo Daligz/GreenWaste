@@ -79,6 +79,7 @@ class conContainers extends StatelessWidget {
     return  ListView.builder(
 
       //scrollDirection: Axis.horizontal,
+      physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: containers.length,
       itemBuilder: (context, index) => ContainersCard(

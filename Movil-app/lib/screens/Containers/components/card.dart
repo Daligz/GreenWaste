@@ -55,6 +55,7 @@ class ContainersCard extends StatelessWidget {
                     ),
                     Container(
                       alignment: Alignment.center,
+
                       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
                       child: FlatButton(
                         onPressed: () async {
