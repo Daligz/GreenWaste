@@ -105,8 +105,13 @@ ui <- dashboardPage(skin = "green",
       menuItem("Ventas", tabName = "v", icon = icon("money-bill")),
       menuItem("Frecuencia", tabName = "f", icon = icon("chart-line")),
       menuItem("Optimal", tabName = "k", icon = icon("chart-line")),
-      menuItem("Tendencia", tabName = "tendencia", icon = icon("chart-line"))
+      menuItem("Tendencia", tabName = "tendencia", icon = icon("chart-line")),
       
+      #rutas para graficas con k=3
+      h6("Graficas con K3"),
+      menuItem("Ventas con K=3", tabName = "ventask3", icon = icon("money-bill")),
+      menuItem("Frecuencia con K=3", tabName = "frecuenciak3", icon = icon("chart-line")),
+      menuItem("Tendencia con K=3", tabName = "tendenciak3", icon = icon("chart-line"))
     )
   ),
       dashboardBody(
@@ -178,10 +183,6 @@ ui <- dashboardPage(skin = "green",
                 titlePanel("GreenWaste"),
                 sidebarLayout(
                   sidebarPanel(
-                    selectInput("select_knn", label = h3("Seleccione la cantidad de grupos"), 
-                                choices = list("Ninguno"=0,"K=3" = 3, "k=6" = 6), 
-                                selected = 3),
-                    
                   ),
                   mainPanel(
                     h2("Diagrama General del Algoritmo KNN"),
@@ -223,6 +224,100 @@ ui <- dashboardPage(skin = "green",
                     
                   )
                 )
+        ),
+        # Quinto tab
+        tabItem(tabName = "ventask3",
+                titlePanel("GreenWaste"),
+                fluidPage(
+                  sidebarLayout(
+                    sidebarPanel(
+                      selectInput("select_producto_k3", label = h3("Producto"), 
+                                  choices = list("Lapiz" = 1, "Borrador" = 2, "Lapicera" = 3, "Jarra" = 4, "Telefono" = 5,
+                                                 "Lapicero" = 6, "Libreta" = 7, "Colores" = 8, "Eco egg holder" = 9, "Television" = 10), 
+                                  selected = 1),
+                      selectInput("select_mes_k3", label = h3("Mes"), 
+                                  choices = list("Ninguno"=0,  "Enero" = 1, "Febrero" = 2, "Marzo" = 3, "Abril" = 4, "Mayo" = 5,
+                                                 "Junio" = 6, "Julio" = 7, "Agosto" = 8, "Septiembre" = 9, "Octubre" = 10,
+                                                 "Noviembre" = 11, "Diciembre" = 12), 
+                                  selected = 1),
+                      selectInput("select_anio_k3", label = h3("Año"), 
+                                  choices = list("Ninguno"=0,  "2013" = 2013, "2014" = 2014, "2015" = 2015, "2016" = 2016, "2017" = 2017,
+                                                 "2018" = 2018, "2019" = 2019, "2020" = 2020, "2021" = 2021), 
+                                  selected = 2013),
+                    ),
+                    
+                    mainPanel(
+                      h2("Diagrama de cantidad de tipo de ventas con K3"),
+                      
+                      div("Este algoritmo permite ver a travez de una grafica los productos más vendidos y se categorizan de acuerdo a tres etiquetas que se 
+                          representan en numero, cuyo significado son los siguientes: "),
+                      h3("Etiquetas"),
+                      p("1 = Altas (> 50,000)"),
+                      p("2 = Medias (16,000 - 49,999)"),
+                      p(" 3 = Bajas (0 - 15,999)"),
+                      hr(),
+                      plotOutput(outputId = "distPlotk3")
+                      
+                    )
+                  )
+                )
+        ),
+        #Sexto tab
+        tabItem(tabName = "frecuenciak3",
+                titlePanel("GreenWaste"),
+                sidebarLayout(
+                  sidebarPanel(
+                    selectInput("select_anio_two_k3", label = h3("Año"), 
+                                choices = list("2013" = 2013, "2014" = 2014, "2015" = 2015, "2016" = 2016, "2017" = 2017,
+                                               "2018" = 2018, "2019" = 2019, "2020" = 2020, "2021" = 2021), 
+                                selected = 2013),
+                    
+                  ),
+                  mainPanel(
+                    h2("Diagrama de ventas de los productos por mes con K3"),
+                    div("Este grafica nos permite mostrar el compartimento de las ventas de los 10 productos que tenemos en nuestro dataset de acuerdo 
+                        al mes seleccionas a traves del dropdownlist, asi mismo lo categoriza por las etiquetas de ventas las cuales son las siguientes: "),
+                    h3("Etiquetas"),
+                    p("1 = Altas (> 50,000)"),
+                    p("2 = Medias (16,000 - 49,999)"),
+                    p(" 3 = Bajas (0 - 15,999)"),
+                    hr(),
+                    plotOutput(outputId = "ggplotk3")
+                    
+                  )
+                )
+        ),
+        #Septimo tab
+      
+        tabItem(tabName = "tendenciak3",
+                titlePanel("GreenWaste"),
+                sidebarLayout(
+                  sidebarPanel(
+                    selectInput("select_producto_tendencia_k3", label = h3("Producto"), 
+                                choices = list("Lapiz" = 1, "Borrador" = 2, "Lapicera" = 3, "Jarra" = 4, "Telefono" = 5,
+                                               "Lapicero" = 6, "Libreta" = 7, "Colores" = 8, "Eco egg holder" = 9, "Television" = 10), 
+                                selected = 1),
+                    
+                    selectInput("select_mesTendencia_k3", label = h3("Mes"), 
+                                choices = list("Ninguno"=0,  "Enero" = 1, "Febrero" = 2, "Marzo" = 3, "Abril" = 4, "Mayo" = 5,
+                                               "Junio" = 6, "Julio" = 7, "Agosto" = 8, "Septiembre" = 9, "Octubre" = 10,
+                                               "Noviembre" = 11, "Diciembre" = 12), 
+                                selected = 1),
+                    
+                  ),
+                  mainPanel(
+                    h2("Diagrama de Tendencia del Poroducto al Año con K3"),
+                    div("El parámetro k es un parámetro muy importante en el método, el cual se ajusta buscando la 
+                        mejor clasificación con el conjunto de entrenamiento. "),
+                    h3("Etiquetas"),
+                    p("1 = Altas (> 50,000)"),
+                    p("2 = Medias (16,000 - 49,999)"),
+                    p(" 3 = Bajas (0 - 15,999)"),
+                    hr(),
+                    plotOutput(outputId = "tendenciak3")
+                    
+                  )
+                )
         )
       )
     )
@@ -231,6 +326,8 @@ ui <- dashboardPage(skin = "green",
 
 server <- function(input, output) {
   #output$value <- renderPrint({ input$select })
+  
+  #---GRAFICACIÓN DE LA GRAFICA VENTAS CON K6
   output$distPlot <- renderPlot({
     
     resultados <- subset(valores, producto == input$select_producto)
@@ -245,9 +342,11 @@ server <- function(input, output) {
     if(nrow(resultados) != 0){
       plot(factor(resultados$prediction), main = "", col = c("#FBEC85", "#FE8100", "#FBEC85")) 
     }
-    #------------------
+    
     
   })
+  
+  #---GRAFICACIÓN DE LAS FRECUENCIAS CON K6
   
   output$ggplot <- renderPlot({
     
@@ -264,24 +363,14 @@ server <- function(input, output) {
     
     
   })
-  ##-----------------------------
+  #---GRAFICACIÓN DE LA GRAFICA GENERAL KNN
   
   output$optimal <- renderPlot({
-        k9=9
-        if(input$select_knn !=0){
-          if(input$select_knn == 6){
-            plot(train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 9))  
-            
-          }else if(input$select_knn==3){
-            plot(train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 3))  
-            
-          }
-
-        }
+        plot(train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 9))  
 
     })
   
-  ##-----------------------------
+  #---GRAFICACIÓN DE LA GRAFICA TENDENCIAS CON K6
   output$tendencia <- renderPlot({
     
     
@@ -296,8 +385,65 @@ server <- function(input, output) {
       resultadoTendencia <- subset(resultadoTendencia, mes == input$select_mesTendencia)
     }
     if(nrow(resultadoTendencia) != 0){
-      ggplot(data = resultadoTendencia, aes(x=anio , y=ventas, color=(factor(prediction))))+ geom_point()+scale_x_discrete(limit = c(2013,2014,2015,2016,2017,2018,2019,2020,2021))+scale_y_discrete(limit = c(1,2,3))
+      ggplot(data = resultadoTendencia, aes(x=anio , y=(factor(prediction)), color=(factor(prediction))))+ geom_point()+scale_x_discrete(limit = c(2013,2014,2015,2016,2017,2018,2019,2020,2021))+scale_y_discrete(limit = c(1,2,3))
 
+    }
+    
+  })
+  #______________________________________________________________________________________________________________________________________________________#
+  #---GRAFICACIÓN DE LA GRAFICA VENTAS CON K6
+  output$distPlotk3 <- renderPlot({
+    
+    resultadosk3 <- subset(valoresk3, producto == input$select_producto_k3)
+    
+    if(input$select_anio_k3 != 0){
+      resultadosk3 <- subset(resultadosk3, anio == input$select_anio_k3)
+    }
+    
+    if(input$select_mes_k3 != 0){
+      resultadosk3 <- subset(resultadosk3, mes == input$select_mes_k3)
+    }
+    if(nrow(resultadosk3) != 0){
+      plot(factor(resultadosk3$predictionk3), main = "", col = c("#FBEC85", "#FE8100", "#FBEC85")) 
+    }
+    
+    
+  })
+  
+  #---GRAFICACIÓN DE LAS FRECUENCIAS CON K6
+  
+  output$ggplotk3 <- renderPlot({
+    
+    
+    resultados1k3 <- subset(valoresk3, anio == input$select_anio_two_k3)
+    
+    if(input$select_anio_two_k3 != 0){
+      resultados1k3 <- subset(resultados1k3, anio== input$select_anio_two_k3)
+    }
+    if(nrow(resultados1k3) != 0){
+      ggplot(data = resultados1k3, aes(x=producto, y=cantidad, color=(factor(predictionk3))))+ geom_point()+scale_x_discrete(limit = c(1,2, 3, 4, 5, 6, 7, 8, 9, 10))
+      ##plot(factor(resultados$producto), main = "Diagrama de cantidad de tipo de ventas", col = c("blue", "yellow", "red")) 
+    }
+    
+    
+  })
+  
+  #---GRAFICACIÓN DE LA GRAFICA TENDENCIAS CON K6
+  output$tendenciak3 <- renderPlot({
+  
+    resultadoTendenciak3 <- subset(valoresk3, producto == input$select_producto_tendencia_k3)
+    print(resultadoTendenciak3)
+    
+    
+    if(input$select_producto_tendencia_k3 != 0){
+      resultadoTendenciak3 <- subset(resultadoTendenciak3, producto== input$select_producto_tendencia_k3)
+    }
+    if(input$select_mesTendencia_k3 != 0){
+      resultadoTendenciak3 <- subset(resultadoTendenciak3, mes == input$select_mesTendencia_k3)
+    }
+    if(nrow(resultadoTendenciak3) != 0){
+      ggplot(data = resultadoTendenciak3, aes(x=anio , y=(factor(predictionk3)), color=(factor(predictionk3))))+ geom_point()+scale_x_discrete(limit = c(2013,2014,2015,2016,2017,2018,2019,2020,2021))+scale_y_discrete(limit = c(1,2,3))
+      
     }
     
   })
