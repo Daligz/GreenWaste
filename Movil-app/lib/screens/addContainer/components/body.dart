@@ -17,6 +17,8 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    MaterialDropDown materialDropDown = MaterialDropDown();
+    materialDropDown.material.dropdownValue;
     return Background(
       child: SingleChildScrollView(
         child: Column(
@@ -31,7 +33,7 @@ class Body extends StatelessWidget {
               height: size.height * 0.35,
             ),
             SizedBox(height: size.height * 0.02),
-            MaterialDropDown(),
+            materialDropDown,
             SizedBox(height: size.height * 0.02),
             StateDropDown(),
             SizedBox(height: size.height * 0.02),

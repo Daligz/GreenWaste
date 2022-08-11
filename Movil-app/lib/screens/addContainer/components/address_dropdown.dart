@@ -15,8 +15,24 @@ class AddressDropDown extends StatefulWidget {
 }
 
 class _AddressDropDown extends State<AddressDropDown> {
-  String dropdownValue = 'Dirección';
-  late final User? user;
+  String? dropdownValue;
+  int? usuario;
+  List<Address>? addresses;
+
+  getAdresses() async{
+    List<Address>? a = await Service.readAddress(usuario!);
+    setState((){
+      addresses = a;
+      dropdownValue = a![0].idDireccion.toString();
+    });
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    usuario = widget.user!.idUsuario;
+    getAdresses();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +60,12 @@ class _AddressDropDown extends State<AddressDropDown> {
           dropdownValue = newValue!;
         });
       },
-      items: <String>['Dirección','One', 'Two', 'Free', 'Four']
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
+    items: addresses?.map((item) {
+    return DropdownMenuItem(
+    child: Text(item.calle),
+    value: item.idDireccion.toString(),
+    );
+  })?.toList()
     );
   }
 }
