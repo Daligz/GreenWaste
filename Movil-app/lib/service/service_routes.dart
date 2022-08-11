@@ -81,7 +81,7 @@ class Routes {
       "/address/update/$idDireccion/$colonia/$calle/$numero/$municipio/$estado/$idUsuario";
 
   //Materials routes
-  static String routeMaterialsReadAll() => _url + "/material/read/";
+  static String routeMaterialsReadAll() => _url + "/materials/read";
 
   static String routeMaterialsRead(final int idMaterial) => _url + "/material/read/$idMaterial";
 
@@ -92,7 +92,7 @@ class Routes {
       final int idDireccion,
       final String estado) =>
       _url +
-          "/container/create/$idMaterial/$idDireccion/$estado";
+          "/containers/create/$idMaterial/$idDireccion/$estado";
 
   static String routeContainersRead(final int idUsuario) => _url + "/containers/read/$idUsuario";
 }
