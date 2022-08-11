@@ -20,16 +20,16 @@
                 <div class="content1-login">
                     <v-img class="img-logo-splash" src="../assets/img/img_logo_web.png"></v-img>
                 </div>
-                <div class="content2-longin">
+                <form @submit.prevent="inicarSesion" class="content2-longin">
                     <h1 class="titulo-splash">BIENVENIDO A GREENWASTE</h1>
                     <v-img class="img-login" src="../assets/img/img_login_web.png"></v-img>
                     <v-text-field class="input-login" filled outlined label="Correo Electronico"
-                        prepend-inner-icon="mdi-email"></v-text-field>
-                    <v-text-field class="input-login" filled outlined label="Contraseña" prepend-inner-icon="mdi-lock">
+                        prepend-inner-icon="mdi-email" v-model="usuario.correo"></v-text-field>
+                    <v-text-field class="input-login" filled outlined label="Contraseña" prepend-inner-icon="mdi-lock" v-model="usuario.password">
                     </v-text-field>
                     <!---<v-btn @click="btnIniciarSesion()"  id="button-Agregar">Iniciar Sesión</v-btn>-->
-                    <a href="dashboard.html" id="button-Agregar">Iniciar Sesión</a>
-                </div>
+                    <button type="submit" id="button-Agregar">Iniciar Sesión</button>
+                </form>
             </div>
         </v-main>
     </v-app>
@@ -43,31 +43,51 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         //? hacemos referencia a nuestro recursos de la api
-        let url = 'http://127.0.0.1:6969/rewards/';
+        let url = 'http://127.0.0.1:6969/users/';
 
         new Vue({
             el: '#app-login',
             vuetify: new Vuetify(),
             data() {
                 return {
-                    //usuarios[],
-                    dialog:false,
-                    operacion:'',
-                    usuario:{
-                        idUsuario:null,
-                        nombre:'',
-                        apellidoPaterno:'',
-                        apellidoMaterno:'',
+                    usuarios: [],
+                    usuario: {
+                        idusuario: '',
+                        nombre: '',
+                        apellidopaterno: '',
+                        apellidomaterno:'',
                         telefono:'',
                         correo:'',
-                        psw:'',
-                        idRol:'',
+                        password:'',
+                        idrol:''
+                        
+                   
                     }
-
                 }
             },
-            btnIniciarSesion() {
-                window.location.href = 'dashboard.html'
+            methods:{
+                async inicarSesion(){
+                    if(!this.usuario.correo && !this.usuario.password){
+                        alert("Debes agregar todos los datos!");
+                    }else{
+                        var datosCarga={
+                        correo:this.usuario.correo,
+                        password:this.usuario.password
+                        };
+                        await axios.get(url + `login/${this.usuario.correo}/${this.usuario.password}`)
+                        .then(response=>{
+                            console.log(response);
+                            if(!response.length){
+                                window.open('dashboard.html')
+                            
+                            }else{
+                                alert("Verifica tus credenciales!");
+                            }
+                        })
+                        .catch(error=>{
+                        });
+                    }
+                }
             }
         });
     </script>
