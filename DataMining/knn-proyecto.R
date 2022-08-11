@@ -34,7 +34,13 @@ plot(factor(df$ventas), main = "Diagrama de cantidad de tipo de ventas")
 
 plot(factor(df$producto), df$ventas, main = "Diagrama de cajas y bigotes")
 
+#modelo optimal con Kmax=9
 model <- train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 9)
+
+#modelo optimal con Kmax=3
+modelk9 <- train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 3)
+plot(modelk9)
+
 
 summary(model)
 
@@ -142,19 +148,15 @@ ui <- dashboardPage(skin = "green",
                 titlePanel("GreenWaste"),
                 sidebarLayout(
                   sidebarPanel(
-                    selectInput("select_knn", label = h3("Seleccione el tipo de K"), 
+                    selectInput("select_knn", label = h3("Seleccione la cantidad de grupos"), 
                                 choices = list("Ninguno"=0,"K=3" = 3, "k=6" = 6), 
                                 selected = 3),
                     
                   ),
                   mainPanel(
-                    h2("Diagrama de ventas de los prductos por mes"),
-                    div("Este grafica nos permite mostrar el compartimento de las ventas de los 10 productos que tenemos en nuestro dataset de acuerdo 
-                        al mes seleccionas a traves del dropdownlist, asi mismo lo categoriza por las etiquetas de ventas las cuales son las siguientes: "),
-                    h3("Etiquetas"),
-                    p("1 = Altas (> 50,000)"),
-                    p("2 = Medias (16,000 - 49,999)"),
-                    p(" 3 = Bajas (0 - 15,999)"),
+                    h2("Diagrama General del Algoritmo KNN"),
+                    div("El parámetro k es un parámetro muy importante en el método, el cual se ajusta buscando la 
+                        mejor clasificación con el conjunto de entrenamiento. "),
                     hr(),
                     plotOutput(outputId = "optimal")
                     
@@ -204,10 +206,18 @@ server <- function(input, output) {
   ##-----------------------------
   
   output$optimal <- renderPlot({
-    
-        resultadoK <- subset(valores, anio == input$select_anio_two)
-        plot(train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 9))  
-    
+        k9=9
+        if(input$select_knn !=0){
+          if(input$select_knn == 6){
+            plot(train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 9))  
+            
+          }else if(input$select_knn==3){
+            plot(train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 3))  
+            
+          }
+
+        }
+
     })
   
 }
