@@ -73,15 +73,23 @@ class BodySignUp extends StatelessWidget {
                 if(nameTextController.text.isNotEmpty && lastname1TextController.text.isNotEmpty &&
                     lastname2TextController.text.isNotEmpty && phoneTextController.text.isNotEmpty &&
                     emailTextController.text.isNotEmpty && passwordTextController.text.isNotEmpty){
-                  bool account = await Service.createUser(nameTextController.text, lastname1TextController.text, lastname2TextController.text,
-                      phoneTextController.text, emailTextController.text, passwordTextController.text);
-                  bool points = await ServicePoints.createPoints(emailTextController.text);
-                  if(account && points){
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Éxito!"),));
+                  bool name = RegExp(r"^[a-zA-Z ]*$").hasMatch(nameTextController.text);
+                  bool lastName = RegExp(r"^[a-zA-Z ]*$").hasMatch(lastname1TextController.text);
+                  bool lastName2 = RegExp(r"^[a-zA-Z ]*$").hasMatch(lastname2TextController.text);
+                  bool phone = RegExp(r"^((\d{10})|(\d{13}))$").hasMatch(phoneTextController.text);
+                  bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(emailTextController.text);
+                  if(name && lastName && lastName2 && phone && emailValid){
+                    bool account = await Service.createUser(nameTextController.text, lastname1TextController.text, lastname2TextController.text,
+                        phoneTextController.text, emailTextController.text, passwordTextController.text);
+                    bool points = await ServicePoints.createPoints(emailTextController.text);
+                    if(account && points){
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Éxito!"),));
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Error al crear usuario!"),));
+                    }
                   }else{
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Error al crear usuario!"),));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Error al crear al usuario!"),));
                   }
-
                 } else{
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("No se ha podido crear el usuario, falta campos por llenar"),));
                 }

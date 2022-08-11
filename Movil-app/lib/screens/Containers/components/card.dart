@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movil_app/constants.dart';
+import 'package:movil_app/screens/Profile/profile_screen.dart';
+import 'package:movil_app/screens/main_screen.dart';
 import 'package:movil_app/service/common/containers.dart';
 import 'package:movil_app/service/common/user.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -10,7 +12,9 @@ import 'package:movil_app/screens/Containers/containers.dart';
 class ContainersCard extends StatelessWidget {
   final User? user;
   final Containers? containers;
-  const ContainersCard({Key? key, required this.user, this.containers}) : super(key: key);
+  final Color color;
+
+  const ContainersCard({Key? key, required this.user,this.color = kPrimaryColor, this.containers}) : super(key: key);
 
   @override
   Widget build(final BuildContext context) {
@@ -53,13 +57,17 @@ class ContainersCard extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
                       child: FlatButton(
                         onPressed: () async {
+                          //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text(containers!.idContenedor.toString()),));
+
                           if(containers!.estado == "vacio"){
                             bool valor = await Service.updateContainers(containers!.idContenedor, lleno);
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text(valor.toString()),));
+
 
                             if(valor != false){
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Éxito!"),));
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> ContainersScreen(user: user)));
+                              Navigator.of(context).pushNamed('/main-screen', arguments: {'user': user,},);
+                              //Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfileScreen(user: user)));
+
                             }else{
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Error al editar el contenedor!"),));
                             }
@@ -68,7 +76,8 @@ class ContainersCard extends StatelessWidget {
 
                             if(valor != false){
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Éxito!"),));
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> ContainersScreen(user: user)));
+                              Navigator.of(context).pushNamed('/main-screen', arguments: {'user': user,},);
+                              //Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfileScreen(user: user)));
                             }else{
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Error al editar el contendor!"),));
                             }
@@ -84,13 +93,16 @@ class ContainersCard extends StatelessWidget {
                               fontSize: 16.0
                           );
                           */
+
                         },
+
                         child: Text(containers!.estado, style: TextStyle(color: Colors.white)),
-                        color: kPrimaryColor,
+                        color: color,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                       ),
+
                     ),
                   ],
                 ),
