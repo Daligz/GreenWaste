@@ -34,7 +34,13 @@ plot(factor(df$ventas), main = "Diagrama de cantidad de tipo de ventas")
 
 plot(factor(df$producto), df$ventas, main = "Diagrama de cajas y bigotes")
 
+#modelo optimal con Kmax=9
 model <- train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 9)
+
+#modelo optimal con Kmax=3
+modelk9 <- train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 3)
+plot(modelk9)
+
 
 summary(model)
 
@@ -69,7 +75,8 @@ ui <- dashboardPage(skin = "green",
     sidebarMenu(
       menuItem("Ventas", tabName = "v", icon = icon("money-bill")),
       menuItem("Frecuencia", tabName = "f", icon = icon("chart-line")),
-      menuItem("Optimal", tabName = "k", icon = icon("chart-line"))
+      menuItem("Optimal", tabName = "k", icon = icon("chart-line")),
+      menuItem("Tendencia", tabName = "tendencia", icon = icon("chart-line"))
       
     )
   ),
@@ -124,7 +131,7 @@ ui <- dashboardPage(skin = "green",
                     
                   ),
                   mainPanel(
-                    h2("Diagrama de ventas de los prductos por mes"),
+                    h2("Diagrama de ventas de los productos por mes"),
                     div("Este grafica nos permite mostrar el compartimento de las ventas de los 10 productos que tenemos en nuestro dataset de acuerdo 
                         al mes seleccionas a traves del dropdownlist, asi mismo lo categoriza por las etiquetas de ventas las cuales son las siguientes: "),
                     h3("Etiquetas"),
@@ -142,21 +149,42 @@ ui <- dashboardPage(skin = "green",
                 titlePanel("GreenWaste"),
                 sidebarLayout(
                   sidebarPanel(
-                    selectInput("select_knn", label = h3("Seleccione el tipo de K"), 
+                    selectInput("select_knn", label = h3("Seleccione la cantidad de grupos"), 
                                 choices = list("Ninguno"=0,"K=3" = 3, "k=6" = 6), 
                                 selected = 3),
                     
                   ),
                   mainPanel(
-                    h2("Diagrama de ventas de los prductos por mes"),
-                    div("Este grafica nos permite mostrar el compartimento de las ventas de los 10 productos que tenemos en nuestro dataset de acuerdo 
-                        al mes seleccionas a traves del dropdownlist, asi mismo lo categoriza por las etiquetas de ventas las cuales son las siguientes: "),
+                    h2("Diagrama General del Algoritmo KNN"),
+                    div("El parámetro k es un parámetro muy importante en el método, el cual se ajusta buscando la 
+                        mejor clasificación con el conjunto de entrenamiento. "),
+                    hr(),
+                    plotOutput(outputId = "optimal")
+                    
+                  )
+                )
+        ),
+        #CuartoItem
+        tabItem(tabName = "tendencia",
+                titlePanel("GreenWaste"),
+                sidebarLayout(
+                  sidebarPanel(
+                    selectInput("select_producto_tendencia", label = h3("Producto"), 
+                                choices = list("Lapiz" = 1, "Borrador" = 2, "Lapicera" = 3, "Jarra" = 4, "Telefono" = 5,
+                                               "Lapicero" = 6, "Libreta" = 7, "Colores" = 8, "Eco egg holder" = 9, "Television" = 10), 
+                                selected = 1),
+                    
+                  ),
+                  mainPanel(
+                    h2("Diagrama de Tendencia del Poroducto al Año"),
+                    div("El parámetro k es un parámetro muy importante en el método, el cual se ajusta buscando la 
+                        mejor clasificación con el conjunto de entrenamiento. "),
                     h3("Etiquetas"),
                     p("1 = Altas (> 50,000)"),
                     p("2 = Medias (16,000 - 49,999)"),
                     p(" 3 = Bajas (0 - 15,999)"),
                     hr(),
-                    plotOutput(outputId = "optimal")
+                    plotOutput(outputId = "tendencia")
                     
                   )
                 )
@@ -204,11 +232,34 @@ server <- function(input, output) {
   ##-----------------------------
   
   output$optimal <- renderPlot({
-    
-        resultadoK <- subset(valores, anio == input$select_anio_two)
-        plot(train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 9))  
-    
+        k9=9
+        if(input$select_knn !=0){
+          if(input$select_knn == 6){
+            plot(train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 9))  
+            
+          }else if(input$select_knn==3){
+            plot(train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 3))  
+            
+          }
+
+        }
+
     })
   
+  ##-----------------------------
+  output$tendencia <- renderPlot({
+    
+    resultadoTendencia <- subset(valores, producto == input$select_producto_tendencia)
+    
+    if(input$select_producto_tendencia != 0){
+      resultadoTendencia <- subset(resultadoTendencia, producto== input$select_producto_tendencia)
+    }
+    if(nrow(resultadoTendencia) != 0){
+      ggplot(data = resultadoTendencia, aes(x=anio , y=ventas, color=(factor(prediction))))+ geom_point()
+    }
+    
+  })
+  
+ 
 }
 shinyApp(ui = ui, server = server)
