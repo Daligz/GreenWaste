@@ -19,7 +19,7 @@ body {
 }
 
 .logo {
-    width:60%;
+    max-width: 60%;
     margin: auto auto 0px auto;
     font-size: 50px;
     text-shadow: -1px 2px 2px #000;
@@ -97,3 +97,35 @@ body {
         opacity: 0;
     }
 }
+
+
+@media (max-width: 780px) {
+    .logo {
+        max-width:80%;
+    }
+     
+  }
+  @media (max-width: 560px) {
+    .logo {
+        max-width:100%;
+    }
+   .titulo-splash{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size:40px;
+  }
+  }
+  @media (max-width: 430px) {
+    .logo {
+        max-width:100%;
+    }
+   
+   .titulo-splash{
+    font-size: 40px;
+  }
+   
+   
+      
+  }
+  
+    
