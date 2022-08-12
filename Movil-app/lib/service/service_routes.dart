@@ -1,5 +1,5 @@
 class Routes {
-  static const String _url = "http://192.168.1.106:6969";
+  static const String _url = "http://192.168.0.14:6969";
 
   // User routes
   static String routeUserCreate(

@@ -70,9 +70,19 @@ class Body_Address extends StatelessWidget {
                 if(coloniaTextController.text.isNotEmpty && calleTextController.text.isNotEmpty &&
                     numeroTextController.text.isNotEmpty && municipioTextController.text.isNotEmpty &&
                     estadoTextController.text.isNotEmpty){
-                  Service.createAddress(coloniaTextController.text, calleTextController.text, numeroTextController.text, municipioTextController.text,
-                      estadoTextController.text,user!.idUsuario);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Éxito!"),));
+                  bool colonia = RegExp(r"^[a-zA-Z ]*$").hasMatch(coloniaTextController.text);
+                  bool calle = RegExp(r"^[a-zA-Z ]*$").hasMatch(calleTextController.text);
+                  bool numero = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]").hasMatch(numeroTextController.text);
+                  bool minucipio = RegExp(r"^[a-zA-Z ]*$").hasMatch(municipioTextController.text);
+                  bool estado = RegExp(r"^[a-zA-Z ]*$").hasMatch(estadoTextController.text);
+                  if (colonia && calle && numero && minucipio && estado){
+                    Service.createAddress(coloniaTextController.text, calleTextController.text, numeroTextController.text, municipioTextController.text,
+                        estadoTextController.text,user!.idUsuario);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Éxito!"),));
+                  }else{
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("Ingrese datos validos"),));
+
+                  }
                 } else{
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text("No se ha crear la dirección, falta campos por llenar"),));
                 }
