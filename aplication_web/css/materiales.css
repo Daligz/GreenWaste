@@ -20,7 +20,6 @@
 .grid-container {
     display: grid;
     grid-template-columns: auto auto;
-    padding: 10px;
 }
 
 .grid-item {
@@ -67,8 +66,11 @@
     margin: auto;
 }
 .title-form-materiales{
-    font-size: 30px;
-    margin-left: 22%;
+    display: grid;
+    grid-template-columns:auto;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 32px;
 }
 .content-form-materiales{
     width: 90%;
@@ -105,4 +107,193 @@
     background: #fff;
     border-style: solid;
     border-color: #358F80;
+}
+
+
+
+
+@media (max-width: 1500px) {
+ 
+    .imgPanelUsuario{
+        max-width: 100%;
+    }
+    #title-panel{
+        margin: 0%;
+        font-size:55px;
+        margin-top: 10%;
+        margin-bottom: 10%;
+    }
+ 
+}
+
+@media (max-width: 1000px) {
+ 
+    .imgPanelUsuario{
+        max-width: 100%;
+    }
+    .grid-container {
+        margin-top: 0;
+        padding: 0;
+        display: block;
+    }
+    .gridItem1{
+        margin-top: -10%;
+        margin-bottom: -10%;
+    }
+    .gridItem2{
+        margin-top: -12%;
+        margin-bottom: -5%;
+    }
+    .gridItem3{
+        margin-top: -8%;
+        margin-bottom: -5%;
+    }
+    .imgPanelMaterial{
+        max-width: 70%;
+        display: block;
+        margin: auto;
+    }
+    .gridItem4{
+        margin-top: -10%;
+        margin-bottom: -5%;
+    }
+    .imgPanelPremio{
+        max-width: 80%;
+        display: block;
+        margin: auto;
+    }
+    .grid-item {
+        text-align: center;
+    }
+    #title-panel{
+        margin: 0%;
+        font-size:50px;
+    }
+    .card-table{
+        margin-top: 30%;
+    }
+}
+
+@media (max-width: 780px) {
+    #title-panel{
+        width: 100%;
+        font-size: 14px;
+    } 
+    .grid-container {
+        margin-top: 0;
+        padding: 0;
+        display: block;
+    
+    }
+    .grid-item {
+        text-align: center;
+    }
+    #title-panel{
+        margin: 0%;
+        font-size: 40px;
+    }
+    .gridItem3{
+        margin-top: -5%;
+        margin-bottom: -7%;
+    }
+    .imgPanelMaterial{
+        max-width: 80%;
+        display: block;
+        margin: auto;
+    }
+    .gridItem4{
+        margin-top: -13%;
+        margin-bottom: -10%;
+    }
+    .imgPanelPremio{
+        max-width: 80%;
+        display: block;
+        margin: auto;
+    }
+   
+}
+@media (max-width: 560px) {
+    #img-materiales{
+        max-width: 70%;
+        display: block;
+        margin: auto;
+    }
+    .title-form-materiales{
+        font-size: 22px;
+    }
+    .grid-container {
+        margin-top: 0;
+        padding: 0;
+        display: block;
+    
+    }
+    .gridItem1{
+        margin-top: -36%;
+        margin-bottom: -36%;
+    }
+    .gridItem2{
+        margin-top: -30%;
+        margin-bottom: -15%;
+    }
+    .grid-item {
+        text-align: center;
+    }
+    .gridItem3{
+        margin-top: -30%;
+        margin-bottom: -25%;
+    }
+    .imgPanelMaterial{
+        max-width: 80%;
+        display: block;
+        margin: auto;
+    }
+    .gridItem4{
+        margin-top: -30%;
+        margin-bottom: -25%;
+    }
+    .imgPanelPremio{
+        max-width: 90%;
+        display: block;
+        margin: auto;
+    }
+    .imgPanelUsuario{
+        max-width: 100%;
+        display: block;
+        margin: auto;
+    }
+    
+    .imgPanelCanjee{
+        max-width: 90%;
+        display: block;
+        margin: auto;
+    }
+    #title-panel{
+        margin: 0%;
+        font-size: 30px;
+    } 
+
+
+}
+@media (max-width: 430px) {
+ 
+    .imgPanelUsuario{
+        max-width: 90%;
+        display: block;
+        margin: auto;
+    }
+    .imgPanelMaterial{
+        max-width: 80%;
+        display: block;
+        margin: auto;
+    }
+    .imgPanelPremio{
+        max-width: 70%;
+        display: block;
+        margin: auto;
+    }
+    #title-panel{
+        margin: 0%;
+        font-size: 25px;
+    } 
+    
 }

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/contentDashboard.css">
     <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/premios.css">
+    <link rel="stylesheet" href="../css/materiales.css">
 </head>
 
 <body>
@@ -75,18 +75,18 @@
                     <div id="content2-main">
                         <sidebar-view :drawer="drawer" />
                         <div class="grid-container">
-                            <div class="grid-item">
-                                <v-img src="../assets/img/img_panelPremios_web.png" class="my-2" contain height="400" />
+                            <div class="grid-item gridItem4">
+                                <v-img src="../assets/img/img_panelPremios_web.png" class="my-2 imgPanelPremio" contain height="400" />
                             </div>
                             <div class="grid-item">
                                 <h1 id="title-panel">PANEL DE CONTROL DE LOS PREMIOS</h1>
                                 <v-btn class=" pa-5 cyan darken-3" block dark color="#358F80" @click="formNuevo()">
-                                    <v-icon dark>mdi-plus</v-icon>Agregar nuevo usuario
+                                    <v-icon dark>mdi-plus</v-icon>Agregar un premio nuevo
                                 </v-btn>
                             </div>
                         </div>
                     </div>
-                    <v-card class="mx-auto mt-5" max-width="1500" elevation="4">
+                    <v-card id="card-table" class="mx-auto mt-5" max-width="1500" elevation="4">
                         <!-- Tabla y formulario -->
                         <v-simple-table class="mx-auto mt-5" max-width="1500" elevation="4">
                             <template v-slot:default>
