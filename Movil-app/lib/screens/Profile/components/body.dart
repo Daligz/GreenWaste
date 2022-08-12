@@ -7,6 +7,7 @@ import 'package:movil_app/components/already_have_a_container_check.dart';
 import 'package:movil_app/screens/UpdateUser/update_user.dart';
 import 'package:movil_app/screens/address/AddressCreate/create_address.dart';
 import 'package:movil_app/screens/login/login.dart';
+import 'package:movil_app/screens/reports/reports_screen.dart';
 import 'package:movil_app/service/common/address.dart';
 import 'package:movil_app/service/common/user.dart';
 
@@ -65,7 +66,12 @@ class Body extends StatelessWidget {
             ),
             RoundedButton(
               text: "Historial de recompensas",
-              press: () {},
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ReportScreen(user)),
+                );
+              },
             ),
             RoundedButton(
               text: "Cerrar sesión",
