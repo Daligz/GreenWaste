@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movil_app/constants.dart';
 import 'package:movil_app/screens/Profile/profile_screen.dart';
+import 'package:movil_app/screens/reports/reports_screen.dart';
 import 'package:movil_app/screens/rewards/rewards_screen.dart';
 import 'package:movil_app/service/common/address.dart';
 import 'package:movil_app/service/common/containers.dart';
@@ -22,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
     ContainersScreen(user: null),
     ProfileScreen(user: null),
     RewardScreen(user: null),
-    RewardScreen(user: null),
+    ReportScreen(user: null),
   ];
 
   @override
@@ -36,8 +37,8 @@ class _MainScreenState extends State<MainScreen> {
         screens.add(ContainersScreen(user: user));
         screens.add(ProfileScreen(user: user));
         screens.add(RewardScreen(user: user));
-        screens.add(RewardScreen(user: user));
-        screens.add(RewardScreen(user: user));
+        screens.add(ReportScreen(user: user));
+        screens.add(ReportScreen(user: user));
         if(arguments['index']!=null){
           index = arguments['index'];
         }
@@ -63,7 +64,7 @@ class _MainScreenState extends State<MainScreen> {
             labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
             onDestinationSelected: (index) =>
                 setState(() => this.index = index),
-            destinations: [
+            destinations: const [
               NavigationDestination(
                   icon: Icon(
                     Icons.house_outlined,

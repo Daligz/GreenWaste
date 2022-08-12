@@ -8,7 +8,7 @@ class ReportScreen extends StatelessWidget {
 
   final User? user;
 
-  const ReportScreen(this.user);
+  const ReportScreen({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(final BuildContext context) {

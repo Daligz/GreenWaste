@@ -69,7 +69,7 @@ class Body extends StatelessWidget {
               press: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ReportScreen(user)),
+                  MaterialPageRoute(builder: (context) => ReportScreen(user: user)),
                 );
               },
             ),
