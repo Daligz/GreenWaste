@@ -59,7 +59,7 @@
                         telefono:'',
                         correo:'',
                         password:'',
-                        idrol:''
+                        idrol:2
                         
                    
                     }
@@ -74,7 +74,7 @@
                         correo:this.usuario.correo,
                         password:this.usuario.password
                         };
-                        await axios.get(url + `login/${this.usuario.correo}/${this.usuario.password}`)
+                        await axios.get(url + `loginWeb/${this.usuario.correo}/${this.usuario.password}/${this.usuario.idrol}`)
                         .then(response=>{
                             console.log(response);
                             console.log(response.length);
