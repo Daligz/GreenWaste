@@ -134,31 +134,25 @@
                                         <v-row>
                                             <v-col cols="12" md="6">
                                                 <v-text-field filled outlined v-model="recompensa.nombre" 
-                                                    label="Nombre del premio" prepend-inner-icon="mdi-gift" solo
-                                                    required>
+                                                    label="Nombre del premio" prepend-inner-icon="mdi-gift">
                                                     {{recompensa.nombre}}</v-text-field>
                                             </v-col>
                                             <v-col cols="12" md="6">
-                                                <!--v-file-input v-model="recompensa.imagen" label="Seleccione la imagen"
-                                                    solo required filled outlined prepend-inner-icon="mdi-camera">
-                                                </v-file-input-->
+                                         
                                                 <v-text-field filled outlined v-model="recompensa.imagen" 
-                                                    label="URL de la imagen" prepend-inner-icon="mdi-camera" solo
-                                                    required>
+                                                    label="URL de la imagen" prepend-inner-icon="mdi-camera">
                                                     {{recompensa.imagen}}</v-text-field>
                                             </v-col>
                                         </v-row>
                                         <v-row>
                                             <v-col cols="12" md="6">
                                                 <v-text-field filled outlined v-model="recompensa.valor"
-                                                    label="ingrese el valor" solo required
+                                                    label="ingrese el valor" 
                                                     prepend-inner-icon="mdi-cash-multiple">
                                                 </v-text-field>
                                             </v-col>
                                             <v-col cols="12" md="6">
-                                                <v-text-field v-model="recompensa.stock" filled
-                                                    outlinedv-model="recompensa.valor" label="ingrese el stock" solo
-                                                    required prepend-inner-icon="mdi-cash-multiple">
+                                                <v-text-field v-model="recompensa.stock" filled outlined v-model="recompensa.valor" label="ingrese el stock" prepend-inner-icon="mdi-cash-multiple">
                                                 </v-text-field>
                                             </v-col>
                                         </v-row>
@@ -166,7 +160,7 @@
                                             <v-col cols="12" md="12">
                                                 <v-textarea v-model="recompensa.descripcion" name="input-7-1" filled outlined
                                             label="Ingrese una secripción del producto"
-                                            prepend-inner-icon="mdi-book-open-variant" auto-grow solo required>
+                                            prepend-inner-icon="mdi-book-open-variant" auto-grow >
                                         </v-textarea>
                                             </v-col>
                                         </v-row>

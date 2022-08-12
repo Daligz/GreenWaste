@@ -92,7 +92,6 @@
                                         <th class="white--text text-center">USUARIO</th>
                                         <th class="white--text text-center">PREMIO</th>
                                         <th class="white--text text-center">FECHA</th>
-                                        <!--<th class="white--text text-center">ACCIONES</th>-->                  
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -100,19 +99,9 @@
                                         <tr v-for="canjee in canjees" :key="canjees.idcanje">
                                         <td class=" font-weight-bold text-center">{{ canjee.idcanje }}</td>
                                         <td class=" font-weight-bold text-center">{{ canjee.nombreusuario}} {{ canjee.apellidopaterno }} {{ canjee.apellidomaterno }}</td>
-                                        <!--<td class=" font-weight-bold text-center">{{ canjee.apellidopaterno }}</td> -->
-                                        <!--<td class=" font-weight-bold text-center">{{ canjee.apellidomaterno }}</td> -->
                                         <td class=" font-weight-bold text-center">{{ canjee.nombrepremio }}</td>
                                         <td class=" font-weight-bold text-center">{{ canjee.fechacanjee }}</td>
-                                       <!-- <td class=" text-center">
-                                            <v-btn dark class="amber darken-3" small
-                                                @click="formEditar(material.idmaterial,material.nombre,material.costo)">
-                                                <v-icon>mdi-pencil</v-icon>Editar
-                                            </v-btn>
-                                            <v-btn dark class="red accent-3" small @click="borrar(material.idmaterial)">
-                                                <v-icon>mdi-delete</v-icon>Eliminar
-                                            </v-btn>
-                                        </td> //-->
+                                    
                                     </tr>
                                 </tbody>
                             </template>
