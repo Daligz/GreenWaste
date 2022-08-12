@@ -64,15 +64,15 @@ class Body extends StatelessWidget {
                 );
               },
             ),
-            // RoundedButton(
-            //   text: "Historial de recompensas",
-            //   press: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(builder: (context) => ReportScreen(user: user)),
-            //     );
-            //   },
-            // ),
+            RoundedButton(
+              text: "Historial de recompensas",
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ReportScreen(user: user)),
+                );
+              },
+            ),
             RoundedButton(
               text: "Cerrar sesión",
               press: () {
