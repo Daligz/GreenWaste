@@ -105,7 +105,8 @@ ui <- dashboardPage(skin = "green",
       menuItem("Ventas", tabName = "v", icon = icon("money-bill")),
       menuItem("Frecuencia", tabName = "f", icon = icon("chart-line")),
       menuItem("Optimal", tabName = "k", icon = icon("chart-line")),
-      menuItem("Tendencia", tabName = "tendencia", icon = icon("chart-line")),
+      menuItem("Tendencias por mes", tabName = "tendenciames", icon = icon("chart-line")),
+      menuItem("Tendencias por año", tabName = "tendenciaanio", icon = icon("chart-line")),
       
       #rutas para graficas con k=3
       h6("Graficas con K3"),
@@ -195,7 +196,7 @@ ui <- dashboardPage(skin = "green",
                 )
         ),
         #CuartoItem
-        tabItem(tabName = "tendencia",
+        tabItem(tabName = "tendenciames",
                 titlePanel("GreenWaste"),
                 sidebarLayout(
                   sidebarPanel(
@@ -212,7 +213,7 @@ ui <- dashboardPage(skin = "green",
                     
                   ),
                   mainPanel(
-                    h2("Diagrama de Tendencia del Poroducto al Año"),
+                    h2("Diagrama de Tendencia del Producto al Año"),
                     div("El parámetro k es un parámetro muy importante en el método, el cual se ajusta buscando la 
                         mejor clasificación con el conjunto de entrenamiento. "),
                     h3("Etiquetas"),
@@ -225,7 +226,38 @@ ui <- dashboardPage(skin = "green",
                   )
                 )
         ),
-        # Quinto tab
+        
+        #QuintoItem
+        tabItem(tabName = "tendenciaanio",
+                titlePanel("GreenWaste"),
+                sidebarLayout(
+                  sidebarPanel(
+                    selectInput("select_producto_tendencia", label = h3("Producto"), 
+                                choices = list("Lapiz" = 1, "Borrador" = 2, "Lapicera" = 3, "Jarra" = 4, "Telefono" = 5,
+                                               "Lapicero" = 6, "Libreta" = 7, "Colores" = 8, "Eco egg holder" = 9, "Television" = 10), 
+                                selected = 1),
+                    
+                    selectInput("select_aniotendencia", label = h3("Año"), 
+                                choices = list("Ninguno"=0,  "2013" = 2013, "2014" = 2014, "2015" = 2015, "2016" = 2016, "2017" = 2017,
+                                               "2018" = 2018, "2019" = 2019, "2020" = 2020, "2021" = 2021), 
+                                selected = 2013),
+                    
+                  ),
+                  mainPanel(
+                    h2("Diagrama de Tendencia del Producto al mes"),
+                    div("El parámetro k es un parámetro muy importante en el método, el cual se ajusta buscando la 
+                        mejor clasificación con el conjunto de entrenamiento. "),
+                    h3("Etiquetas"),
+                    p("1 = Altas (> 50,000)"),
+                    p("2 = Medias (16,000 - 49,999)"),
+                    p(" 3 = Bajas (0 - 15,999)"),
+                    hr(),
+                    plotOutput(outputId = "tendenciaanio")
+                    
+                  )
+                )
+        ),
+        # Sexto tab
         tabItem(tabName = "ventask3",
                 titlePanel("GreenWaste"),
                 fluidPage(
@@ -262,7 +294,7 @@ ui <- dashboardPage(skin = "green",
                   )
                 )
         ),
-        #Sexto tab
+        #Septimo tab
         tabItem(tabName = "frecuenciak3",
                 titlePanel("GreenWaste"),
                 sidebarLayout(
@@ -287,7 +319,7 @@ ui <- dashboardPage(skin = "green",
                   )
                 )
         ),
-        #Septimo tab
+        #Octavo tab
       
         tabItem(tabName = "tendenciak3",
                 titlePanel("GreenWaste"),
@@ -306,7 +338,7 @@ ui <- dashboardPage(skin = "green",
                     
                   ),
                   mainPanel(
-                    h2("Diagrama de Tendencia del Poroducto al Año con K3"),
+                    h2("Diagrama de Tendencia del Producto al Año con K3"),
                     div("El parámetro k es un parámetro muy importante en el método, el cual se ajusta buscando la 
                         mejor clasificación con el conjunto de entrenamiento. "),
                     h3("Etiquetas"),
@@ -327,7 +359,7 @@ ui <- dashboardPage(skin = "green",
 server <- function(input, output) {
   #output$value <- renderPrint({ input$select })
   
-  #---GRAFICACIÓN DE LA GRAFICA VENTAS CON K6
+  #---GRAFICACIÓN DE LA GRAFICA VENTAS CON K6---------TabItem_1
   output$distPlot <- renderPlot({
     
     resultados <- subset(valores, producto == input$select_producto)
@@ -346,7 +378,7 @@ server <- function(input, output) {
     
   })
   
-  #---GRAFICACIÓN DE LAS FRECUENCIAS CON K6
+  #---GRAFICACIÓN DE LAS FRECUENCIAS CON K6---------TabItem_2
   
   output$ggplot <- renderPlot({
     
@@ -363,14 +395,14 @@ server <- function(input, output) {
     
     
   })
-  #---GRAFICACIÓN DE LA GRAFICA GENERAL KNN
+  #---GRAFICACIÓN DE LA GRAFICA GENERAL KNN---------TabItem_3
   
   output$optimal <- renderPlot({
         plot(train.kknn(factor(ventas) ~ ., data = entrenamiento, kmax = 9))  
 
     })
   
-  #---GRAFICACIÓN DE LA GRAFICA TENDENCIAS CON K6
+  #---GRAFICACIÓN DE LA GRAFICA TENDENCIAS CON K6---------TabItem_4
   output$tendencia <- renderPlot({
     
     
@@ -391,7 +423,28 @@ server <- function(input, output) {
     
   })
   #______________________________________________________________________________________________________________________________________________________#
-  #---GRAFICACIÓN DE LA GRAFICA VENTAS CON K6
+  #---GRAFICACIÓN DE LA GRAFICA TENDENCIAS CON K6---------TabItem_5
+  output$tendenciaanio <- renderPlot({
+    
+    
+    resultadoTendencia <- subset(valores, producto == input$select_producto_tendencia)
+    print(resultadoTendencia)
+    
+    
+    if(input$select_producto_tendencia != 0){
+      resultadoTendencia <- subset(resultadoTendencia, producto== input$select_producto_tendencia)
+    }
+    if(input$select_aniotendencia != 0){
+      resultadoTendencia <- subset(resultadoTendencia, anio == input$select_aniotendencia)
+    }
+    if(nrow(resultadoTendencia) != 0){
+      ggplot(data = resultadoTendencia, aes(x=mes , y=(factor(prediction)), color=(factor(prediction))))+ geom_point()+scale_x_discrete(limit = c("ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"))+scale_y_discrete(limit = c(1,2,3))
+      
+    }
+    
+  })
+  #______________________________________________________________________________________________________________________________________________________#
+  #---GRAFICACIÓN DE LA GRAFICA VENTAS CON K6---------TabItem_6
   output$distPlotk3 <- renderPlot({
     
     resultadosk3 <- subset(valoresk3, producto == input$select_producto_k3)
@@ -410,7 +463,7 @@ server <- function(input, output) {
     
   })
   
-  #---GRAFICACIÓN DE LAS FRECUENCIAS CON K6
+  #---GRAFICACIÓN DE LAS FRECUENCIAS CON K6---------TabItem_7
   
   output$ggplotk3 <- renderPlot({
     
@@ -428,7 +481,7 @@ server <- function(input, output) {
     
   })
   
-  #---GRAFICACIÓN DE LA GRAFICA TENDENCIAS CON K6
+  #---GRAFICACIÓN DE LA GRAFICA TENDENCIAS CON K6---------TabItem_8
   output$tendenciak3 <- renderPlot({
   
     resultadoTendenciak3 <- subset(valoresk3, producto == input$select_producto_tendencia_k3)
