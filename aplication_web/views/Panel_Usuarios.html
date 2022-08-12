@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="../css/dashboard.css">
@@ -14,7 +20,6 @@
 </head>
 
 <body>
-
     <v-app id="view-panel-usuarios">
         <v-main>
             <nav>
@@ -72,7 +77,7 @@
                 </div>
                 <div class="dash-content">
                     <div id="content2-main">
-                        <sidebar-view :drawer="drawer" />
+                        <sidebar-view :drawer="drawerUsuario" />
                         <div class="grid-container">
                             <div class="grid-item">
                                 <v-img src="../assets/img/img_panelUsuarios_web.png" class="my-2" contain height="400" />
@@ -137,43 +142,38 @@
                                         <input v-model="usuario.idusuario" hidden></input>
                                         <v-row>
                                             <v-col cols="12" md="6">
+                                             
                                                 <v-text-field filled outlined v-model="usuario.nombre" 
-                                                    label="Ingresa tu nombre" prepend-inner-icon="mdi-account-circle" solo
-                                                    required>
+                                                    label="Ingresa tu nombre" prepend-inner-icon="mdi-account-circle">
                                                     {{usuario.nombre}}</v-text-field>
                                             </v-col>
                                             <v-col cols="12" md="6">
                                                 <v-text-field filled outlined v-model="usuario.apellidopaterno" 
-                                                    label="Ingresa tu apellido paterno" prepend-inner-icon="mdi-account-circle" solo
-                                                    required>
+                                                    label="Ingresa tu apellido paterno" prepend-inner-icon="mdi-account-circle">
                                                     {{usuario.apellidopaterno}}</v-text-field>
                                             </v-col>
                                         </v-row>
                                         <v-row>
                                             <v-col cols="12" md="6">
                                                 <v-text-field filled outlined v-model="usuario.apellidomaterno" 
-                                                    label="Ingresa tu apellido Materno" prepend-inner-icon="mdi-account-circle" solo
-                                                    required>
+                                                    label="Ingresa tu apellido Materno" prepend-inner-icon="mdi-account-circle">
                                                     {{usuario.apellidomaterno}}</v-text-field>
                                             </v-col>
                                             <v-col cols="12" md="6">
                                                 <v-text-field filled outlined v-model="usuario.telefono" 
-                                                    label="Ingresa tu telefono" prepend-inner-icon="mdi-phone" solo
-                                                    required>
+                                                    label="Ingresa tu telefono" prepend-inner-icon="mdi-phone">
                                                     {{usuario.telefono}}</v-text-field>
                                             </v-col>
                                         </v-row>
                                         <v-row>
                                             <v-col cols="12" md="6">
                                                 <v-text-field filled outlined v-model="usuario.correo" 
-                                                    label="Ingrese su correo electronico" prepend-inner-icon="mdi-email" solo
-                                                    required>
+                                                    label="Ingrese su correo electronico" prepend-inner-icon="mdi-email">
                                                     {{usuario.correo}}</v-text-field>
                                             </v-col>
                                             <v-col cols="12" md="6">
                                                 <v-text-field filled outlined v-model="usuario.psw" 
-                                                    label="Ingrese una contraseña" prepend-inner-icon="mdi-lock" solo
-                                                    required>
+                                                    label="Ingrese una contraseña" prepend-inner-icon="mdi-lock">
                                                     {{usuario.psw}}</v-text-field>
                                             </v-col>
                                         </v-row>
@@ -196,7 +196,6 @@
         </v-main>
     </v-app>
     <script src="../js/dashboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.5.7/vuetify.min.js"
         integrity="sha512-BPXn+V2iK/Zu6fOm3WiAdC1pv9uneSxCCFsJHg8Cs3PEq6BGRpWgXL+EkVylCnl8FpJNNNqvY+yTMQRi4JIfZA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -205,7 +204,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script>
+        
         //? hacemos referencia a nuestro recursos de la api
         let url = 'http://127.0.0.1:6969/users/';
 
@@ -243,7 +245,7 @@
                         })
                 },
                 crear: function(){
-                    let parametros ={nombre:this.usuario.nombre, apellidopaterno:this.usuario.apellidopaterno, apellidomaterno:this.usuario.apellidomaterno, telefono:this.usuario.telefono, correo:this.usuario.correo, psw:this.usuario.psw, idrol:1}
+                    let parametros ={nombre:this.usuario.nombre, apellidopaterno:this.usuario.apellidopaterno, apellidomaterno:this.usuario.apellidomaterno, telefono:this.usuario.telefono, correo:this.usuario.correo, psw:this.usuario.psw, idrol:2}
                     if(!parametros.nombre || !parametros.apellidopaterno || !parametros.apellidomaterno || !parametros.telefono || !parametros.correo || !parametros.psw || !parametros.idrol){
                         alert("Debes agregar todos los datos");
                         return;
