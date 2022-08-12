@@ -79,7 +79,8 @@
                             console.log(response);
                             console.log(response.length);
                             if(response.data.length > 0){
-                                window.open('dashboard.html')
+                                window.open('dashboard.html');
+                                window.close('login.html');
                             
                             }else{
                                 alert("Verifica tus credenciales!");
