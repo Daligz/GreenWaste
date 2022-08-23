@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movil_app/screens/Profile/components/background.dart';
 import 'package:movil_app/service/common/user.dart';
 
+import '../../../../components/rounded_button.dart';
+import '../../AddressCreate/create_address.dart';
 import 'address_container.dart';
 
 class AddressBody extends StatelessWidget {
@@ -15,8 +17,19 @@ class AddressBody extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: <Widget> [
-            AddressContainer(user: user,),
-          ],
+          AddressContainer(user: user,),
+            RoundedButton(
+              text: "Agregar Dirección",
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AddressCreate(user: user!)),
+                );
+              },
+            ),
+        ],
+
         ),
       ),
     );

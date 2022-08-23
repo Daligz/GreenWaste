@@ -37,7 +37,7 @@
                             </a></li>
                         <li><a href="Panel_Canjees.html">
                                 <i class="uil uil-trash-alt"></i>
-                                <span class="link-name"><b>Canjees</b></span>
+                                <span class="link-name"><b>Canjes</b></span>
                             </a></li>
                         <li><a href="Panel_Materiales.html">
                                 <i class="uil uil-file-copy-alt"></i>
@@ -47,7 +47,7 @@
                                 <i class="uil uil-gift"></i>
                                 <span class="link-name"><b>Premios</b></span>
                             </a></li>
-                        <li><a href="#">
+                        <li><a href="login.html">
                                 <i class="uil uil-signout"></i>
                                 <span class="link-name"><b>Cerrar Sesión</b></span>
                             </a></li>
@@ -75,8 +75,8 @@
                     <div id="content2-main">
                         <sidebar-view :drawer="drawer" />
                         <div class="grid-container">
-                            <div class="grid-item">
-                                <v-img src="../assets/img/img_panelMateriales_web.png" class="my-2" contain height="400" />
+                            <div class="grid-item gridItem3">
+                                <v-img src="../assets/img/img_panelMateriales_web.png" class="my-2 imgPanelMaterial" contain height="400" />
                             </div>
                             <div class="grid-item">
                                 <h1 id="title-panel">PANEL DE CONTROL DE MATERIALES</h1>
@@ -128,14 +128,12 @@
                                         <v-row>
                                             <v-col cols="12" md="6">
                                                 <v-text-field filled outlined v-model="material.nombre" 
-                                                    label="Nombre del Material" prepend-inner-icon="mdi-gift" solo
-                                                    required>
+                                                    label="Nombre del Material" prepend-inner-icon="mdi-gift">
                                                     {{material.nombre}}</v-text-field>
                                             </v-col>
                                             <v-col cols="12" md="6">
                                                 <v-text-field filled outlined v-model="material.costo" 
-                                                    label="Costo del material" prepend-inner-icon="mdi-cash-multiple" solo
-                                                    required>
+                                                    label="Costo del material" prepend-inner-icon="mdi-cash-multiple">
                                                     {{material.costo}}</v-text-field>
                                             </v-col>
                                         </v-row>

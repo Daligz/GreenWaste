@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/contentDashboard.css">
     <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/premios.css">
+    <link rel="stylesheet" href="../css/materiales.css">
 </head>
 
 <body>
@@ -37,7 +37,7 @@
                             </a></li>
                         <li><a href="Panel_Canjees.html">
                                 <i class="uil uil-trash-alt"></i>
-                                <span class="link-name"><b>Canjees</b></span>
+                                <span class="link-name"><b>Canjes</b></span>
                             </a></li>
                         <li><a href="Panel_Materiales.html">
                                 <i class="uil uil-file-copy-alt"></i>
@@ -47,7 +47,7 @@
                                 <i class="uil uil-gift"></i>
                                 <span class="link-name"><b>Premios</b></span>
                             </a></li>
-                        <li><a href="#">
+                        <li><a href="login.html">
                                 <i class="uil uil-signout"></i>
                                 <span class="link-name"><b>Cerrar Sesión</b></span>
                             </a></li>
@@ -75,18 +75,18 @@
                     <div id="content2-main">
                         <sidebar-view :drawer="drawer" />
                         <div class="grid-container">
-                            <div class="grid-item">
-                                <v-img src="../assets/img/img_panelPremios_web.png" class="my-2" contain height="400" />
+                            <div class="grid-item gridItem4">
+                                <v-img src="../assets/img/img_panelPremios_web.png" class="my-2 imgPanelPremio" contain height="400" />
                             </div>
                             <div class="grid-item">
                                 <h1 id="title-panel">PANEL DE CONTROL DE LOS PREMIOS</h1>
                                 <v-btn class=" pa-5 cyan darken-3" block dark color="#358F80" @click="formNuevo()">
-                                    <v-icon dark>mdi-plus</v-icon>Agregar nuevo usuario
+                                    <v-icon dark>mdi-plus</v-icon>Agregar un premio nuevo
                                 </v-btn>
                             </div>
                         </div>
                     </div>
-                    <v-card class="mx-auto mt-5" max-width="1500" elevation="4">
+                    <v-card id="card-table" class="mx-auto mt-5" max-width="1500" elevation="4">
                         <!-- Tabla y formulario -->
                         <v-simple-table class="mx-auto mt-5" max-width="1500" elevation="4">
                             <template v-slot:default>
@@ -134,31 +134,25 @@
                                         <v-row>
                                             <v-col cols="12" md="6">
                                                 <v-text-field filled outlined v-model="recompensa.nombre" 
-                                                    label="Nombre del premio" prepend-inner-icon="mdi-gift" solo
-                                                    required>
+                                                    label="Nombre del premio" prepend-inner-icon="mdi-gift">
                                                     {{recompensa.nombre}}</v-text-field>
                                             </v-col>
                                             <v-col cols="12" md="6">
-                                                <!--v-file-input v-model="recompensa.imagen" label="Seleccione la imagen"
-                                                    solo required filled outlined prepend-inner-icon="mdi-camera">
-                                                </v-file-input-->
+                                         
                                                 <v-text-field filled outlined v-model="recompensa.imagen" 
-                                                    label="URL de la imagen" prepend-inner-icon="mdi-camera" solo
-                                                    required>
+                                                    label="URL de la imagen" prepend-inner-icon="mdi-camera">
                                                     {{recompensa.imagen}}</v-text-field>
                                             </v-col>
                                         </v-row>
                                         <v-row>
                                             <v-col cols="12" md="6">
                                                 <v-text-field filled outlined v-model="recompensa.valor"
-                                                    label="ingrese el valor" solo required
+                                                    label="ingrese el valor" 
                                                     prepend-inner-icon="mdi-cash-multiple">
                                                 </v-text-field>
                                             </v-col>
                                             <v-col cols="12" md="6">
-                                                <v-text-field v-model="recompensa.stock" filled
-                                                    outlinedv-model="recompensa.valor" label="ingrese el stock" solo
-                                                    required prepend-inner-icon="mdi-cash-multiple">
+                                                <v-text-field v-model="recompensa.stock" filled outlined v-model="recompensa.valor" label="ingrese el stock" prepend-inner-icon="mdi-cash-multiple">
                                                 </v-text-field>
                                             </v-col>
                                         </v-row>
@@ -166,7 +160,7 @@
                                             <v-col cols="12" md="12">
                                                 <v-textarea v-model="recompensa.descripcion" name="input-7-1" filled outlined
                                             label="Ingrese una secripción del producto"
-                                            prepend-inner-icon="mdi-book-open-variant" auto-grow solo required>
+                                            prepend-inner-icon="mdi-book-open-variant" auto-grow >
                                         </v-textarea>
                                             </v-col>
                                         </v-row>

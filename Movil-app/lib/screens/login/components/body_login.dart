@@ -35,7 +35,7 @@ class Body_Login extends StatelessWidget {
             RoundedPasswordField(
                 onChanged: (value) {}, controller: passwordTextController),
             RoundedButton(
-              text: "Inciar Sesión",
+              text: "Iniciar Sesión",
               press: () async {
                 if (emailTextController.text.isNotEmpty &&
                     passwordTextController.text.isNotEmpty) {

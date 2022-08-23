@@ -13,9 +13,7 @@
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/materiales.css">
 </head>
-
 <body>
-
     <v-app id="view-panel-canjees">
         <v-main>
             <nav>
@@ -31,13 +29,13 @@
                                 <i class="uil uil-estate"></i>
                                 <span class="link-name"><b>Dahsboard</b></span>
                             </a></li>
-                        <li><a href="#">
+                        <li><a href="Panel_Usuarios.html">
                                 <i class="uil uil-users-alt"></i>
                                 <span class="link-name"><b>Usuarios</b></span>
                             </a></li>
                         <li><a href="Panel_Canjees.html">
                                 <i class="uil uil-trash-alt"></i>
-                                <span class="link-name"><b>Canjees</b></span>
+                                <span class="link-name"><b>Canjes</b></span>
                             </a></li>
                         <li><a href="Panel_Materiales.html">
                                 <i class="uil uil-file-copy-alt"></i>
@@ -47,7 +45,7 @@
                                 <i class="uil uil-gift"></i>
                                 <span class="link-name"><b>Premios</b></span>
                             </a></li>
-                        <li><a href="#">
+                        <li><a href="login.html"
                                 <i class="uil uil-signout"></i>
                                 <span class="link-name"><b>Cerrar Sesión</b></span>
                             </a></li>
@@ -75,11 +73,11 @@
                     <div id="content2-main">
                         <sidebar-view :drawer="drawer" />
                         <div class="grid-container">
-                            <div class="grid-item">
-                                <v-img src="../assets/img/img_panelCanjee_web.png" class="my-2" contain height="400" />
+                            <div class="grid-item gridItem2">
+                                <v-img src="../assets/img/img_panelCanjee_web.png" class="my-2 imgPanelCanjee" contain height="400" />
                             </div>
                             <div class="grid-item">
-                                <h1 id="title-panel">PANEL DE CONTROL DE CANJEES</h1>
+                                <h1 id="title-panel">PANEL DE CONTROL DE CANJES</h1>
                             
                             </div>
                         </div>
@@ -94,7 +92,6 @@
                                         <th class="white--text text-center">USUARIO</th>
                                         <th class="white--text text-center">PREMIO</th>
                                         <th class="white--text text-center">FECHA</th>
-                                        <!--<th class="white--text text-center">ACCIONES</th>-->                  
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -102,19 +99,9 @@
                                         <tr v-for="canjee in canjees" :key="canjees.idcanje">
                                         <td class=" font-weight-bold text-center">{{ canjee.idcanje }}</td>
                                         <td class=" font-weight-bold text-center">{{ canjee.nombreusuario}} {{ canjee.apellidopaterno }} {{ canjee.apellidomaterno }}</td>
-                                        <!--<td class=" font-weight-bold text-center">{{ canjee.apellidopaterno }}</td> -->
-                                        <!--<td class=" font-weight-bold text-center">{{ canjee.apellidomaterno }}</td> -->
                                         <td class=" font-weight-bold text-center">{{ canjee.nombrepremio }}</td>
                                         <td class=" font-weight-bold text-center">{{ canjee.fechacanjee }}</td>
-                                       <!-- <td class=" text-center">
-                                            <v-btn dark class="amber darken-3" small
-                                                @click="formEditar(material.idmaterial,material.nombre,material.costo)">
-                                                <v-icon>mdi-pencil</v-icon>Editar
-                                            </v-btn>
-                                            <v-btn dark class="red accent-3" small @click="borrar(material.idmaterial)">
-                                                <v-icon>mdi-delete</v-icon>Eliminar
-                                            </v-btn>
-                                        </td> //-->
+                                    
                                     </tr>
                                 </tbody>
                             </template>

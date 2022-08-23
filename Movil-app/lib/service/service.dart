@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:movil_app/service/common/user.dart';
 import 'package:movil_app/service/common/address.dart';
+import 'package:movil_app/service/common/containers.dart';
 import 'package:movil_app/service/service_routes.dart';
 
 class Service {
@@ -78,6 +79,23 @@ class Service {
     if(response.statusCode != 200) return List.empty();
     return (json.decode(response.body) as List).map((e) => Address.fromJson(e)).toList();
   }
+
+  static Future<List<Containers>?> readContainers(final int idUsuario) async {
+    final Response response = await get(Uri.parse(Routes.routeContainersRead(idUsuario)));
+    if(response.statusCode != 200) return List.empty();
+    return (json.decode(response.body) as List).map((e) => Containers.fromJson(e)).toList();
+  }
+
+  static Future<bool> updateContainers(
+      final int idContenedor,
+      final String estado) async {
+    final Response response = await get(Uri.parse(Routes.routeContainersUpdate(
+        idContenedor,
+        estado)));
+    print(response.statusCode == 200);
+    return (response.statusCode == 200);
+  }
+
 
   static Future<bool> updateAddress(
       final int idDireccion,

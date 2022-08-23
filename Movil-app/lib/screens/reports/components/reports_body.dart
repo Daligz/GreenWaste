@@ -12,7 +12,7 @@ import 'package:path_provider/path_provider.dart';
 
 class ReportBody extends StatefulWidget {
 
-  final String idUsuario;
+  final String? idUsuario;
 
   const ReportBody(this.idUsuario);
 
@@ -24,7 +24,7 @@ class _ReportBodyState extends State<ReportBody> {
 
   Claim claim = Claim(0, List.empty());
   bool loading = true;
-  final String idUsuario;
+  final String? idUsuario;
   final _controller = ScrollController();
   final ScreenshotController _screenshotController = ScreenshotController();
 
@@ -40,7 +40,7 @@ class _ReportBodyState extends State<ReportBody> {
   }
 
   void _loadData() async {
-    final Claim claimData = await ServiceClaims.getClaim(idUsuario);
+    final Claim claimData = await ServiceClaims.getClaim(idUsuario!);
     setState(() {
       claim = claimData;
       loading = false;

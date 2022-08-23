@@ -1,5 +1,6 @@
 .flex-container{
     display: flex;
+    flex-direction: row;
   }
   .flex-container>div{
     width: 50%;
@@ -17,7 +18,7 @@
   .titulo-splash{
     font-family: Roboto;
     color: #358F80;
-    font-size: 50px;
+    font-size: 45px;
     text-align: center;
     text-shadow: 2px 2px #999;
     margin-bottom: 2%;
@@ -58,24 +59,46 @@
     border-color: #358F80;
   }
   /* Diseño para celulares */
+
+
+@media (max-width: 780px) {
+  .flex-container{
+    flex-direction: column;
+  }
+ .content1-login{
+  display: none;
+ }
+ .titulo-splash{
+  font-size: 40px;
+}
+   
+}
+@media (max-width: 560px) {
+  .flex-container{
+    flex-direction: column;
+  }
+ .content1-login{
+  display: none;
+ }
+ .titulo-splash{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+}
+@media (max-width: 430px) {
+  .flex-container{
+    flex-direction: column;
+  }
+ .content1-login{
+  display: none;
+ }
+ .titulo-splash{
+  font-size: 25px;
+}
+ 
+ 
+    
+}
+
   
-  @media screen and (max-width:480px){
-    template {
-      float:none;
-      width:100%;
-    }
-  }
-  /* Diseño para tabletas */
-  @media screen and (min-width: 800px) {
-    template {
-      float:left;
-      width:50%;
-    }
-  }
-  /* Diseño para PC */
-  @media screen and (min-width: 1025px) {
-    template {
-      float: left;
-      width: 33%;
-    }
-  }

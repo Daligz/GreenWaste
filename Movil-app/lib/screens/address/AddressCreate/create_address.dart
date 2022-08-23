@@ -8,8 +8,6 @@ class AddressCreate extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Body_Address(
-          user: user
-      ),);
+      body: Body_Address(user: user),);
   }
 }

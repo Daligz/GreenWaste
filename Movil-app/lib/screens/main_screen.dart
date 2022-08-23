@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:movil_app/constants.dart';
 import 'package:movil_app/screens/Profile/profile_screen.dart';
+import 'package:movil_app/screens/reports/reports_screen.dart';
 import 'package:movil_app/screens/rewards/rewards_screen.dart';
 import 'package:movil_app/service/common/address.dart';
+import 'package:movil_app/service/common/containers.dart';
 import 'package:movil_app/service/common/user.dart';
-
+import 'package:movil_app/screens/Containers/containers.dart';
+import 'package:movil_app/screens/addContainer/add_container_screen.dart';
 import 'addContainer/add_container_screen.dart';
 import 'address/AddressRead/read_addres.dart';
 
@@ -17,10 +20,10 @@ class _MainScreenState extends State<MainScreen> {
   int index = 0;
   User? user;
   final screens = [
+    ContainersScreen(user: null),
     ProfileScreen(user: null),
     RewardScreen(user: null),
-    RewardScreen(user: null),
-    AddContainerScreen(user: null),
+    ReportScreen(user: null),
   ];
 
   @override
@@ -30,11 +33,12 @@ class _MainScreenState extends State<MainScreen> {
       if (ModalRoute.of(context)?.settings.arguments != null) {
         final Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
         user = arguments['user'];
-        screens.removeRange(0, 3);
+        screens.removeRange(0, 4);
+        screens.add(ContainersScreen(user: user));
         screens.add(ProfileScreen(user: user));
         screens.add(RewardScreen(user: user));
-        screens.add(RewardScreen(user: user,));
-        screens.add(RewardScreen(user: user,));
+        screens.add(ReportScreen(user: user));
+        screens.add(ReportScreen(user: user));
         if(arguments['index']!=null){
           index = arguments['index'];
         }
@@ -60,7 +64,7 @@ class _MainScreenState extends State<MainScreen> {
             labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
             onDestinationSelected: (index) =>
                 setState(() => this.index = index),
-            destinations: [
+            destinations: const [
               NavigationDestination(
                   icon: Icon(
                     Icons.house_outlined,

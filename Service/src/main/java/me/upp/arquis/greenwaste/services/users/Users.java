@@ -13,7 +13,9 @@ public class Users extends Router {
                 new UserRead(),
                 new UserReadWeb(),
                 new UserSpecificRead(),
-                new UserLogin()
+                new UserLogin(),
+                new UserLoginWeb()
+
 
         );
     }
