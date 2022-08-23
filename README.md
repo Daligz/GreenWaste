@@ -5,7 +5,28 @@ Sistema inteligente de recolección de basura con un modelo de negocio autosuste
 * App móvil *(Movil-App)*
 * Panel web *(aplication_web)*
 * Servicios web *(Service)*
-* Panel administrativo *(DataMining)*
+* Panel administrativo *(DataMining - Machine Learning)*
+
+## App móvil
+Aplicación móvil desarrollada en flutter con conexión a servicios web a través de solicitudes https para administrar datos de usuarios, redimir recompensas, ver historial de puntos mensuales, registrar direcciones e inicios de sesión.
+
+## Panel web
+Panel de administrador para gestionar recompensas, usuarios, contenedores, materiales y premios, desarrollado en html con css y vuejs consumiendo servicios web.
+
+## Servicios web
+Servicios web estructurados para funcionar como una red de microservicios escritos en Java con conexión directa a la base de datos MySQL mediante conexiones asíncronas con implementación CORS.
+
+## Panel administrativo
+Generar un método que permita visualizar cuales son los premios que son menos reclamados por los usuarios que hacen uso de nuestra aplicación, de esa manera se pueden evitar pérdidas económicas que afecten el crecimiento de la app y por ende el cumplimiento de uno de nuestros objetivos, concientizar a la población a cuidar el medio ambiente que nos rodea, debido a que los usuarios pueden perder el interés en reclamar algunos de los premios por ser muy repetidos o porque no son necesarios para su uso.
+
+Este panel fue desarrollado en R con librerías como ggplot2, kknn, RMySQL, DBI y shinydashboard, utilizando el algoritmo KNN (K-nearest neighbours), con el fin de realizar clasificaciones utilizando datos obtenidos de nuestra base de datos principal a un datawarehouse.
+
+![r-1](docs/r-1.png)<br/>
+![r-2](docs/r-2.png)<br/>
+![r-3](docs/r-3.png)<br/>
+![r-4](docs/r-4.png)<br/>
+![r-5](docs/r-5.png)<br/>
+
 
 # Mockups
 ## Móvil
