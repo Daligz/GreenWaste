@@ -11,7 +11,7 @@ Sistema inteligente de recolección de basura con un modelo de negocio autosuste
 Aplicación móvil desarrollada en flutter con conexión a servicios web a través de solicitudes https para administrar datos de usuarios, redimir recompensas, ver historial de puntos mensuales, registrar direcciones e inicios de sesión.
 
 ## Panel web
-Panel de administrador para gestionar recompensas, usuarios, contenedores, materiales y premios, desarrollado en html con css y vuejs consumiendo servicios web.
+Panel de administrador para gestionar recompensas, usuarios, contenedores, materiales y premios, desarrollado en html con css, javascript y vuejs consumiendo servicios web.
 
 ## Servicios web
 Servicios web estructurados para funcionar como una red de microservicios escritos en Java con conexión directa a la base de datos MySQL mediante conexiones asíncronas con implementación CORS.
