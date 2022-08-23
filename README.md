@@ -17,7 +17,7 @@ Panel de administrador para gestionar recompensas, usuarios, contenedores, mater
 Servicios web estructurados para funcionar como una red de microservicios escritos en Java con conexión directa a la base de datos MySQL mediante conexiones asíncronas con implementación CORS.
 
 ## Panel administrativo
-Generar un método que permita visualizar cuales son los premios que son menos reclamados por los usuarios que hacen uso de nuestra aplicación, de esa manera se pueden evitar pérdidas económicas que afecten el crecimiento de la app y por ende el cumplimiento de uno de nuestros objetivos, concientizar a la población a cuidar el medio ambiente que nos rodea, debido a que los usuarios pueden perder el interés en reclamar algunos de los premios por ser muy repetidos o porque no son necesarios para su uso.
+Se diseño un método que permite visualizar cuales son los premios menor reclamados por los usuarios que hacen uso de nuestra aplicación, de esa manera se pueden evitar pérdidas económicas que afecten el crecimiento de la app y por ende el cumplimiento de uno de nuestros objetivos, concientizar a la población a cuidar el medio ambiente que nos rodea, debido a que los usuarios pueden perder el interés en reclamar algunos de los premios por ser muy repetidos o porque no son necesarios para su uso.
 
 Este panel fue desarrollado en R con librerías como ggplot2, kknn, RMySQL, DBI y shinydashboard, utilizando el algoritmo KNN (K-nearest neighbours), con el fin de realizar clasificaciones utilizando datos obtenidos de nuestra base de datos principal a un datawarehouse.
 
